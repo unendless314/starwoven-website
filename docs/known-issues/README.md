@@ -30,10 +30,10 @@
 
 ## 4. 全站 OG 分享圖檔案曾缺失
 
-- **狀態**：✅ 已解決（2026-11-13）：ComfyUI 生成底圖＋程式疊字，上架 `public/assets/common_b_og_image_v1.jpg`，Layout 預設值改指向此檔並輸出完整網址；格式採 JPG 之理由見 DEC-091。
-- **影響位置**：全站各頁（`src/layouts/Layout.astro` 預設 `ogImage = '/assets/common_b_og_image_v1.jpg'`）
+- **狀態**：✅ 已解決（2026-11-13）：ComfyUI 生成底圖＋程式疊字，上架 `public/assets/common-b-og-image-v1.jpg`，Layout 預設值改指向此檔並輸出完整網址；格式採 JPG 之理由見 DEC-091。
+- **影響位置**：全站各頁（`src/layouts/Layout.astro` 預設 `ogImage = '/assets/common-b-og-image-v1.jpg'`）
 - **說明**：各頁面未個別傳入 `ogImage`，原共用預設圖檔不存在，社群平台（LINE／Facebook）抓取分享縮圖時會 404。
-- **處理結果**：已產出 1200×630 品牌 JPG，並上架至 `public/assets/common_b_og_image_v1.jpg` 與 `design-assets/sd-assets/`。Layout 以此為預設值，透過完整絕對網址輸出 `og:image` 與 `twitter:image`；JPG 是全站 WebP 規範的唯一例外（DEC-091）。
+- **處理結果**：已產出 1200×630 品牌 JPG，並上架至 `public/assets/common-b-og-image-v1.jpg` 與 `design-assets/sd-assets/`。Layout 以此為預設值，透過完整絕對網址輸出 `og:image` 與 `twitter:image`；JPG 是全站 WebP 規範的唯一例外（DEC-091）。
 
 ## 5. 許願池 SSR fallback 與試算表最新課程清單未同步
 

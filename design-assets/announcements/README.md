@@ -12,7 +12,7 @@
 design-assets/announcements/
 ├── 2026-10/
 │   ├── .gitkeep
-│   └── (放入 2026 年 10 月當期海報原檔，如 202610_waite_tarot.png)
+│   └── (放入 2026 年 10 月當期海報原檔，如 202610-waite-tarot.png)
 └── README.md
 ```
 
@@ -35,6 +35,6 @@ design-assets/announcements/
 1. **原檔存檔**：將 Canva 匯出之原圖存入對應年月份目錄（例如 `design-assets/announcements/2026-10/`）。
 2. **轉為 WebP**：
    - 透過專案腳本壓縮轉換為 WebP（品質 Q85，檔案控制在 80~150 KB 內）。
-   - 產出檔案放置於 `public/assets/`（例如 `public/assets/hero_announce_202610_waite_v1.webp`）。
+   - 產出檔案放置於 `public/assets/`（例如 `public/assets/hero-announce-202610-waite-v1.webp`）。
 3. **首頁掛載**：
    - 於 `src/pages/index.astro` 的 `heroSlides` 陣列中新增該海報項目。

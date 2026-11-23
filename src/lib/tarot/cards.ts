@@ -17,7 +17,7 @@ export interface TarotCard {
   suit: Suit | null;
   upright: string[];
   reversed: string[];
-  /** null → 佔位視覺；日後填入 /assets/tarot_xxx_v1.webp（另立 DEC） */
+  /** null → 佔位視覺；日後填入 /assets/tarot-xxx-v1.webp（另立 DEC） */
   image: string | null;
 }
 

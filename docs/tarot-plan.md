@@ -311,7 +311,7 @@
   suit: null,                // wands | cups | swords | pentacles | null
   upright: ['新的開始', '自由', '冒險'],
   reversed: ['魯莽', '猶豫', '錯失時機'],
-  image: null,               // null → 佔位視覺；日後填入 /assets/tarot_xxx_v1.webp
+  image: null,               // null → 佔位視覺；日後填入 /assets/tarot-xxx-v1.webp
 }
 ```
 

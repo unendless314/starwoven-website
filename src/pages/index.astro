@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 // ==========================================
 // 圖片素材路徑配置（ComfyUI 生圖或取得真圖後填入此處）
-// 例如：const imgTarotWorld = '/assets/home_a_tarot_world_v1.png';
+// 例如：const imgTarotWorld = '/assets/home-a-tarot-world-v1.png';
 // 若為空字串，將自動顯示結構佔位框（Placeholder）
 // ==========================================
 
@@ -22,35 +22,35 @@ interface HeroSlide {
 const heroSlides: HeroSlide[] = [
   {
     id: 'announcement-orgonite',
-    image: '/assets/home_announcement_202611_orgonite_v1.webp',
+    image: '/assets/home-announcement-202611-orgonite-v1.webp',
     alt: '奧剛塔手作課・用雙手創造屬於你的能量水晶塔（2027/01/16 14:00～17:00，NT$3,500 含材料費，5 人滿班）',
     link: 'https://line.me/R/ti/p/@347fucvj?ts=07031038&oat_content=url',
     external: true,
   },
   {
     id: 'announcement-market',
-    image: '/assets/home_announcement_202611_market_v1.webp',
+    image: '/assets/home-announcement-202611-market-v1.webp',
     alt: '星靈織語 2026 年底市集預告（11/21～12/27 巫呼呼市集、放野計畫、橫山藝術季、小駅聚會）',
     link: 'https://line.me/R/ti/p/@347fucvj?ts=07031038&oat_content=url',
     external: true,
   },
   {
     id: 'announcement-annual-tarot',
-    image: '/assets/home_announcement_202611_annual_tarot_v1.webp',
+    image: '/assets/home-announcement-202611-annual-tarot-v1.webp',
     alt: '年度流年塔羅・13 張牌的專屬年度指引（個人專屬文字報告）',
     link: 'https://line.me/R/ti/p/@347fucvj?ts=07031038&oat_content=url',
     external: true,
   },
   {
     id: 'announcement-intern',
-    image: '/assets/home_announcement_202610_intern_v1.webp',
+    image: '/assets/home-announcement-202610-intern-v1.webp',
     alt: '招募・星靈實習生（以技能換技能・專業培訓課程）',
     link: 'https://line.me/R/ti/p/@347fucvj?ts=07031038&oat_content=url',
     external: true,
   },
   {
     id: 'announcement-christmas',
-    image: '/assets/home_announcement_202610_christmas_v1.webp',
+    image: '/assets/home-announcement-202610-christmas-v1.webp',
     alt: '星靈織語週年慶・聖誕節交換禮物（115/12/19 烤雞大餐與塔羅交換禮物）',
     link: 'https://line.me/R/ti/p/@347fucvj?ts=07031038&oat_content=url',
     external: true,
@@ -58,7 +58,7 @@ const heroSlides: HeroSlide[] = [
   // 品牌美學保底圖（DEC-086）：海報全數過期下架時，輪播仍至少有一張
   {
     id: 'star-weaver',
-    image: '/assets/home_a_star_weaver_v1.webp',
+    image: '/assets/home-a-star-weaver-v1.webp',
     alt: '光之編織・星靈織語 (The Star Weaver)',
   },
 ];
@@ -77,28 +77,28 @@ interface CoreServiceCard {
 
 const coreServiceCards: CoreServiceCard[] = [
   {
-    image: '/assets/home_c_planet_stars_v1.webp', // 首頁-C：行星與星環
+    image: '/assets/home-c-planet-stars-v1.webp', // 首頁-C：行星與星環
     imageAlt: '命理與占卜 行星與星環插圖',
     titleLines: ['命理與占卜', '一對一諮詢'],
     items: ['塔羅占卜', '占星解析', '八字命理', '生命靈數'],
     cta: { text: '價目表諮詢', href: '/services' },
   },
   {
-    image: '/assets/home_f_reiki_hands_v1.webp', // 首頁-F：雙手療癒與能量光芒
+    image: '/assets/home-f-reiki-hands-v1.webp', // 首頁-F：雙手療癒與能量光芒
     imageAlt: '身心靈療癒 雙手療癒與能量光芒插圖',
     titleLines: ['身心靈療癒', '一對一體驗'],
     items: ['天使靈氣', '臼井靈氣', '靈擺調頻', '脈輪檢測', '阿卡西紀錄', '亢達里尼靈氣'],
     cta: { text: '體驗諮詢', href: '/services#healing' },
   },
   {
-    image: '/assets/home_e_community_trio_v1.webp', // 首頁-E：三人社群夥伴
+    image: '/assets/home-e-community-trio-v1.webp', // 首頁-E：三人社群夥伴
     imageAlt: '課程與活動 社群夥伴剪影',
     titleLines: ['課程與活動'],
     items: ['循環課程', '實體交流會', '主題工作坊'],
     cta: { text: '查看最新課程', href: '/courses' },
   },
   {
-    image: '/assets/home_d_open_book_v1.webp', // 首頁-D：筆記本與筆
+    image: '/assets/home-d-open-book-v1.webp', // 首頁-D：筆記本與筆
     imageAlt: '星靈專欄 筆記本與筆插圖',
     titleLines: ['星靈專欄'],
     showLatestPosts: true,

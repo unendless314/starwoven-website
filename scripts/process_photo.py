@@ -8,7 +8,7 @@ scripts/process_photo.py — 星靈織語 Starwoven 實拍素材最佳化與 Web
 
 支援功能：
   1. 單張轉檔：
-     python scripts/process_photo.py -i design-assets/raw-photos/team/以恩.png -o about_b_founder_yien_v1.webp
+     python scripts/process_photo.py -i design-assets/raw-photos/team/以恩.png -o about-b-founder-yien-v1.webp
   2. 團隊夥伴批次一鍵轉檔（含悠悠、凜月等特定取景框）：
      python scripts/process_photo.py --batch-team
   3. 固定循環課程批次轉檔：
@@ -24,98 +24,98 @@ from PIL import Image, ImageOps
 # 包含自訂 ROI 取景框 (left, top, right, bottom) 或置中正方形裁切
 TEAM_MAPPING = {
     "以恩.png": {
-        "output": "about_b_founder_yien_v1.webp",
+        "output": "about-b-founder-yien-v1.webp",
         "code": "關於-B",
         "name": "創辦人 以恩",
         "crop_box": None, # 自動正中方形
         "size": 600,
     },
     "皮皮.png": {
-        "output": "about_c_founder_pipi_v1.webp",
+        "output": "about-c-founder-pipi-v1.webp",
         "code": "關於-C",
         "name": "創辦人 皮皮",
         "crop_box": (0, 0, 462, 462), # 頭部稍微靠上，保留髮頂
         "size": 600,
     },
     "達達.png": {
-        "output": "about_d_member_daxin_v1.webp",
+        "output": "about-d-member-daxin-v1.webp",
         "code": "關於-D",
         "name": "夥伴 達達",
         "crop_box": (0, 0, 461, 461), # 保留上方頭髮
         "size": 600,
     },
     "達心.png": {
-        "output": "about_d_member_daxin_v1.webp",
+        "output": "about-d-member-daxin-v1.webp",
         "code": "關於-D",
         "name": "夥伴 達達",
         "crop_box": (0, 0, 461, 461), # 保留上方頭髮
         "size": 600,
     },
     "學長.png": {
-        "output": "about_e_member_xiaoyu_v1.webp",
+        "output": "about-e-member-xiaoyu-v1.webp",
         "code": "關於-E",
         "name": "夥伴 學長",
         "crop_box": (150, 0, 820, 671), # 橫向照片取中央頭像正方形
         "size": 600,
     },
     "悠悠.png": {
-        "output": "about_f_member_youyou_v1.webp",
+        "output": "about-f-member-youyou-v1.webp",
         "code": "關於-F",
         "name": "夥伴 悠悠",
         "crop_box": (245, 80, 525, 360), # 右上半部半身與持牌特寫
         "size": 600,
     },
     "姆姆.jpg": {
-        "output": "about_g_member_mumu_v1.webp",
+        "output": "about-g-member-mumu-v1.webp",
         "code": "關於-G",
         "name": "夥伴 姆姆",
         "crop_box": (430, 100, 1830, 1500), # 正中特寫頭像與前爪，避開左下筆記本
         "size": 600,
     },
     "姆姆.png": {
-        "output": "about_g_member_mumu_v1.webp",
+        "output": "about-g-member-mumu-v1.webp",
         "code": "關於-G",
         "name": "夥伴 姆姆",
         "crop_box": None,
         "size": 600,
     },
     "月月.png": {
-        "output": "about_h_member_linyue_v1.webp",
+        "output": "about-h-member-linyue-v1.webp",
         "code": "關於-H",
         "name": "夥伴 月月",
         "crop_box": (135, 0, 445, 310), # 右上半部桌前解盤特寫
         "size": 600,
     },
     "凜月.png": {
-        "output": "about_h_member_linyue_v1.webp",
+        "output": "about-h-member-linyue-v1.webp",
         "code": "關於-H",
         "name": "夥伴 月月",
         "crop_box": (135, 0, 445, 310), # 右上半部桌前解盤特寫
         "size": 600,
     },
     "白白.png": {
-        "output": "about_i_member_baibai_v1.webp",
+        "output": "about-i-member-baibai-v1.webp",
         "code": "關於-I",
         "name": "夥伴 白白",
         "crop_box": None,
         "size": 600,
     },
     "Migo.png": {
-        "output": "about_j_member_migo_v1.webp",
+        "output": "about-j-member-migo-v1.webp",
         "code": "關於-J",
         "name": "夥伴 Migo",
         "crop_box": None,
         "size": 600,
     },
     "古古.png": {
-        "output": "about_k_member_gugu_v1.webp",
+        "output": "about-k-member-gugu-v1.webp",
         "code": "關於-K",
         "name": "夥伴 古古",
         "crop_box": None,
         "size": 600,
     },
     "黎夢.jpg": {
-        "output": "about_l_member_limeng_v1.webp",
+        "output": "about-l-member-limeng-v1.webp",
         "code": "關於-L",
         "name": "夥伴 黎夢",
         "crop_box": (0, 0, 1045, 1045), # 直式取上方正方形
@@ -126,49 +126,49 @@ TEAM_MAPPING = {
 # 固定循環課程現場照片對應設定 (16:10 寬螢幕比例 960x600)
 COURSES_MAPPING = {
     "光與阿卡西紀錄.png": {
-        "output": "courses_a_akashic_v1.webp",
+        "output": "courses-a-akashic-v1.webp",
         "code": "課程-A",
         "name": "週一 光與阿卡西紀錄現場照",
         "crop_box": (0, 480, 1093, 1163),  # 16:10 聚焦學員與講者
         "target_size": (960, 600),
     },
     "占星循環課.jpg": {
-        "output": "courses_b_astrology_v1.webp",
+        "output": "courses-b-astrology-v1.webp",
         "code": "課程-B",
         "name": "週二 占星循環班現場照",
         "crop_box": (0, 100, 2364, 1577),  # 16:10
         "target_size": (960, 600),
     },
     "偉特塔羅.jpg": {
-        "output": "courses_c_waite_v1.webp",
+        "output": "courses-c-waite-v1.webp",
         "code": "課程-C",
         "name": "週三 偉特塔羅循環班現場照",
         "crop_box": (0, 100, 1280, 900),   # 16:10
         "target_size": (960, 600),
     },
     "七脈輪與靈氣.png": {
-        "output": "courses_d_reiki_v1.webp",
+        "output": "courses-d-reiki-v1.webp",
         "code": "課程-D",
         "name": "週四 七脈輪與靈氣現場照",
         "crop_box": (0, 320, 1093, 1003),  # 16:10 聚焦席地靜心圈
         "target_size": (960, 600),
     },
     "托特塔羅.jpg": {
-        "output": "courses_e_thoth_v1.webp",
+        "output": "courses-e-thoth-v1.webp",
         "code": "課程-E",
         "name": "週五 托特塔羅循環班現場照",
         "crop_box": (0, 80, 1280, 880),    # 16:10
         "target_size": (960, 600),
     },
     "生命靈數.png": {
-        "output": "courses_f_numerology_v1.webp",
+        "output": "courses-f-numerology-v1.webp",
         "code": "課程-F",
         "name": "週六 生命靈數循環班現場照",
         "crop_box": (0, 260, 866, 801),    # 16:10 聚焦白板算式與解說
         "target_size": (960, 600),
     },
     "命理交流會.png": {
-        "output": "courses_g_meetup_v1.webp",
+        "output": "courses-g-meetup-v1.webp",
         "code": "課程-G",
         "name": "實體命理交流會現場照",
         "crop_box": (0, 80, 386, 466),     # 正方/4:3 聚會全景
@@ -182,6 +182,11 @@ def process_photo(input_path, output_name, crop_box=None, target_size=None, qual
     
     if "/" in output_name or "\\" in output_name or os.path.dirname(output_name):
         print(f"錯誤：--output 僅接受純檔名：{output_name}")
+        sys.exit(1)
+
+    # 命名規則：素材檔名一律用 -，不得含 _（AGENTS.md「Naming」）
+    if "_" in output_name:
+        print(f"錯誤：輸出檔名不得含底線 _，請改用 -（例如 about-b-founder-yien-v1.webp）：{output_name}")
         sys.exit(1)
         
     if not output_name.lower().endswith(".webp"):
@@ -231,10 +236,24 @@ def process_photo(input_path, output_name, crop_box=None, target_size=None, qual
     print(f"[+] 匯出成功: {output_name} ({im.size[0]}x{im.size[1]}, {out_size_kb:.1f} KB, -{reduction:.1f}%)")
     return dst_path
 
+def check_duplicate_outputs(mapping, src_dir):
+    """寫檔前檢查：若有多個「目前存在」的原圖對應到同一個輸出檔（如別名 達達.png／達心.png），
+    直接報錯中止，避免後處理的照片無聲覆蓋前一張。"""
+    by_output = {}
+    for filename, cfg in mapping.items():
+        if os.path.exists(os.path.join(src_dir, filename)):
+            by_output.setdefault(cfg["output"], []).append(filename)
+    conflicts = {out: srcs for out, srcs in by_output.items() if len(srcs) > 1}
+    if conflicts:
+        for out, srcs in conflicts.items():
+            print(f"錯誤：{'、'.join(srcs)} 都會輸出成 {out}，請只保留其中一張原圖")
+        sys.exit(1)
+
 def batch_courses():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     courses_dir = os.path.join(repo_root, "design-assets", "raw-photos", "courses")
     print(f"[*] 開始活動課程照片批次轉檔 (目錄: {courses_dir})...")
+    check_duplicate_outputs(COURSES_MAPPING, courses_dir)
     count = 0
     for filename, cfg in COURSES_MAPPING.items():
         src_path = os.path.join(courses_dir, filename)
@@ -255,6 +274,7 @@ def batch_team():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     team_dir = os.path.join(repo_root, "design-assets", "raw-photos", "team")
     print(f"[*] 開始團隊成員照片批次轉檔 (目錄: {team_dir})...")
+    check_duplicate_outputs(TEAM_MAPPING, team_dir)
     count = 0
     for filename, cfg in TEAM_MAPPING.items():
         src_path = os.path.join(team_dir, filename)
@@ -274,7 +294,7 @@ def batch_team():
 def main():
     parser = argparse.ArgumentParser(description="Starwoven 實拍素材轉 WebP 工具")
     parser.add_argument("-i", "--input", help="原始圖檔路徑")
-    parser.add_argument("-o", "--output", help="輸出檔名 (如 about_b_founder_yien_v1.webp)")
+    parser.add_argument("-o", "--output", help="輸出檔名 (如 about-b-founder-yien-v1.webp)")
     parser.add_argument("--size", type=int, default=600, help="正方形長寬像素 (預設 600)")
     parser.add_argument("--quality", type=int, default=85, help="WebP 壓縮品質 1-100 (預設 85)")
     parser.add_argument("--batch-team", action="store_true", help="一鍵批次處理 design-assets/raw-photos/team/ 內所有夥伴照片")

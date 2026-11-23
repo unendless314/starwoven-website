@@ -189,5 +189,5 @@
 ### DEC-091（2026-11-13）社群分享圖（OG）用 JPG，為全站 WebP 規範的唯一例外
 
 - **背景**：全站素材一律轉 WebP，但 `og:image` 由 LINE、Facebook 等平台的爬蟲抓取，不經瀏覽器。查證時各平台對 WebP 的支援說法不一（LinkedIn、Mastodon 有 WebP 預覽不顯示的回報；LINE 無官方說明）。
-- **決策**：OG 圖以 JPG 輸出（`public/assets/common_b_og_image_v1.jpg`，1200×630），不轉 WebP。分享預覽穩定顯示比檔案大小重要。
+- **決策**：OG 圖以 JPG 輸出（`public/assets/common-b-og-image-v1.jpg`，1200×630），不轉 WebP。分享預覽穩定顯示比檔案大小重要。
 - 文字以程式疊在 AI 生成底圖上（不讓模型畫字）；主體與文字集中於畫面中央約 630×630 範圍，以容許平台裁成正方形。生成紀錄見 `docs/image-prompts.md` 共用-B。

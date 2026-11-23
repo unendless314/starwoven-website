@@ -130,13 +130,13 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
 - 部落格文章**不寫死課程的星期、時段、講師、價格**，一律連至
   `/courses#recurring`；粗體緊鄰全形引號（「」）時 `**` 不生效，改用 `<strong>`。
 - Every page sets its own `<title>` and meta description. OG image：各頁未個別傳入
-  `ogImage`，共用 Layout 預設值 `/assets/common_b_og_image_v1.jpg`（1200×630；
+  `ogImage`，共用 Layout 預設值 `/assets/common-b-og-image-v1.jpg`（1200×630；
   刻意用 JPG，DEC-091；Layout 會轉成完整網址輸出）。
 
 ## Asset management (human-led, WebP mandatory)
 
-- Naming: `[分頁代碼]_[圖片代碼]_[素材名稱]_v[版本號].webp`
-  (e.g. `home_a_tarot_world_v3.webp`)；代號登錄於 `docs/image-prompts.md`。
+- Naming: `[分頁代碼]-[圖片代碼]-[素材名稱]-v[版本號].webp`
+  (e.g. `home-a-tarot-world-v3.webp`)；代號登錄於 `docs/image-prompts.md`。
   唯一例外：社群分享圖（OG）用 JPG（DEC-091）。
 - Adopted assets → archive copy in `design-assets/sd-assets/` + production copy in
   `public/assets/`；rejected → `design-assets/sd-assets/rejected/`（never delete）。
@@ -182,8 +182,8 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
 
 - **用 `_`**：程式碼內的變數名稱、環境變數、Python 檔名。
 - **其他一律用 `-`**：檔名、資料夾、網址、repo，**包含素材圖片**。
-- 既有的 `_` 檔名（文件、素材圖片等）正依重構計畫分批改正；改正前不要零星改名，
-  以免引用路徑斷掉。新增檔案一律用 `-`。
+- 文件與素材圖片已於 2026-11-23 全數改為 `-`；新增檔案一律用 `-`。
+  `scripts/process_asset.py`、`process_photo.py` 的輸出檔名含 `_` 時會直接報錯。
 
 ## Deployment (Hetzner NBG1, Ubuntu arm64, nginx)
 

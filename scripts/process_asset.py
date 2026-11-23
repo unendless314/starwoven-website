@@ -9,7 +9,7 @@ scripts/process_asset.py — 星靈織語 Starwoven 素材後製與 WebP 轉換�
   pip install rembg onnxruntime pillow
 
 使用範例：
-  python scripts/process_asset.py --input design-assets/sd-assets/z-image-turbo_00014_.png --output services_a_tarot_v1.webp --code 服務-A --name "塔羅占卜 (v1)"
+  python scripts/process_asset.py --input design-assets/sd-assets/z-image-turbo_00014_.png --output services-a-tarot-v1.webp --code 服務-A --name "塔羅占卜 (v1)"
 """
 
 import os
@@ -46,7 +46,12 @@ def extract_comfyui_metadata(img_path):
 def process_asset(input_path, output_name, code="", name="", skip_rembg=False, quality=85):
     # 驗證 output_name 必須為單純檔名，防止路徑遍歷或絕對路徑寫入外部目錄
     if "/" in output_name or "\\" in output_name or os.path.dirname(output_name) or output_name.strip() in ("", ".", ".."):
-        print(f"錯誤：--output 僅接受純檔名（例如 services_a_tarot_v1.webp），不可包含目錄或路徑：{output_name}")
+        print(f"錯誤：--output 僅接受純檔名（例如 services-a-tarot-v1.webp），不可包含目錄或路徑：{output_name}")
+        sys.exit(1)
+
+    # 命名規則：素材檔名一律用 -，不得含 _（AGENTS.md「Naming」）
+    if "_" in output_name:
+        print(f"錯誤：輸出檔名不得含底線 _，請改用 -（例如 services-a-tarot-v1.webp）：{output_name}")
         sys.exit(1)
 
     # 確保副檔名為 .webp
@@ -115,7 +120,7 @@ def process_asset(input_path, output_name, code="", name="", skip_rembg=False, q
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="星靈織語素材後製與 WebP 轉換工具")
     parser.add_argument("--input", "-i", required=True, help="原始圖檔路徑 (例如 design-assets/sd-assets/z-image-turbo_00014_.png)")
-    parser.add_argument("--output", "-o", required=True, help="輸出 WebP 檔名 (例如 services_a_tarot_v1.webp)")
+    parser.add_argument("--output", "-o", required=True, help="輸出 WebP 檔名 (例如 services-a-tarot-v1.webp)")
     parser.add_argument("--code", "-c", default="", help="素材編號 (例如 服務-A、首頁-A)")
     parser.add_argument("--name", "-n", default="", help="素材名稱 (例如 塔羅占卜 (v1))")
     parser.add_argument("--skip-rembg", action="store_true", help="跳過 rembg 去背步驟 (若已人工去背)")

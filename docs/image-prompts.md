@@ -7,12 +7,12 @@
 
 ## 命名與歸檔規範（`[分頁]-[圖片 A-Z]`）
 
-為確保多頁面架構下切版、生圖與記錄能精準對應，全站素材一律採用 **`[分頁代碼]_[圖片代碼]_[素材名稱]_v[版本號].png`** 命名：
+為確保多頁面架構下切版、生圖與記錄能精準對應，全站素材一律採用 **`[分頁代碼]-[圖片代碼]-[素材名稱]-v[版本號].png`** 命名：
 
 - **分頁代碼**：`home`（首頁）、`about`（關於我們）、`services`（命理服務）、`courses`（活動課程）、`reiki`（靈氣脈輪）、`akashic`（光與阿卡西）、`shop`（星靈選物）、`common`（跨頁共用）。
 - **圖片代碼**：`a` ~ `z`（依版面由上至下、由主要至次要編排）。
 - **存放路徑**：
-  - 挑選採用的原圖／去背圖 → `design-assets/sd-assets/`（例如：`home_a_tarot_world_v1.png`）
+  - 挑選採用的原圖／去背圖 → `design-assets/sd-assets/`（例如：`home-a-tarot-world-v1.png`）
   - 淘汰或測試圖 → `design-assets/sd-assets/rejected/`（保留備查）
   - 最終壓縮上站圖檔 → `public/assets/`
 - **生圖模式**：本專案採**人機協作**，由人類操作 ComfyUI（本機 SDXL/Flux）或 OpenAI 雲端生圖，產出後人工檢視、去背定稿。
@@ -130,12 +130,12 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：首頁「固定循環課程」區塊 6 門課程之活動現場照片插槽
 - **規格建議**：直式比例（4:5 或 3:4），真實上課/團練/練習現場照片，需清晰、採光溫和自然。
 - **對應編號與檔案**：
-  - `[首頁]-[圖片 G]`：每週一 阿卡西紀錄與光的課程 (`home_g_course_akashic.jpg`)
-  - `[首頁]-[圖片 H]`：每週二 占星循環班 (`home_h_course_astrology.jpg`)
-  - `[首頁]-[圖片 I]`：每週三 偉特塔羅循環班 (`home_i_course_waite.jpg`)
-  - `[首頁]-[圖片 J]`：每週四 七脈輪與靈氣團練 (`home_j_course_reiki.jpg`)
-  - `[首頁]-[圖片 K]`：每週五 托特塔羅循環班 (`home_k_course_thoth.jpg`)
-  - `[首頁]-[圖片 L]`：每週六 生命靈數 (`home_l_course_numerology.jpg`)
+  - `[首頁]-[圖片 G]`：每週一 阿卡西紀錄與光的課程 (`home-g-course-akashic.jpg`)
+  - `[首頁]-[圖片 H]`：每週二 占星循環班 (`home-h-course-astrology.jpg`)
+  - `[首頁]-[圖片 I]`：每週三 偉特塔羅循環班 (`home-i-course-waite.jpg`)
+  - `[首頁]-[圖片 J]`：每週四 七脈輪與靈氣團練 (`home-j-course-reiki.jpg`)
+  - `[首頁]-[圖片 K]`：每週五 托特塔羅循環班 (`home-k-course-thoth.jpg`)
+  - `[首頁]-[圖片 L]`：每週六 生命靈數 (`home-l-course-numerology.jpg`)
 - **備註**：目前前端維持精美線框佔位符（Placeholder），取得正式照片後直接放入 `public/assets/` 即可。
 
 ---
@@ -145,9 +145,9 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：首頁「命理師介紹」區塊 3 位老師圓框頭像
 - **規格建議**：正方形（1:1）或直式，建議解析度至少 600×600 px，現場工作/解盤專注照片或乾淨個人照。
 - **對應編號與檔案**：
-  - `[首頁]-[圖片 M]`：以恩 現場照片 (`home_m_reader_yien.jpg`)
-  - `[首頁]-[圖片 N]`：皮皮 現場照片 (`home_n_reader_pipi.jpg`)
-  - `[首頁]-[圖片 O]`：達心 現場照片 (`home_o_reader_daxin.jpg`)
+  - `[首頁]-[圖片 M]`：以恩 現場照片 (`home-m-reader-yien.jpg`)
+  - `[首頁]-[圖片 N]`：皮皮 現場照片 (`home-n-reader-pipi.jpg`)
+  - `[首頁]-[圖片 O]`：達心 現場照片 (`home-o-reader-daxin.jpg`)
 - **備註**：前端採用 CSS `rounded-full` 與 `object-cover`，任何比例之照片丟入後皆會自動等比居中裁切成完美正圓，無須手動預先裁圓。
 
 ---
@@ -159,7 +159,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   ```text
   deep indigo and dark purple night sky background, subtle nebula gradient, scattered soft glowing star dust particles and gentle bokeh light spots, calm, mystical, dreamy spiritual atmosphere, empty center for text overlay, wide angle wallpaper composition, high resolution, smooth gradients, no moon, no horizon, no landscape, no text, no figures
   ```
-- **存放檔名**：`home_p_bg_stars_v1.png`
+- **存放檔名**：`home-p-bg-stars-v1.png`
 
 ---
 
@@ -170,22 +170,22 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：命理服務頁面（`/services`）9 大雙欄卡片頂部專屬插圖位置（`w-24 h-24 sm:w-28 sm:h-28` 容器，居中 `object-contain`）
 - **視覺重點**：溫暖靈性的全彩水彩插畫（Full Color Watercolor Illustration），完美呼應 Canva 原站視覺調性，去背透明 WebP 支援深淺色雙主題自適應。
 - **對應編號與檔案**：
-  - `[服務]-[圖片 A]`：塔羅占卜插圖（神秘深紫金邊雙牌、星月與粉晶光芒）(`services_a_tarot_v1.webp`)
-  - `[服務]-[圖片 B]`：星盤解析插圖（金色同心星盤輪盤、水彩星雲與星座符號）(`services_b_astrology_v1.webp`)
-  - `[服務]-[圖片 C]`：生命靈數插圖（神聖幾何九芒星、金光與水彩靈數圓圈）(`services_c_numerology_v1.webp`)
-  - `[服務]-[圖片 D]`：八字命理插圖（東方水墨水彩太極陰陽兩儀、五行流轉氣韻）(`services_d_bazi_v1.webp`)
-  - `[服務]-[圖片 E]`：靈氣調頻插圖（雙手溫柔托舉、七脈輪彩虹能量光球升騰）(`services_e_reiki_v1.webp`)
-  - `[服務]-[圖片 F]`：阿卡西紀錄插圖（茂盛生命之樹、金葉星塵與靈魂源頭水彩）(`services_f_akashic_v1.webp`)
-  - `[服務]-[圖片 G]`：毛孩溝通插圖（貓咪與小狗心靈對話、光之絲線與水彩星塵光芒）(`services_g_pet_v1.webp`)
-  - `[服務]-[圖片 H]`：天使靈氣插圖（半身天使合掌閉眼祈禱、背後光圈與金色星塵）(`services_h_angel_reiki_v1.webp`)
-  - `[服務]-[圖片 I]`：亢達里尼靈氣插圖（中軸光柱、薄荷翡翠綠蛇形光帶螺旋上升、頂端淡粉蓮花光芒）(`services_i_kundalini_reiki_v1.webp`)
+  - `[服務]-[圖片 A]`：塔羅占卜插圖（神秘深紫金邊雙牌、星月與粉晶光芒）(`services-a-tarot-v1.webp`)
+  - `[服務]-[圖片 B]`：星盤解析插圖（金色同心星盤輪盤、水彩星雲與星座符號）(`services-b-astrology-v1.webp`)
+  - `[服務]-[圖片 C]`：生命靈數插圖（神聖幾何九芒星、金光與水彩靈數圓圈）(`services-c-numerology-v1.webp`)
+  - `[服務]-[圖片 D]`：八字命理插圖（東方水墨水彩太極陰陽兩儀、五行流轉氣韻）(`services-d-bazi-v1.webp`)
+  - `[服務]-[圖片 E]`：靈氣調頻插圖（雙手溫柔托舉、七脈輪彩虹能量光球升騰）(`services-e-reiki-v1.webp`)
+  - `[服務]-[圖片 F]`：阿卡西紀錄插圖（茂盛生命之樹、金葉星塵與靈魂源頭水彩）(`services-f-akashic-v1.webp`)
+  - `[服務]-[圖片 G]`：毛孩溝通插圖（貓咪與小狗心靈對話、光之絲線與水彩星塵光芒）(`services-g-pet-v1.webp`)
+  - `[服務]-[圖片 H]`：天使靈氣插圖（半身天使合掌閉眼祈禱、背後光圈與金色星塵）(`services-h-angel-reiki-v1.webp`)
+  - `[服務]-[圖片 I]`：亢達里尼靈氣插圖（中軸光柱、薄荷翡翠綠蛇形光帶螺旋上升、頂端淡粉蓮花光芒）(`services-i-kundalini-reiki-v1.webp`)
 - **備註**：A~J 已全部完成生成、高品質去背（Transparent RGBA）與 WebP 最佳化，正式部署於 `public/assets/` 與 `src/pages/services.astro`。
 
 ---
 
 ### [服務]-[圖片 G]：毛孩溝通（Pet Communication & Telepathy）
 
-- **版位用途**：命理服務頁面（`/services`）服務-G 卡片頂部專屬插圖位置（`services_g_pet_v1.webp`）
+- **版位用途**：命理服務頁面（`/services`）服務-G 卡片頂部專屬插圖位置（`services-g-pet-v1.webp`）
 - **視覺重點**：溫柔平靜的貓咪與小狗依偎相伴，心輪散發柔和光芒，光之絲線與金色星塵微光在彼此間流轉，傳遞跨越物種的心靈對話與療癒陪伴。純白底手繪水彩風格，邊緣細膩通透。
 - **色彩規格**：月光藍（`#8FB8E8`）、淡紫羅蘭、暖柔金光，去背透明 WebP 支援深淺色雙主題自適應。
 - **OpenAI Playground / DALL·E 3 提示詞（採用品）**：
@@ -207,7 +207,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 ### [服務]-[圖片 H]：天使靈氣（Angel Reiki — Praying Angel）
 
 - **狀態**：已採用上架（2026-11-13）
-- **版位用途**：命理服務頁面（`/services`）服務-H 卡片頂部專屬插圖位置（`services_h_angel_reiki_v1.webp`）；填入 `services.astro` 之 `imgAngelReiki`
+- **版位用途**：命理服務頁面（`/services`）服務-H 卡片頂部專屬插圖位置（`services-h-angel-reiki-v1.webp`）；填入 `services.astro` 之 `imgAngelReiki`
 - **形象來源**：古古老師原始描述——人形天使、雙手合掌、低頭、微笑、閉眼祈禱，周遭有可見的 aura。
 - **開發者擴寫（依版位限制）**：
   1. **半身構圖（腰部以上）**：插圖容器僅約 96~112px，全身構圖會使臉與手過小。
@@ -227,14 +227,14 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   ```text
   low quality, blurry, deformed, extra limbs, extra fingers, fused fingers, extra wings, cropped wings, cropped head, full body, tiny figure, open eyes, sad expression, realistic photo, realistic human face, 3d render, oil painting, baroque, ornate religious icon, cross, crucifix, text, watermark, dark background, complex background, diffuse glow fog, heavy bloom, smoke, noise, jpeg artifacts, overexposed, dirty texture, modern tech
   ```
-- **後製參數（預定）**：解析度 1024×1024 / `scripts/process_asset.py` U2Net 自動去背（翅膀羽毛與光圈邊緣需人工檢視）/ WebP Q85；採用後記錄於「六、生成紀錄」，並將 `services.astro` 之 `imgAngelReiki` 填入 `/assets/services_h_angel_reiki_v1.webp`。
+- **後製參數（預定）**：解析度 1024×1024 / `scripts/process_asset.py` U2Net 自動去背（翅膀羽毛與光圈邊緣需人工檢視）/ WebP Q85；採用後記錄於「六、生成紀錄」，並將 `services.astro` 之 `imgAngelReiki` 填入 `/assets/services-h-angel-reiki-v1.webp`。
 
 ---
 
 ### [服務]-[圖片 I]：亢達里尼靈氣（Kundalini Reiki — Rising Serpent of Light）
 
 - **狀態**：已採用上架（2026-11-13）
-- **版位用途**：命理服務頁面（`/services`）服務-I 卡片頂部專屬插圖位置（`services_i_kundalini_reiki_v1.webp`）；填入 `services.astro` 之 `imgKundaliniReiki`
+- **版位用途**：命理服務頁面（`/services`）服務-I 卡片頂部專屬插圖位置（`services-i-kundalini-reiki-v1.webp`）；填入 `services.astro` 之 `imgKundaliniReiki`
 - **形象來源**：老師原始描述——參考世界衛生組織（WHO）的蛇杖 logo 設計。
 - **開發者擴寫與設計注意**：
   1. **只取結構，不仿 WHO 標誌**：「杖＋盤繞之蛇」（阿斯克勒庇俄斯之杖）為古代公共領域符號，可自由繪製；但 WHO 標誌（聯合國地球＋橄欖枝環＋蛇杖之組合）受國際組織標誌保護，不得仿製或暗示關聯——不畫地球、橄欖枝環、徽章外框。
@@ -255,14 +255,14 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   ```text
   low quality, blurry, deformed, realistic snake, scales, fangs, open mouth, aggressive, scary, menacing, two snakes, wings, caduceus, medical symbol, red cross, hospital, globe, laurel wreath, emblem, badge, logo, wooden staff, rainbow chakra orbs, human figure, realistic photo, 3d render, text, watermark, dark background, complex background, diffuse glow fog, heavy bloom, smoke, noise, jpeg artifacts, overexposed, dirty texture, modern tech
   ```
-- **後製參數（預定）**：解析度 1024×1024 / `scripts/process_asset.py` U2Net 自動去背（半透明光帶與光柱邊緣需人工檢視）/ WebP Q85；採用後記錄於「六、生成紀錄」，並將 `services.astro` 之 `imgKundaliniReiki` 填入 `/assets/services_i_kundalini_reiki_v1.webp`。
+- **後製參數（預定）**：解析度 1024×1024 / `scripts/process_asset.py` U2Net 自動去背（半透明光帶與光柱邊緣需人工檢視）/ WebP Q85；採用後記錄於「六、生成紀錄」，並將 `services.astro` 之 `imgKundaliniReiki` 填入 `/assets/services-i-kundalini-reiki-v1.webp`。
 
 ---
 
 ### [服務]-[圖片 J]：靈擺調頻（Pendulum Healing — Crystal Pendulum）
 
 - **狀態**：已採用上架（2026-11-13）
-- **版位用途**：命理服務頁面（`/services`）服務-J 卡片頂部專屬插圖位置（`services_j_pendulum_v1.webp`）；填入 `services.astro` 之 `imgPendulum`
+- **版位用途**：命理服務頁面（`/services`）服務-J 卡片頂部專屬插圖位置（`services-j-pendulum-v1.webp`）；填入 `services.astro` 之 `imgPendulum`
 - **形象來源**：老師尚未描述，以下為開發者草案。建議向黎夢老師確認慣用靈擺的水晶種類、形狀與顏色，再替換提示詞中的「紫水晶」。
 - **開發者設計注意**：
   1. **單一主體、縱向置中**：插圖容器僅約 96~112px，主體須簡單可辨。
@@ -283,7 +283,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   ```text
   low quality, blurry, deformed, extra fingers, full hand, two hands, open palms, arm, human figure, face, pocket watch, clock, hypnosis spiral, swirl pattern, multiple pendulums, motion blur trails, rainbow chakra orbs, dark crystal, realistic photo, 3d render, text, watermark, dark background, complex background, diffuse glow fog, heavy bloom, smoke, noise, jpeg artifacts, overexposed, dirty texture, modern tech
   ```
-- **後製參數（預定）**：解析度 1024×1024 / `scripts/process_asset.py` U2Net 自動去背（細鏈與光弧邊緣易被切除，需人工檢視）/ WebP Q85；採用後記錄於「六、生成紀錄」，並將 `services.astro` 之 `imgPendulum` 填入 `/assets/services_j_pendulum_v1.webp`。
+- **後製參數（預定）**：解析度 1024×1024 / `scripts/process_asset.py` U2Net 自動去背（細鏈與光弧邊緣易被切除，需人工檢視）/ WebP Q85；採用後記錄於「六、生成紀錄」，並將 `services.astro` 之 `imgPendulum` 填入 `/assets/services-j-pendulum-v1.webp`。
 ---
 
 ## 三、【活動與課程】(Courses / starwovenstudy)
@@ -292,19 +292,19 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 
 - **版位用途**：活動課程頁面（`/courses`）固定循環課程 6 大卡片頂部 16:10 照片插槽（首頁週一至週六課表亦同步共用引用）
 - **對應編號與檔案**：
-  - `[課程]-[圖片 A]`：週一 光與阿卡西紀錄現場照 (`courses_a_akashic_v1.webp`)
-  - `[課程]-[圖片 B]`：週二 占星循環班現場照 (`courses_b_astrology_v1.webp`)
-  - `[課程]-[圖片 C]`：週三 偉特塔羅循環班現場照 (`courses_c_waite_v1.webp`)
-  - `[課程]-[圖片 D]`：週四 七脈輪與靈氣現場照 (`courses_d_reiki_v1.webp`)
-  - `[課程]-[圖片 E]`：週五 托特塔羅循環班現場照 (`courses_e_thoth_v1.webp`)
-  - `[課程]-[圖片 F]`：週六 生命靈數循環班現場照 (`courses_f_numerology_v1.webp`)
+  - `[課程]-[圖片 A]`：週一 光與阿卡西紀錄現場照 (`courses-a-akashic-v1.webp`)
+  - `[課程]-[圖片 B]`：週二 占星循環班現場照 (`courses-b-astrology-v1.webp`)
+  - `[課程]-[圖片 C]`：週三 偉特塔羅循環班現場照 (`courses-c-waite-v1.webp`)
+  - `[課程]-[圖片 D]`：週四 七脈輪與靈氣現場照 (`courses-d-reiki-v1.webp`)
+  - `[課程]-[圖片 E]`：週五 托特塔羅循環班現場照 (`courses-e-thoth-v1.webp`)
+  - `[課程]-[圖片 F]`：週六 生命靈數循環班現場照 (`courses-f-numerology-v1.webp`)
 - **備註**：已自 `design-assets/raw-photos/courses/` 實拍原圖完成 16:10 取景裁切與 WebP Q85 壓縮（各圖約 19~86 KB），正式部署於 `public/assets/`。
 
 ---
 
 ### [課程]-[圖片 G]：命理交流會實體現場活動照（1張，已採用上線）
 
-- **版位用途**：活動課程頁面「實體交流會」專區左側照片插槽 (`courses_g_meetup_v1.webp`)
+- **版位用途**：活動課程頁面「實體交流會」專區左側照片插槽 (`courses-g-meetup-v1.webp`)
 - **規格建議**：正方形 1:1（600×600 px），學員排盤、切磋研討之溫馨互動照片。已完成裁切與 WebP 轉換上架。
 
 ---
@@ -313,10 +313,10 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 
 - **版位用途**：活動課程頁面「主題工作坊」卡片側邊之 **9:16 直式**短影音欄位。該課程有 `youtubeId` 時顯示 YouTube Shorts，圖片不出現；無影片時圖片才作為直式背景（`object-cover` 裁切、60% 不透明度並疊加深色漸層，上方壓有標籤與文字）。素材請以 9:16 直式製作，主體置中、避開上下緣文字區。
 - **對應編號與檔案**：
-  - `[課程]-[圖片 H]`：塏易學 梅花易數情境海報 (`courses_h_meihua.jpg` / `.png`)
-  - `[課程]-[圖片 I]`：八字體驗情境海報 (`courses_i_bazi.jpg` / `.png`)
-  - `[課程]-[圖片 J]`：紫微斗數工作坊情境海報 (`courses_j_ziwei.jpg` / `.png`)（工作坊已於 2026-11-17 下架）
-  - `[課程]-[圖片 K]`：奧剛塔手作課情境海報 (`courses_k_orgonite.jpg` / `.png`)（尚未製作；以短影音為優先）
+  - `[課程]-[圖片 H]`：塏易學 梅花易數情境海報 (`courses-h-meihua.jpg` / `.png`)
+  - `[課程]-[圖片 I]`：八字體驗情境海報 (`courses-i-bazi.jpg` / `.png`)
+  - `[課程]-[圖片 J]`：紫微斗數工作坊情境海報 (`courses-j-ziwei.jpg` / `.png`)（工作坊已於 2026-11-17 下架）
+  - `[課程]-[圖片 K]`：奧剛塔手作課情境海報 (`courses-k-orgonite.jpg` / `.png`)（尚未製作；以短影音為優先）
 
 ---
 
@@ -327,7 +327,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：關於我們頁面（`/about`）「我們從抱團取暖開始，現在我們想要傳承」區塊右側主視覺
 - **規格建議**：直式比例 447:517（Canva 原始規格為寬 447 × 高 517 px；原圖 1166 × 1349 px）。
 - **視覺重點**：星靈織語全體夥伴溫馨手繪水彩群像，襯托深邃星空、星座輪盤、塔羅牌、靈性白狐與光之織語，象徵「星靈織語，織起人與人的連結，也讓每一道光持續傳下去」。
-- **對應檔案**：`about_a_brand_story_v1.webp`（由 `design-assets/raw-photos/team/介紹命理師封面.png` 轉換為 WebP Q85，檔案大小 388.4 KB，保留完整背景）。
+- **對應檔案**：`about-a-brand-story-v1.webp`（由 `design-assets/raw-photos/team/介紹命理師封面.png` 轉換為 WebP Q85，檔案大小 388.4 KB，保留完整背景）。
 
 ---
 
@@ -336,8 +336,8 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：關於我們頁面「星靈織語創辦人」2 欄大名片圓框頭像（Canva 原始規格 269 × 269 px 正圓）
 - **規格建議**：正方形（1:1），解析度至少 600×600 px，清晰個人肖像或靈性工作照。
 - **對應編號與檔案**：
-  - `[關於]-[圖片 B]`：以恩 創辦人形象照 (`about_b_founder_yien.jpg`)
-  - `[關於]-[圖片 C]`：皮皮 創辦人形象照 (`about_c_founder_pipi.jpg`)
+  - `[關於]-[圖片 B]`：以恩 創辦人形象照 (`about-b-founder-yien.jpg`)
+  - `[關於]-[圖片 C]`：皮皮 創辦人形象照 (`about-c-founder-pipi.jpg`)
 - **備註**：前端封裝 `rounded-full` 與 `object-cover`，任何比例照片置入皆自動居中裁切成正圓。未上傳前自動呈現專屬創辦人靈性符號與代碼標籤。
 
 ---
@@ -346,11 +346,11 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 
 - **版位用途**：關於我們頁面「星靈織語夥伴」9 位成員橫式名片圓框頭像（Canva 原始規格 269 × 269 px）
 - **排列順序**：
-  - 第 1 排：`[關於]-[圖片 D]` 達達 (`about_d_member_daxin.jpg`) · `[關於]-[圖片 E]` 學長 (`about_e_member_xiaoyu.jpg`)
-  - 第 2 排：`[關於]-[圖片 F]` 悠悠 (`about_f_member_youyou.jpg`) · `[關於]-[圖片 G]` 姆姆 (`about_g_member_mumu.jpg`)
-  - 第 3 排：`[關於]-[圖片 H]` 月月 (`about_h_member_linyue.jpg`) · `[關於]-[圖片 I]` 白白 (`about_i_member_baibai.jpg`)
-  - 第 4 排：`[關於]-[圖片 J]` Migo (`about_j_member_migo.jpg`) · `[關於]-[圖片 K]` 古古 (`about_k_member_gugu.jpg`)
-  - 第 5 排：`[關於]-[圖片 L]` 黎夢 (`about_l_member_limeng_v1.webp` / `about_l_member_limeng.jpg`)
+  - 第 1 排：`[關於]-[圖片 D]` 達達 (`about-d-member-daxin.jpg`) · `[關於]-[圖片 E]` 學長 (`about-e-member-xiaoyu.jpg`)
+  - 第 2 排：`[關於]-[圖片 F]` 悠悠 (`about-f-member-youyou.jpg`) · `[關於]-[圖片 G]` 姆姆 (`about-g-member-mumu.jpg`)
+  - 第 3 排：`[關於]-[圖片 H]` 月月 (`about-h-member-linyue.jpg`) · `[關於]-[圖片 I]` 白白 (`about-i-member-baibai.jpg`)
+  - 第 4 排：`[關於]-[圖片 J]` Migo (`about-j-member-migo.jpg`) · `[關於]-[圖片 K]` 古古 (`about-k-member-gugu.jpg`)
+  - 第 5 排：`[關於]-[圖片 L]` 黎夢 (`about-l-member-limeng-v1.webp` / `about-l-member-limeng.jpg`)
 - **備註**：取得照片後置於 `public/assets/` 即可立即自動上線。
 
 ---
@@ -378,7 +378,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   A full-bleed watercolor illustration filling the entire frame edge to edge, with no borders, no margins and no white space. A calm deep indigo and midnight purple night sky with soft, uneven hand-painted watercolor texture. Soft lavender and moonlight blue watercolor cloud banks rest on the left and right sides at middle height, reaching gently toward the inner third of the image and thinning into faint wisps near the center. Two or three long, thin, flowing golden threads weave in and out of the clouds like loose silk strands, drifting horizontally from both sides toward the middle, their glowing tips fading softly just below the center of the image. The central area stays calm, dark and open, suitable for title text, with only very faint tiny stars. Many small twinkling four-pointed stars and fine star dust are scattered across the upper sky and around the clouds on both sides. The composition is balanced but not mirrored, the left and right sides look naturally different. The sky is flat and open with no swirling shapes. Serene, healing, mystical, elegant mood, high resolution.
   ```
 - **經驗紀錄**：提示詞含「banner」會使模型在畫布內再畫一條橫幅（上下白邊）；要求光暈「匯聚於中央」會畫出漩渦星系；雲層寫「middle height」會讓雲帶橫在中央，文字因此改放上半部。
-- **存放檔名**：`common_b_og_image_v1.jpg`（`public/assets/` 與 `design-assets/sd-assets/`；生成原圖 `common_b_og_image_v1.png` 留存本機，git-ignored）
+- **存放檔名**：`common-b-og-image-v1.jpg`（`public/assets/` 與 `design-assets/sd-assets/`；生成原圖 `common-b-og-image-v1.png` 留存本機，git-ignored）
 
 ---
 
@@ -404,7 +404,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   ```
 - **後製紀錄**：原圖 1254×1254 透明 PNG，免去背。燈籠外圍半透明白色光暈在深色底上呈白霧，改以程式移除（自燈籠外緣連通之近白像素）並於燈籠後方疊星金 `#FCE794` 徑向漸層光；裁去四周透明邊（留 24px）為 1132×1147 / WebP Q85。
 - **經驗紀錄**：GPT Image 會在發光物周圍畫白色光暈，去背後只在淺底看不出來；重抽時可在提示詞補「The lantern's warm light stays inside and right around the lantern as a small golden glow, with no white halo or white haze around it.」
-- **存放檔名**：`common_c_lost_star_v1.webp`（`public/assets/` 與 `design-assets/sd-assets/`）
+- **存放檔名**：`common-c-lost-star-v1.webp`（`public/assets/` 與 `design-assets/sd-assets/`）
 
 ---
 
@@ -413,10 +413,10 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：全站頁尾「聯絡我們」區塊之官方條碼
 - **規格建議**：正方形 PNG，純白底色帶邊界安全距離（Quiet zone），保證手機相機與掃描器秒讀。
 - **對應編號與檔案**：
-  - `[頁尾]-[圖片 A]`：Line ID `starwoven` QR Code (`footer_qr_line.png`)
-  - `[頁尾]-[圖片 B]`：Instagram `starwoven2026` QR Code (`footer_qr_instagram.png`)
-  - `[頁尾]-[圖片 C]`：Line 社群 `星靈織語` QR Code (`footer_qr_community.png`)
-  - `[頁尾]-[圖片 D]`：iOpen Mall `星靈選物` QR Code (`footer_qr_iopenmall.png`)
+  - `[頁尾]-[圖片 A]`：Line ID `starwoven` QR Code (`footer-qr-line.png`)
+  - `[頁尾]-[圖片 B]`：Instagram `starwoven2026` QR Code (`footer-qr-instagram.png`)
+  - `[頁尾]-[圖片 C]`：Line 社群 `星靈織語` QR Code (`footer-qr-community.png`)
+  - `[頁尾]-[圖片 D]`：iOpen Mall `星靈選物` QR Code (`footer-qr-iopenmall.png`)
 - **備註**：已從 Canva 高清實測截圖精準提取裁切，並加上安全空白邊界；前端同時封裝超連結，手機訪客點擊可直達 App 或網頁。
 
 ---
@@ -426,11 +426,11 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：星靈專欄列表頁（`/blog`，16:10 寬幅卡片）與文章詳情內頁（`/blog/[slug]`，16:9 / 21:9 頂部編輯部橫幅）
 - **規格規格**：1344 × 768（SDXL 標準寬幅，比例 1.75:1，滿版手繪水彩風格無須去背）
 - **對應編號與檔案**：
-  - `[專欄]-[圖片 A]`：光與阿卡西紀錄精選專文插圖（生命之書、天國金色光柱與命運星塵）(`blog_a_akashic_light_v1.webp`)
-  - `[專欄]-[圖片 B]`：初探阿卡西紀錄專文插圖（靈魂藍圖神聖幾何、星辰之門與以太圖書館）(`blog_b_akashic_intro_v1.webp`)
-  - `[專欄]-[圖片 C]`：臼井靈氣與七脈輪專文插圖（冥想人體光影輪廓、七脈輪彩虹能量光球升騰）(`blog_c_reiki_chakras_v1.webp`)
-  - `[專欄]-[圖片 D]`：日常能量急救包專文插圖（雙手捧托翡翠綠與粉金能量光、晨光與居家靜心）(`blog_d_reiki_healing_v1.webp`)
-  - `[專欄]-[圖片 E]`：塔羅牌心靈之鏡專文插圖（古典靈性鏡面、水彩倒映星盤與星星牌光暈）(`blog_e_tarot_mirror_v1.webp`)
+  - `[專欄]-[圖片 A]`：光與阿卡西紀錄精選專文插圖（生命之書、天國金色光柱與命運星塵）(`blog-a-akashic-light-v1.webp`)
+  - `[專欄]-[圖片 B]`：初探阿卡西紀錄專文插圖（靈魂藍圖神聖幾何、星辰之門與以太圖書館）(`blog-b-akashic-intro-v1.webp`)
+  - `[專欄]-[圖片 C]`：臼井靈氣與七脈輪專文插圖（冥想人體光影輪廓、七脈輪彩虹能量光球升騰）(`blog-c-reiki-chakras-v1.webp`)
+  - `[專欄]-[圖片 D]`：日常能量急救包專文插圖（雙手捧托翡翠綠與粉金能量光、晨光與居家靜心）(`blog-d-reiki-healing-v1.webp`)
+  - `[專欄]-[圖片 E]`：塔羅牌心靈之鏡專文插圖（古典靈性鏡面、水彩倒映星盤與星星牌光暈）(`blog-e-tarot-mirror-v1.webp`)
 - **備註**：全部採用 ComfyUI Z-Image-Turbo / SDXL 生成，經專案標準流程壓縮為高品質 WebP（品質 85，跳過去背保留滿版水彩 wash），正式部署於 `public/assets/` 與文章 Markdown frontmatter。
 
 ---
@@ -439,70 +439,70 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 
 | 編號 | 素材名稱 | 日期 | 平台 / 模型 | 提示詞（摘要） | 種子碼 (Seed) | 評選結果 | 後製方式 | 存放檔名 |
 |---|---|---|---|---|---|---|---|---|
-| `首頁-A` | 塔羅牌・世界牌 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 舞者花環四大神獸白線 | 756252877462802 | 淘汰 (備查) | 移至 rejected | `home_a_tarot_world_v1.webp` |
-| `首頁-A` | 塔羅牌・世界牌 (v2) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 彩虹漸層舞者花環四大神獸 | 115754867374705 | 淘汰 (備查) | 移至 rejected | `home_a_tarot_world_v2.webp` |
-| `首頁-A` | 塔羅牌・世界牌 (v3) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 飽和彩虹光暈舞者花環神獸 | 1055348331508342 | 採用上架 | 轉 WebP Q85 | `home_a_tarot_world_v3.webp` |
-| `首頁-A` | 命運之輪 (v1) | 2026-10-08 | ComfyUI | 圓形天體命運之輪星盤白線 | 464187154494867 | 採用上架 | 轉 WebP Q85 (保留背景) | `home_a_wheel_of_fortune_v1.webp` |
-| `首頁-A` | 光之編織・星靈織語 (v1) | 2026-10-08 | ComfyUI | 玫瑰粉晶雙手編織心形星團絲線 | 475590790854527 | 採用上架 | 轉 WebP Q85 (保留背景) | `home_a_star_weaver_v1.webp` |
-| `首頁-B` | 十二星座星盤輪盤 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 3D透視十二星座星盤彩虹光 | 885617653962545 | 採用上架 | 轉 WebP Q85 (1:1) | `home_b_zodiac_wheel_v1.webp` |
-| `首頁-B` | 天體星盤儀與黃金星輪 (v1) | 2026-10-08 | ComfyUI | 天體星盤儀渾天儀日月同心星環金框 | 265829913854434 | 採用上架 | 轉 WebP Q85 (保留背景) | `home_b_celestial_astrolabe_v1.webp` |
-| `首頁-C` | 命理諮詢・行星星環 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 土星造型手繪細線條星芒 | 992106538623070 | 採用上架 | 去背 + 轉 WebP | `home_c_planet_stars_v1.webp` |
-| `首頁-D` | 課程學習・筆記本筆 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 翻開手帳筆記本與筆星芒 | 808022016837652 | 採用上架 | 去背 + 轉 WebP | `home_d_open_book_v1.webp` |
-| `首頁-E` | 實體活動・三人社群 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 靈性夥伴圍坐聚會手繪星芒 | 1004066584927966 | 採用上架 | 去背 + 轉 WebP | `home_e_community_trio_v1.webp` |
-| `首頁-F` | 靈氣調頻・雙手能量 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 雙手托起能量光芒手繪 | 244399405058717 | 採用上架 | 去背 + 轉 WebP | `home_f_reiki_hands_v1.webp` |
-| `首頁-G` | 週一 阿卡西課照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-A`) | `courses_a_akashic_v1.webp` |
-| `首頁-H` | 週二 占星班照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-B`) | `courses_b_astrology_v1.webp` |
-| `首頁-I` | 週三 偉特團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-C`) | `courses_c_waite_v1.webp` |
-| `首頁-J` | 週四 靈氣團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-D`) | `courses_d_reiki_v1.webp` |
-| `首頁-K` | 週五 托特塔羅照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-E`) | `courses_e_thoth_v1.webp` |
-| `首頁-L` | 週六 生命靈數照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-F`) | `courses_f_numerology_v1.webp` |
-| `課程-A` | 週一 阿卡西課照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (居中偏下) + WebP Q85 | `courses_a_akashic_v1.webp` |
-| `課程-B` | 週二 占星班照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (960×600) + WebP Q85 | `courses_b_astrology_v1.webp` |
-| `課程-C` | 週三 偉特團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (960×600) + WebP Q85 | `courses_c_waite_v1.webp` |
-| `課程-D` | 週四 靈氣團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (居中) + WebP Q85 | `courses_d_reiki_v1.webp` |
-| `課程-E` | 週五 托特塔羅照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (960×600) + WebP Q85 | `courses_e_thoth_v1.webp` |
-| `課程-F` | 週六 生命靈數照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (居中皮皮) + WebP Q85 | `courses_f_numerology_v1.webp` |
-| `課程-G` | 命理交流會現場照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 正方形 1:1 裁切 (600×600) + WebP Q85 | `courses_g_meetup_v1.webp` |
+| `首頁-A` | 塔羅牌・世界牌 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 舞者花環四大神獸白線 | 756252877462802 | 淘汰 (備查) | 移至 rejected | `home-a-tarot-world-v1.webp` |
+| `首頁-A` | 塔羅牌・世界牌 (v2) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 彩虹漸層舞者花環四大神獸 | 115754867374705 | 淘汰 (備查) | 移至 rejected | `home-a-tarot-world-v2.webp` |
+| `首頁-A` | 塔羅牌・世界牌 (v3) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 飽和彩虹光暈舞者花環神獸 | 1055348331508342 | 採用上架 | 轉 WebP Q85 | `home-a-tarot-world-v3.webp` |
+| `首頁-A` | 命運之輪 (v1) | 2026-10-08 | ComfyUI | 圓形天體命運之輪星盤白線 | 464187154494867 | 採用上架 | 轉 WebP Q85 (保留背景) | `home-a-wheel-of-fortune-v1.webp` |
+| `首頁-A` | 光之編織・星靈織語 (v1) | 2026-10-08 | ComfyUI | 玫瑰粉晶雙手編織心形星團絲線 | 475590790854527 | 採用上架 | 轉 WebP Q85 (保留背景) | `home-a-star-weaver-v1.webp` |
+| `首頁-B` | 十二星座星盤輪盤 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 3D透視十二星座星盤彩虹光 | 885617653962545 | 採用上架 | 轉 WebP Q85 (1:1) | `home-b-zodiac-wheel-v1.webp` |
+| `首頁-B` | 天體星盤儀與黃金星輪 (v1) | 2026-10-08 | ComfyUI | 天體星盤儀渾天儀日月同心星環金框 | 265829913854434 | 採用上架 | 轉 WebP Q85 (保留背景) | `home-b-celestial-astrolabe-v1.webp` |
+| `首頁-C` | 命理諮詢・行星星環 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 土星造型手繪細線條星芒 | 992106538623070 | 採用上架 | 去背 + 轉 WebP | `home-c-planet-stars-v1.webp` |
+| `首頁-D` | 課程學習・筆記本筆 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 翻開手帳筆記本與筆星芒 | 808022016837652 | 採用上架 | 去背 + 轉 WebP | `home-d-open-book-v1.webp` |
+| `首頁-E` | 實體活動・三人社群 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 靈性夥伴圍坐聚會手繪星芒 | 1004066584927966 | 採用上架 | 去背 + 轉 WebP | `home-e-community-trio-v1.webp` |
+| `首頁-F` | 靈氣調頻・雙手能量 | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 雙手托起能量光芒手繪 | 244399405058717 | 採用上架 | 去背 + 轉 WebP | `home-f-reiki-hands-v1.webp` |
+| `首頁-G` | 週一 阿卡西課照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-A`) | `courses-a-akashic-v1.webp` |
+| `首頁-H` | 週二 占星班照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-B`) | `courses-b-astrology-v1.webp` |
+| `首頁-I` | 週三 偉特團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-C`) | `courses-c-waite-v1.webp` |
+| `首頁-J` | 週四 靈氣團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-D`) | `courses-d-reiki-v1.webp` |
+| `首頁-K` | 週五 托特塔羅照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-E`) | `courses-e-thoth-v1.webp` |
+| `首頁-L` | 週六 生命靈數照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 + 轉 WebP Q85 (共用 `課程-F`) | `courses-f-numerology-v1.webp` |
+| `課程-A` | 週一 阿卡西課照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (居中偏下) + WebP Q85 | `courses-a-akashic-v1.webp` |
+| `課程-B` | 週二 占星班照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (960×600) + WebP Q85 | `courses-b-astrology-v1.webp` |
+| `課程-C` | 週三 偉特團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (960×600) + WebP Q85 | `courses-c-waite-v1.webp` |
+| `課程-D` | 週四 靈氣團練照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (居中) + WebP Q85 | `courses-d-reiki-v1.webp` |
+| `課程-E` | 週五 托特塔羅照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (960×600) + WebP Q85 | `courses-e-thoth-v1.webp` |
+| `課程-F` | 週六 生命靈數照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 16:10 裁切 (居中皮皮) + WebP Q85 | `courses-f-numerology-v1.webp` |
+| `課程-G` | 命理交流會現場照 | 2026-10-02 | 業主實拍 | 實體活動現場照片 | - | 採用上架 | 正方形 1:1 裁切 (600×600) + WebP Q85 | `courses-g-meetup-v1.webp` |
 | `首頁-M` | 以恩 現場照 | 2026-10-02 | 業主指示 | 首頁命理師區塊已移除 | - | 取消 (DEC-030) | 集中於關於我們 | `(併入 關於-B)` |
 | `首頁-N` | 皮皮 現場照 | 2026-10-02 | 業主指示 | 首頁命理師區塊已移除 | - | 取消 (DEC-030) | 集中於關於我們 | `(併入 關於-C)` |
 | `首頁-O` | 達心 現場照 | 2026-10-02 | 業主指示 | 首頁命理師區塊已移除 | - | 取消 (DEC-030) | 集中於關於我們 | `(併入 關於-D)` |
-| `首頁-P` | 深靛藍星空背景 | 2026-09-22 | ComfyUI | 深靛藍暗紫星塵留白底圖 | | 待生成 | 壓至1MB內 | `home_p_bg_stars_v1.png` |
-| `服務-A` | 塔羅占卜 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 神秘紫金雙塔羅牌粉晶光芒 | 588777160954832 | 採用上架 | 去背 + 轉 WebP | `services_a_tarot_v1.webp` |
-| `服務-B` | 星盤解析 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 金色天體同心星盤水彩星雲 | 283886040671793 | 採用上架 | 精密圓形抗鋸齒去背 + WebP Q85 | `services_b_astrology_v1.webp` |
-| `服務-C` | 生命靈數 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 神聖幾何九芒星靈數水彩光芒 | 229167127995660 | 採用上架 | 去背 + 轉 WebP | `services_c_numerology_v1.webp` |
-| `服務-D` | 八字命理 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 東方水墨水彩太極陰陽五行流轉 | 753048023136719 | 採用上架 | 去背 + 轉 WebP | `services_d_bazi_v1.webp` |
-| `服務-E` | 靈氣調頻 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 雙手捧托七脈輪彩虹能量光暈 | 950154034724132 | 採用上架 | 去背 + 轉 WebP | `services_e_reiki_v1.webp` |
-| `服務-F` | 阿卡西紀錄 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 靈魂生命之樹金葉星塵水彩 | 877470136253271 | 採用上架 | 去背 + 轉 WebP | `services_f_akashic_v1.webp` |
-| `服務-H` | 天使靈氣 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 暖金髮象牙白袍半身天使合掌祈禱 | 416420314841581 | 採用上架 | 去背（光環內圈清理）+ WebP Q85 | `services_h_angel_reiki_v1.webp` |
-| `服務-I` | 亢達里尼靈氣 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 薄荷翡翠綠光蛇盤繞金光柱與粉蓮花 | 202100658325472 | 採用上架 | 去背 + WebP Q85 | `services_i_kundalini_reiki_v1.webp` |
-| `服務-J` | 靈擺調頻 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 雙指銀鏈雙尖紫水晶柱與弧形金光 | 44320477463172 | 採用上架 | 去背（弧形金光與星芒補回）+ WebP Q85 | `services_j_pendulum_v1.webp` |
-| `關於-A` | 品牌故事氛圍插圖 (v1) | 2026-10-09 | 業主提供 (Canva) | 手繪全彩命理師團隊群像與星光織語 | - | 採用上架 | 轉 WebP Q85 (保留背景) | `about_a_brand_story_v1.webp` |
-| `關於-B` | 以恩 創辦人形象照 | 2026-10-02 | 業主實拍 | 創辦人個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_b_founder_yien_v1.webp` |
-| `關於-C` | 皮皮 創辦人形象照 | 2026-10-02 | 業主實拍 | 創辦人個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_c_founder_pipi_v1.webp` |
-| `關於-D` | 達達 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_d_member_daxin_v1.webp` |
-| `關於-E` | 學長 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | 縮放800px + 轉 WebP Q85 | `about_e_member_xiaoyu_v1.webp` |
-| `關於-F` | 悠悠 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_f_member_youyou_v1.webp` |
-| `關於-G` | 姆姆 夥伴形象照 | 2026-10-04 | 業主實拍 | 夥伴個人頭像 (姆姆.jpg) | - | 採用上架 | EXIF校正 + ROI 正中裁切 + 轉 WebP Q85 | `about_g_member_mumu_v1.webp` |
-| `關於-H` | 月月 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 (月月.png) | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_h_member_linyue_v1.webp` |
-| `關於-I` | 白白 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_i_member_baibai_v1.webp` |
-| `關於-J` | Migo 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_j_member_migo_v1.webp` |
-| `關於-K` | 古古 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about_k_member_gugu_v1.webp` |
-| `關於-L` | 黎夢 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | 縮放800px + 轉 WebP Q85 | `about_l_member_limeng_v1.webp` |
-| `共用-A` | 內頁淺藍水彩底圖 | 2026-09-22 | ComfyUI | 淡天藍水彩暈染雲朵 | | 待生成 | 裁切調色 | `common_a_watercolor_bg_v1.png` |
-| `頁尾-A` | Line ID 條碼 | 2026-09-22 | 實體擷圖 | 官方 LINE 條碼 | - | 採用 | 安全留白 | `footer_qr_line.png` |
-| `頁尾-B` | Instagram 條碼 | 2026-09-22 | 實體擷圖 | 官方 IG 條碼 | - | 採用 | 安全留白 | `footer_qr_instagram.png` |
-| `頁尾-C` | Line 社群 條碼 | 2026-09-22 | 實體擷圖 | 官方社群條碼 | - | 採用 | 安全留白 | `footer_qr_community.png` |
-| `頁尾-D` | iOpen Mall 條碼 | 2026-09-22 | 實體擷圖 | 7-11 賣場條碼 | - | 採用 | 安全留白 | `footer_qr_iopenmall.png` |
-| `專欄-A` | 光與阿卡西精選 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 生命之書天國光柱命運絲線水彩 | 6131051543551 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog_a_akashic_light_v1.webp` |
-| `專欄-B` | 初探阿卡西紀錄 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 靈魂藍圖神聖幾何星辰之門水彩 | 266276422365168 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog_b_akashic_intro_v1.webp` |
-| `專欄-C` | 靈氣與七脈輪 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 冥想人體光影七脈輪彩虹能量 | 423006888875148 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog_c_reiki_chakras_v1.webp` |
-| `專欄-D` | 日常能量急救包 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 雙手捧托翡翠綠粉金能量光晨光 | 965541644548421 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog_d_reiki_healing_v1.webp` |
-| `專欄-E` | 塔羅心靈之鏡 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 古典靈性鏡面倒映塔羅牌星盤 | 188810271202554 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog_e_tarot_mirror_v1.webp` |
-| `公告-202610-A` | 聖誕節交換禮物週年慶 (v1) | 2026-10-09 | Canva | 聖誕樹禮物塔羅牌週年慶活動海報 | - | 採用上架 | 轉 WebP Q85 (896×1152) | `home_announcement_202610_christmas_v1.webp` |
-| `公告-202610-B` | 星靈實習生招募 (v1) | 2026-10-09 | Canva | 星空月亮以技能換技能培訓招募海報 | - | 採用上架 | 轉 WebP Q85 (896×1152) | `home_announcement_202610_intern_v1.webp` |
-| `公告-202611-A` | 2026 年底市集預告 (v1) | 2026-11-08 | 業主提供 | 夜空水晶塔羅四市集場次與服務項目海報 | - | 採用上架 | 轉 WebP Q85 (825×1024，原尺寸) | `home_announcement_202611_market_v1.webp` |
-| `公告-202611-B` | 年度流年塔羅 (v1) | 2026-11-08 | 業主提供 | 太陽牌粉紫星空年度報告內容與費用海報 | - | 採用上架 | 轉 WebP Q85 (1024×1536，原尺寸) | `home_announcement_202611_annual_tarot_v1.webp` |
-| `公告-202611-C` | 奧剛塔手作課 (v1) | 2026-11-17 | 業主提供 | 星空紫水晶金字塔奧剛塔手作課日期費用名額海報 | - | 採用上架 | 轉 WebP Q85 (1122×1402，原尺寸，4:5) | `home_announcement_202611_orgonite_v1.webp` |
+| `首頁-P` | 深靛藍星空背景 | 2026-09-22 | ComfyUI | 深靛藍暗紫星塵留白底圖 | | 待生成 | 壓至1MB內 | `home-p-bg-stars-v1.png` |
+| `服務-A` | 塔羅占卜 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 神秘紫金雙塔羅牌粉晶光芒 | 588777160954832 | 採用上架 | 去背 + 轉 WebP | `services-a-tarot-v1.webp` |
+| `服務-B` | 星盤解析 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 金色天體同心星盤水彩星雲 | 283886040671793 | 採用上架 | 精密圓形抗鋸齒去背 + WebP Q85 | `services-b-astrology-v1.webp` |
+| `服務-C` | 生命靈數 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 神聖幾何九芒星靈數水彩光芒 | 229167127995660 | 採用上架 | 去背 + 轉 WebP | `services-c-numerology-v1.webp` |
+| `服務-D` | 八字命理 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 東方水墨水彩太極陰陽五行流轉 | 753048023136719 | 採用上架 | 去背 + 轉 WebP | `services-d-bazi-v1.webp` |
+| `服務-E` | 靈氣調頻 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 雙手捧托七脈輪彩虹能量光暈 | 950154034724132 | 採用上架 | 去背 + 轉 WebP | `services-e-reiki-v1.webp` |
+| `服務-F` | 阿卡西紀錄 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 靈魂生命之樹金葉星塵水彩 | 877470136253271 | 採用上架 | 去背 + 轉 WebP | `services-f-akashic-v1.webp` |
+| `服務-H` | 天使靈氣 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 暖金髮象牙白袍半身天使合掌祈禱 | 416420314841581 | 採用上架 | 去背（光環內圈清理）+ WebP Q85 | `services-h-angel-reiki-v1.webp` |
+| `服務-I` | 亢達里尼靈氣 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 薄荷翡翠綠光蛇盤繞金光柱與粉蓮花 | 202100658325472 | 採用上架 | 去背 + WebP Q85 | `services-i-kundalini-reiki-v1.webp` |
+| `服務-J` | 靈擺調頻 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 雙指銀鏈雙尖紫水晶柱與弧形金光 | 44320477463172 | 採用上架 | 去背（弧形金光與星芒補回）+ WebP Q85 | `services-j-pendulum-v1.webp` |
+| `關於-A` | 品牌故事氛圍插圖 (v1) | 2026-10-09 | 業主提供 (Canva) | 手繪全彩命理師團隊群像與星光織語 | - | 採用上架 | 轉 WebP Q85 (保留背景) | `about-a-brand-story-v1.webp` |
+| `關於-B` | 以恩 創辦人形象照 | 2026-10-02 | 業主實拍 | 創辦人個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-b-founder-yien-v1.webp` |
+| `關於-C` | 皮皮 創辦人形象照 | 2026-10-02 | 業主實拍 | 創辦人個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-c-founder-pipi-v1.webp` |
+| `關於-D` | 達達 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-d-member-daxin-v1.webp` |
+| `關於-E` | 學長 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | 縮放800px + 轉 WebP Q85 | `about-e-member-xiaoyu-v1.webp` |
+| `關於-F` | 悠悠 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-f-member-youyou-v1.webp` |
+| `關於-G` | 姆姆 夥伴形象照 | 2026-10-04 | 業主實拍 | 夥伴個人頭像 (姆姆.jpg) | - | 採用上架 | EXIF校正 + ROI 正中裁切 + 轉 WebP Q85 | `about-g-member-mumu-v1.webp` |
+| `關於-H` | 月月 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 (月月.png) | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-h-member-linyue-v1.webp` |
+| `關於-I` | 白白 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-i-member-baibai-v1.webp` |
+| `關於-J` | Migo 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-j-member-migo-v1.webp` |
+| `關於-K` | 古古 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | EXIF校正 + 轉 WebP Q85 | `about-k-member-gugu-v1.webp` |
+| `關於-L` | 黎夢 夥伴形象照 | 2026-10-02 | 業主實拍 | 夥伴個人頭像 | - | 採用上架 | 縮放800px + 轉 WebP Q85 | `about-l-member-limeng-v1.webp` |
+| `共用-A` | 內頁淺藍水彩底圖 | 2026-09-22 | ComfyUI | 淡天藍水彩暈染雲朵 | | 待生成 | 裁切調色 | `common-a-watercolor-bg-v1.png` |
+| `頁尾-A` | Line ID 條碼 | 2026-09-22 | 實體擷圖 | 官方 LINE 條碼 | - | 採用 | 安全留白 | `footer-qr-line.png` |
+| `頁尾-B` | Instagram 條碼 | 2026-09-22 | 實體擷圖 | 官方 IG 條碼 | - | 採用 | 安全留白 | `footer-qr-instagram.png` |
+| `頁尾-C` | Line 社群 條碼 | 2026-09-22 | 實體擷圖 | 官方社群條碼 | - | 採用 | 安全留白 | `footer-qr-community.png` |
+| `頁尾-D` | iOpen Mall 條碼 | 2026-09-22 | 實體擷圖 | 7-11 賣場條碼 | - | 採用 | 安全留白 | `footer-qr-iopenmall.png` |
+| `專欄-A` | 光與阿卡西精選 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 生命之書天國光柱命運絲線水彩 | 6131051543551 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog-a-akashic-light-v1.webp` |
+| `專欄-B` | 初探阿卡西紀錄 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 靈魂藍圖神聖幾何星辰之門水彩 | 266276422365168 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog-b-akashic-intro-v1.webp` |
+| `專欄-C` | 靈氣與七脈輪 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 冥想人體光影七脈輪彩虹能量 | 423006888875148 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog-c-reiki-chakras-v1.webp` |
+| `專欄-D` | 日常能量急救包 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 雙手捧托翡翠綠粉金能量光晨光 | 965541644548421 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog-d-reiki-healing-v1.webp` |
+| `專欄-E` | 塔羅心靈之鏡 (v1) | 2026-09-30 | ComfyUI (Z-Image-Turbo) | 古典靈性鏡面倒映塔羅牌星盤 | 188810271202554 | 採用上架 | 轉 WebP Q85 (保留背景) | `blog-e-tarot-mirror-v1.webp` |
+| `公告-202610-A` | 聖誕節交換禮物週年慶 (v1) | 2026-10-09 | Canva | 聖誕樹禮物塔羅牌週年慶活動海報 | - | 採用上架 | 轉 WebP Q85 (896×1152) | `home-announcement-202610-christmas-v1.webp` |
+| `公告-202610-B` | 星靈實習生招募 (v1) | 2026-10-09 | Canva | 星空月亮以技能換技能培訓招募海報 | - | 採用上架 | 轉 WebP Q85 (896×1152) | `home-announcement-202610-intern-v1.webp` |
+| `公告-202611-A` | 2026 年底市集預告 (v1) | 2026-11-08 | 業主提供 | 夜空水晶塔羅四市集場次與服務項目海報 | - | 採用上架 | 轉 WebP Q85 (825×1024，原尺寸) | `home-announcement-202611-market-v1.webp` |
+| `公告-202611-B` | 年度流年塔羅 (v1) | 2026-11-08 | 業主提供 | 太陽牌粉紫星空年度報告內容與費用海報 | - | 採用上架 | 轉 WebP Q85 (1024×1536，原尺寸) | `home-announcement-202611-annual-tarot-v1.webp` |
+| `公告-202611-C` | 奧剛塔手作課 (v1) | 2026-11-17 | 業主提供 | 星空紫水晶金字塔奧剛塔手作課日期費用名額海報 | - | 採用上架 | 轉 WebP Q85 (1122×1402，原尺寸，4:5) | `home-announcement-202611-orgonite-v1.webp` |
 | `共用-B` | 社群分享圖候選 00039 | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 漩渦星系與金色星座連線（初版提示詞） | 974073409220626 | 淘汰：中央漩渦過亮，不利疊字 | 原圖已刪除（使用者指示，未移至 rejected） | `z-image-turbo_00039_.png` |
 | `共用-B` | 社群分享圖候選 00040 | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 兩側雲與燙金線、中央留空 | 958450086481488 | 淘汰：左右鏡像、偏套版 | 原圖已刪除（使用者指示，未移至 rejected） | `z-image-turbo_00040_.png` |
 | `共用-B` | 社群分享圖候選 00041 | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 同上 | 85263663017668 | 淘汰：上下白邊（提示詞 banner 所致） | 原圖已刪除（使用者指示，未移至 rejected） | `z-image-turbo_00041_.png` |
@@ -515,8 +515,8 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 | `共用-B` | 社群分享圖候選 00048 | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 同上 | 721564883295122 | 淘汰：雲過亮過大 | 原圖已刪除（使用者指示，未移至 rejected） | `z-image-turbo_00048_.png` |
 | `共用-B` | 社群分享圖候選 00049 | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 同上，星點最多 | 422759402323167 | 淘汰：次選 | 原圖已刪除（使用者指示，未移至 rejected） | `z-image-turbo_00049_.png` |
 | `共用-B` | 社群分享圖候選 00050 | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 同上 | 148174810181506 | 淘汰：與 00051 相近 | 原圖已刪除（使用者指示，未移至 rejected） | `z-image-turbo_00050_.png` |
-| `共用-B` | 社群分享圖 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 夜空雲帶金線自兩側交會、上半部疊粉圓體品牌字 | 932090169070292 | 採用上架 | 1824×960 縮至 1200×630＋Pillow 疊字，JPG Q88（DEC-091） | `common_b_og_image_v1.jpg` |
-| `共用-C` | 404 頁迷途小星 (v1) | 2026-11-16 | OpenAI Playground（GPT Image） | 攤開星圖缺一顆星、提燈小星星找位置 | - | 採用上架 | 原生透明免去背；燈籠白暈改星金漸層光、裁邊 + WebP Q85 | `common_c_lost_star_v1.webp` |
+| `共用-B` | 社群分享圖 (v1) | 2026-11-13 | ComfyUI (Z-Image-Turbo) | 夜空雲帶金線自兩側交會、上半部疊粉圓體品牌字 | 932090169070292 | 採用上架 | 1824×960 縮至 1200×630＋Pillow 疊字，JPG Q88（DEC-091） | `common-b-og-image-v1.jpg` |
+| `共用-C` | 404 頁迷途小星 (v1) | 2026-11-16 | OpenAI Playground（GPT Image） | 攤開星圖缺一顆星、提燈小星星找位置 | - | 採用上架 | 原生透明免去背；燈籠白暈改星金漸層光、裁邊 + WebP Q85 | `common-c-lost-star-v1.webp` |
 
 
 ---
@@ -547,10 +547,10 @@ pip install rembg onnxruntime pillow
 
 ```bash
 # 單張素材後製處理
-python scripts/process_asset.py --input design-assets/sd-assets/z-image-turbo_00014_.png --output services_a_tarot_v1.webp --code 服務-A --name "塔羅占卜 (v1)"
+python scripts/process_asset.py --input design-assets/sd-assets/z-image-turbo_00014_.png --output services-a-tarot-v1.webp --code 服務-A --name "塔羅占卜 (v1)"
 
 # 若外部已完成手工去背（跳過去背直接轉 WebP）：
-python scripts/process_asset.py --input design-assets/sd-assets/custom_image.png --output home_a_tarot_world_v3.webp --skip-rembg
+python scripts/process_asset.py --input design-assets/sd-assets/custom-image.png --output home-a-tarot-world-v3.webp --skip-rembg
 ```
 
 ### 3. Git 版控安全守則
