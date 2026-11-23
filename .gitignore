@@ -33,22 +33,22 @@ pnpm-debug.log*
 .idea/
 
 # Local reference screenshots
-demo_docs/reference-screenshots/
+design-assets/reference-screenshots/
 
 # Raw uncompressed generation PNGs (WebP versions are tracked instead)
-demo_docs/sd-assets/**/*.png
+design-assets/sd-assets/**/*.png
 
 # Raw uncompressed real photos (camera originals, high-res PNG/JPG)
-demo_docs/raw-photos/**/*
-!demo_docs/raw-photos/**/
-!demo_docs/raw-photos/**/.gitkeep
+design-assets/raw-photos/**/*
+!design-assets/raw-photos/**/
+!design-assets/raw-photos/**/.gitkeep
 
 # Raw uncompressed announcement posters (Canva originals, high-res PNG/JPG)
-demo_docs/announcements/**/*
-!demo_docs/announcements/**/
-!demo_docs/announcements/**/.gitkeep
-!demo_docs/announcements/**/*.md
-!demo_docs/announcements/**/*.webp
+design-assets/announcements/**/*
+!design-assets/announcements/**/
+!design-assets/announcements/**/.gitkeep
+!design-assets/announcements/**/*.md
+!design-assets/announcements/**/*.webp
 
 
 

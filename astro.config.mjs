@@ -2,7 +2,7 @@ import { defineConfig, envField } from 'astro/config';
 import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
 
-// AI 互動功能（線上塔羅抽卡 DEC-073、線上占星抽卡 DEC-080；共用基礎設施 DEC-079，規格 demo_docs/ai_platform_plan.md）：
+// AI 互動功能（線上塔羅抽卡 DEC-073、線上占星抽卡 DEC-080；共用基礎設施 DEC-079，規格 docs/ai-platform-plan.md）：
 // 全站維持 output: 'static'；僅 src/pages/api/<feature>/reading.ts 宣告 prerender = false，
 // 由 Node standalone 服務提供（build 輸出 dist/client/ ＋ dist/server/）。
 const serverSecret = { context: 'server', access: 'secret' };

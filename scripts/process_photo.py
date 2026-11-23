@@ -2,13 +2,13 @@
 scripts/process_photo.py — 星靈織語 Starwoven 實拍素材最佳化與 WebP 轉換工具
 
 用途：
-  將 demo_docs/raw-photos/ 子目錄（team / courses / workshops / events）內的實拍照片，
+  將 design-assets/raw-photos/ 子目錄（team / courses / workshops / events）內的實拍照片，
   最佳化尺寸、套用自訂取景視窗（ROI Crop）或等比縮放，並轉換為高效能 WebP，
   輸出至生產目錄 public/assets/。
 
 支援功能：
   1. 單張轉檔：
-     python scripts/process_photo.py -i demo_docs/raw-photos/team/以恩.png -o about_b_founder_yien_v1.webp
+     python scripts/process_photo.py -i design-assets/raw-photos/team/以恩.png -o about_b_founder_yien_v1.webp
   2. 團隊夥伴批次一鍵轉檔（含悠悠、凜月等特定取景框）：
      python scripts/process_photo.py --batch-team
   3. 固定循環課程批次轉檔：
@@ -233,7 +233,7 @@ def process_photo(input_path, output_name, crop_box=None, target_size=None, qual
 
 def batch_courses():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    courses_dir = os.path.join(repo_root, "demo_docs", "raw-photos", "courses")
+    courses_dir = os.path.join(repo_root, "design-assets", "raw-photos", "courses")
     print(f"[*] 開始活動課程照片批次轉檔 (目錄: {courses_dir})...")
     count = 0
     for filename, cfg in COURSES_MAPPING.items():
@@ -253,7 +253,7 @@ def batch_courses():
 
 def batch_team():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    team_dir = os.path.join(repo_root, "demo_docs", "raw-photos", "team")
+    team_dir = os.path.join(repo_root, "design-assets", "raw-photos", "team")
     print(f"[*] 開始團隊成員照片批次轉檔 (目錄: {team_dir})...")
     count = 0
     for filename, cfg in TEAM_MAPPING.items():
@@ -277,8 +277,8 @@ def main():
     parser.add_argument("-o", "--output", help="輸出檔名 (如 about_b_founder_yien_v1.webp)")
     parser.add_argument("--size", type=int, default=600, help="正方形長寬像素 (預設 600)")
     parser.add_argument("--quality", type=int, default=85, help="WebP 壓縮品質 1-100 (預設 85)")
-    parser.add_argument("--batch-team", action="store_true", help="一鍵批次處理 demo_docs/raw-photos/team/ 內所有夥伴照片")
-    parser.add_argument("--batch-courses", action="store_true", help="一鍵批次處理 demo_docs/raw-photos/courses/ 內所有活動課程照片")
+    parser.add_argument("--batch-team", action="store_true", help="一鍵批次處理 design-assets/raw-photos/team/ 內所有夥伴照片")
+    parser.add_argument("--batch-courses", action="store_true", help="一鍵批次處理 design-assets/raw-photos/courses/ 內所有活動課程照片")
     args = parser.parse_args()
     
     if args.batch_team:

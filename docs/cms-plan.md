@@ -85,7 +85,7 @@
 
 ### 第三階段：星靈出攤
 - 現行試算表使用頻率高、業主已經用熟。編輯者熟悉 CMS 後再遷移，以免引起反彈、因小失大。
-- 遷移後退役 `PUBLIC_BOOTH_API_URL` 與出攤用的 Apps Script，並改寫 `booth_plan.md`。
+- 遷移後退役 `PUBLIC_BOOTH_API_URL` 與出攤用的 Apps Script，並改寫 `booth-plan.md`。
 - **時效性的變化**：現行做法是業主改完、訪客重新整理就生效；遷移後為發布後數分鐘生效。遷移前須確認業主可以接受。
 
 ### 第四階段：課程許願池（視使用情況決定）
@@ -215,7 +215,7 @@
   - 前台頁面使用網站共用的版型與主題，本來就屬於網站；真正可能拆出去的只有後端 API。
   - 目前前台與 API 共用 `src/lib/ai/shared/`，同一位開發者主導，流量不大；拆開後要多維護一套建置與部署，前後端改動也要分開協調，效益不明顯。
   - **重新評估的時機**：新功能需要會員帳號、付費或儲存使用者資料（需要資料庫）、改由不同開發者負責、部署互相干擾到影響營運，或需要不同的技術或機器。功能「數量」變多本身不構成理由。
-  - **預留拆分的可能**：新增 AI 功能時遵守 `ai_platform_plan.md` 第十節的檢查清單（伺服器程式放在 `server` 資料夾、前端不得 import、各功能互不 import），日後要拆就是整個資料夾搬出去。
+  - **預留拆分的可能**：新增 AI 功能時遵守 `ai-platform-plan.md` 第十節的檢查清單（伺服器程式放在 `server` 資料夾、前端不得 import、各功能互不 import），日後要拆就是整個資料夾搬出去。
 
 **開發機的本機資料夾結構（預定）**：
 
@@ -274,8 +274,8 @@ v0.1 擔心的問題：CMS 與開發者共用同一個 repo 的 `main`，開發�
 - 建置時，`astro:assets` 仍可再產生不同尺寸（響應式圖片），但不再負責 WebP 轉檔的主要工作。
 - 若以上仍不足，再評估 Git LFS 或外部圖床。
 - **與現行素材規範的衝突**（`AGENTS.md`「Asset management」）：
-  - 「不得提交原始 PNG」「轉 WebP Q85」「人工檢查後才上架」「登錄 `image_prompts.md`」，都是為開發端素材設計的。
-  - CMS 上傳的圖片改為：建置時自動最佳化，編輯者自行檢查，不登錄 `image_prompts.md`。
+  - 「不得提交原始 PNG」「轉 WebP Q85」「人工檢查後才上架」「登錄 `image-prompts.md`」，都是為開發端素材設計的。
+  - CMS 上傳的圖片改為：建置時自動最佳化，編輯者自行檢查，不登錄 `image-prompts.md`。
   - 須於 `AGENTS.md` 明訂兩套規範的適用範圍。
 
 ---
@@ -342,12 +342,12 @@ v0.1 擔心的問題：CMS 與開發者共用同一個 repo 的 `main`，開發�
 - **`decisions.md`**：新增 DEC，記錄採用 CMS 的理由、職責分工與不審核原則、遷移順序。DEC-038 與 DEC-085（星靈出攤）於對應階段遷移時改寫。
 - **`AGENTS.md`**：
   - 「Repo state」：增列內容 repo 的位置與用途，以及本機開發如何取得內容。
-  - 「Canonical sources of truth」：CMS 管理的內容，正本改為內容 repo 中的檔案，`content_inventory.md` 不再登錄這些內容。
+  - 「Canonical sources of truth」：CMS 管理的內容，正本改為內容 repo 中的檔案，`content-inventory.md` 不再登錄這些內容。
   - 「Asset management」：增列 CMS 上傳圖片的規範（第八節）。
   - 「No fabrication」：CMS 內容由編輯者負責，開發者不草擬。
   - 「Deployment」：增列內容部署流程。
-- **`content_inventory.md`**：第 1.1 節（輪播）、第 3.3 節（交流會）、第 3.4 節（工作坊），以及部落格的相關記載，於遷移後改為「見 CMS」。
-- **`known_issues/README.md`**：第 22 項（奧剛塔短影音與文案待業主確認）於工作坊遷移後，改由編輯者在 CMS 自行處理。
+- **`content-inventory.md`**：第 1.1 節（輪播）、第 3.3 節（交流會）、第 3.4 節（工作坊），以及部落格的相關記載，於遷移後改為「見 CMS」。
+- **`known-issues/README.md`**：第 22 項（奧剛塔短影音與文案待業主確認）於工作坊遷移後，改由編輯者在 CMS 自行處理。
 
 ---
 

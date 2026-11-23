@@ -3,7 +3,7 @@
 ## Repo state
 
 This repo contains the **fully built Astro static site** (initial commit `000b083`),
-with key decisions recorded in `decisions.md`. The original Demo deadline
+with key decisions recorded in `docs/decisions.md`. The original Demo deadline
 (2026-09-23) has passed; the site is feature-complete and under continuous content/UI
 iteration. This file was rewritten on 2026-10-06 — the previous version described a
 pre-build planning repo and is obsolete.
@@ -21,21 +21,23 @@ pre-build planning repo and is obsolete.
 
 ## Canonical sources of truth (read these first, in order)
 
-1. `decisions.md` — 決策紀錄（只記「為什麼」：架構選型、範疇／IA 變更、商業規則、
+文件一律在 `docs/`；素材原檔（AI 生成圖、實拍照、海報原檔）在 `design-assets/`，不會上線。
+
+1. `docs/decisions.md` — 決策紀錄（只記「為什麼」：架構選型、範疇／IA 變更、商業規則、
    決定不做的事；2026-11-12 精簡，編號跳號屬正常）。If any other doc conflicts
    with it on those matters, **this file wins**；價格、人名、連結等現值以
-   `content_inventory.md` 與程式碼為準。
-2. `demo_docs/content_inventory.md` — copy/content SSOT for every page (fully
+   `docs/content-inventory.md` 與程式碼為準。
+2. `docs/content-inventory.md` — copy/content SSOT for every page (fully
    populated since DEC-001; never invent copy, names, or prices).
-3. `demo_docs/phase0_answers.md` — Phase-0 confirmations（較新的確認優先於 spec）。
-4. `demo_docs/spec.md` — original Demo spec; baseline only, several sections
+3. `docs/phase0-answers.md` — Phase-0 confirmations（較新的確認優先於 spec）。
+4. `docs/spec.md` — original Demo spec; baseline only, several sections
    superseded by decisions.
-5. `demo_docs/development_roadmap.md` — phase plan (Phase 0–4 complete; kept for
+5. `docs/development-roadmap.md` — phase plan (Phase 0–4 complete; kept for
    reference).
-6. `demo_docs/image_prompts.md` — asset registry（命名代碼）+ generation log.
+6. `docs/image-prompts.md` — asset registry（命名代碼）+ generation log.
 
-衝突判定順序：`decisions.md`（決策與規則）＞ `content_inventory.md`（文案與現值）＞
-`phase0_answers.md` ＞ `spec.md`。
+衝突判定順序：`docs/decisions.md`（決策與規則）＞ `docs/content-inventory.md`（文案與現值）＞
+`docs/phase0-answers.md` ＞ `docs/spec.md`。
 
 ## Current site IA (actual routes)
 
@@ -54,7 +56,7 @@ POST /api/tarot/reading        api/tarot/reading.ts        on-demand 路由（No
 POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（Node 服務）
 ```
 
-- AI 互動功能共用核心（DEC-079，規格書 `demo_docs/ai_platform_plan.md`）：
+- AI 互動功能共用核心（DEC-079，規格書 `docs/ai-platform-plan.md`）：
   `src/lib/ai/server/`（伺服器專用：`AI_*` 設定、供應商轉接器、`generateText`、標記擷取、
   額度工廠 `createDailyQuota`、輸入守門、端點 HTTP 工具，**不得被前端 import**）＋
   `src/lib/ai/shared/`（前後端共用：共用常數、錯誤碼、安全關懷文案、`postReading`／`trackEvent`）。
@@ -62,14 +64,14 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
 - 塔羅抽卡程式集中於 `src/lib/tarot/`（`config.ts` 功能常數檔、`copy.ts` 前端文案、
   `cards.ts`／`spreads.ts` 共用資料；`server-config.ts`／`ai.ts`／`prompt.ts` 為伺服器專用，
   **不得被前端 import**）＋`src/scripts/tarot.ts`。
-  規格書：`demo_docs/tarot_plan.md`。牌義與提示詞為佔位內容，待占卜師審定。
+  規格書：`docs/tarot-plan.md`。牌義與提示詞為佔位內容，待占卜師審定。
 - 占星抽卡程式集中於 `src/lib/astro-cards/`（`config.ts`、`copy.ts`、`decks.ts` 前後端共用；
   `server-config.ts`／`ai.ts`／`prompt.ts` 為伺服器專用，**不得被前端 import**）＋`src/scripts/astro-cards.ts`。
-  規格書：`demo_docs/astro_cards_plan.md`（DEC-080）。牌義與提示詞為佔位內容，待占星師審定。
-- 新增 AI 功能依 `ai_platform_plan.md` 第十節檢查清單；兩功能相似程式各自實作、不互相 import。
+  規格書：`docs/astro-cards-plan.md`（DEC-080）。牌義與提示詞為佔位內容，待占星師審定。
+- 新增 AI 功能依 `ai-platform-plan.md` 第十節檢查清單；兩功能相似程式各自實作、不互相 import。
 - 星靈扭蛋集中於 `src/pages/gacha.astro`、`src/scripts/gacha.ts` 與 `src/lib/gacha/`；
   以獨立 Google Apps Script＋試算表抽籤（JSONP），不使用 AI／Node API。後端正本為
-  `scripts/gacha_apps_script.gs`，Google 後台設置與 API 合約見 `demo_docs/gacha_plan.md`；
+  `scripts/gacha_apps_script.gs`，Google 後台設置與 API 合約見 `docs/gacha-plan.md`；
   `PUBLIC_GACHA_API_URL` 未設定時為明確標示、無兌換效力的本機 Demo。
 
 - Nav (Navbar.astro): 關於我們 / 命理服務 / 活動與課程 / 課程許願池 / 星靈專欄 / 線上占星 + 「預約諮詢」CTA
@@ -105,7 +107,7 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
   dark (starry night), inner pages default light (watercolor); user toggle
   overrides via localStorage. Every style change must cover both modes.
 - Colors：**唯一定義處為 `global.css` 的 `@theme static`（＋其下 `.dark` 區塊）**，分兩層
-  （known_issues #16）：
+  （known-issues #16）：
   - **語意色（優先使用）**：依用途命名，淺色／深色自動切換，**使用處不寫 `dark:`**。
     文字 `text-heading`（標題）／`text-body`（內文）／`text-muted`（次要）／`text-emphasis`
     （強調、連結）；框線 `border-line`／`border-line-strong`；底色 `bg-card`／`bg-card-soft`／
@@ -134,47 +136,47 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
 ## Asset management (human-led, WebP mandatory)
 
 - Naming: `[分頁代碼]_[圖片代碼]_[素材名稱]_v[版本號].webp`
-  (e.g. `home_a_tarot_world_v3.webp`)；代號登錄於 `image_prompts.md`。
+  (e.g. `home_a_tarot_world_v3.webp`)；代號登錄於 `docs/image-prompts.md`。
   唯一例外：社群分享圖（OG）用 JPG（DEC-091）。
-- Adopted assets → archive copy in `demo_docs/sd-assets/` + production copy in
-  `public/assets/`；rejected → `demo_docs/sd-assets/rejected/`（never delete）。
+- Adopted assets → archive copy in `design-assets/sd-assets/` + production copy in
+  `public/assets/`；rejected → `design-assets/sd-assets/rejected/`（never delete）。
 - **Never commit raw PNGs** — convert to WebP (Q85, `method=6`) before commit.
 - Scripts: `scripts/process_asset.py`（AI 生成圖，rembg 去背）與
   `scripts/process_photo.py`（實拍照，ROI 裁切，`--batch-team` / `--batch-courses`）。
   Both print a ready-made markdown row for the 生成紀錄 table.
-- Log every adopted/rejected image in `image_prompts.md`「六、生成紀錄」。
-- 業主實拍原圖放 `demo_docs/raw-photos/{team,courses,workshops,events}/`
+- Log every adopted/rejected image in `docs/image-prompts.md`「六、生成紀錄」。
+- 業主實拍原圖放 `design-assets/raw-photos/{team,courses,workshops,events}/`
   （git-ignored except `.gitkeep`）。
 - No image ships without a human having eyeballed it.
 
 ## Execution rules
 
 - **No fabrication.** 事實類內容——價格、日期時段、人名、名額、課程或服務流程等
-  對訪客的承諾——只能來自 `content_inventory.md` 或業主；缺少時用佔位，繼續推進。
+  對訪客的承諾——只能來自 `docs/content-inventory.md` 或業主；缺少時用佔位，繼續推進。
   描述性文案（課程簡介、學習重點、適合對象等）業主未提供時，開發者可依既有資料
   （海報、業主訊息）草擬，但不得夾帶上述事實類承諾——「學習重點」若寫出具體會教
   的內容即屬課綱承諾，須有海報或業主訊息佐證，否則改寫成不承諾課綱的描述；草擬內容須在
-  `content_inventory.md` 標明「開發者草擬，待業主確認」，並登記於
-  `known_issues/README.md`。審查時，符合此流程的草擬文案不視為違規。
-- **`decisions.md` 不是變更日誌，預設不立 DEC**（next number: DEC-092）。
+  `docs/content-inventory.md` 標明「開發者草擬，待業主確認」，並登記於
+  `docs/known-issues/README.md`。審查時，符合此流程的草擬文案不視為違規。
+- **`docs/decisions.md` 不是變更日誌，預設不立 DEC**（next number: DEC-092）。
   - 立 DEC 的判準：**半年後的人只看程式碼與規格書，會不會想不通「為什麼這樣做」
     或把它改回去？** 會，才立。只收四類：架構選型、範疇／IA 變更、業主確認的
     商業**規則**、明確決定不做的事。
-  - **不立 DEC**：價格／人名／連結／場次等現值更新（改 `content_inventory.md`）、
+  - **不立 DEC**：價格／人名／連結／場次等現值更新（改 `docs/content-inventory.md`）、
     版面與文案調整、bug 與程式碼審查修復、素材上架、部署與驗收紀錄、文件同步。
     這些寫在 commit message。
   - 每條只寫背景、決策、理由，以十行內為度；不寫改了哪些檔案、驗收過程、
-    審查輪次、上線狀態。細節放對應的 `demo_docs/*_plan.md`。
+    審查輪次、上線狀態。細節放對應的 `docs/*-plan.md`。
   - 既有決策被修改或取代時，**直接改寫原條目**（或刪除），不另附加新條目；
     檔案應反映現行決策，歷史由 git 保存。
-  - 待業主確認的事項記在 `known_issues/README.md`，不記在 DEC。
+  - 待業主確認的事項記在 `docs/known-issues/README.md`，不記在 DEC。
   - 規格書或舊註解中的「另立 DEC」字樣同樣適用上述判準。
   Never silently change scope, IA, pricing, or people——不立 DEC 不代表可以不說：
   在回覆與 commit message 中明講。
 - **Multi-agent workflow**: when you change shared surfaces (Layout, Navbar,
   footer, `global.css`, `public/assets/`, content schema), say so explicitly in
   your final reply.
-- Open content/config issues live in `known_issues/README.md`.
+- Open content/config issues live in `docs/known-issues/README.md`.
 
 ## Naming（2026-11-23 定案）
 
@@ -202,16 +204,16 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
   `/var/www/starwoven`。
 - ⚠️ 線上抽卡功能（DEC-073）合併後，`dist/` 改為 `client/`＋`server/` 結構，
   **舊指令 `rsync -a --delete dist/ /var/www/starwoven/` 不得再使用**，一律改用
-  `scripts/deploy.sh`（規格見 `demo_docs/tarot_plan.md` 第八節）。
+  `scripts/deploy.sh`（規格見 `docs/tarot-plan.md` 第八節）。
 
 ## Environment variables (see `.env.example`)
 
 - `PUBLIC_GA_ID` — GA4 measurement id（未設定時 fallback 為 `G-27D79HXXF5`）。
 - `PUBLIC_WISHLIST_API_URL` — Apps Script web app URL；unset → 許願池以本機
   demo 模式運行（不發網路請求，票數存 localStorage）。
-- `PUBLIC_BOOTH_API_URL` — 星靈出攤 Apps Script web app URL（`demo_docs/booth_plan.md`）；
+- `PUBLIC_BOOTH_API_URL` — 星靈出攤 Apps Script web app URL（`docs/booth-plan.md`）；
   unset → 首頁出攤區直接顯示提示卡（不發網路請求）。build 時編譯進前端，修改後須重新 build＋部署。
-- `PUBLIC_GACHA_API_URL` — 星靈扭蛋 Apps Script web app URL（`demo_docs/gacha_plan.md`）；
+- `PUBLIC_GACHA_API_URL` — 星靈扭蛋 Apps Script web app URL（`docs/gacha-plan.md`）；
   unset → 明確標示之本機 Demo（結果不具兌換效力、不發網路請求）。build 時編譯進前端，
   修改後須重新 build＋部署。
 - `AI_*` — AI 功能共用之供應商變數（DEC-079；原 `TAROT_AI_*`）、`TAROT_*`／`ASTROCARDS_*` — 塔羅／占星抽卡

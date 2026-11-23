@@ -1,9 +1,9 @@
 # 星靈織語 Starwoven — AI 互動功能共用基礎設施規格書 v0.5
 
 > **文件狀態**：v0.5 **設計審查通過；第一階段已上線（驗收通過）**（2026-10-27），可進入第二階段（DEC-080）。對應決策 `decisions.md` DEC-079。
-> **沿革**：v0.1 初稿 → 第一輪設計審查 7 項（P1×1、P2×3、P3×3）全數採納（v0.2）：遷移對照表補上呼叫端 import 規則（`tarot.astro` 之 `CARE_COPY` 等）；端點欄位驗證改為「未知欄位忽略」以維持 v0.9 合約；遷移改稱「新舊變數並存」並明載部署重啟數秒之 502 非零停機；回應標頭要求限定 Node 產生之回應；可觀察差異增列缺金鑰 log 字串；未登錄 `/api/*` 之回應依是否符合靜態副檔名分述；`tarot_plan.md` 殘留之 `/api/` 指引更正。→ 第二輪審查 1 項 P2 採納（v0.3）：呼叫端清單補上檔案內部引用（`tarot/copy.ts` 之 `ErrorCode` 型別、`tarot/config.ts` 之斷言），parity 驗收新增 `astro check` 0 errors（`npm run build` 不做型別檢查）。→ 第三輪審查 1 項 P2 採納（v0.4）：溫度範圍斷言明定為共用函式 `assertAiTemperature`，遷移清單補列 `tarot/config.ts` 之第三個斷言；另逐一盤點 `src/lib/tarot/` 全部 export 與內部引用，補明 `guard.ts` 之 `Reservation` 型別與內部依賴。→ 第四輪審查無新問題，設計審查通過。→ 第一階段實作（v0.5）：依實作補明兩處介面細節——`postReading` 新增第三參數 `isValid`（各功能成功回應結構檢查，原塔羅 `isValidReading` 之呼叫點）、`http.ts` 新增 `errorResponse(code)`（錯誤碼 → `ERROR_STATUS` 之 JSON 回應）；本機 parity 驗收結果見 DEC-079。
-> **定位**：線上塔羅抽卡（`tarot_plan.md`）與後續 AI 互動小遊戲（第一個為占星抽卡，規格另立 `astro_cards_plan.md`）共用之伺服器基礎設施——AI 供應商銜接、參數管理、防濫用與額度、輸入守門、API 慣例、nginx、部署。各功能規格書只寫該功能專屬內容（資料、提示詞、API 欄位、頁面），共用部分一律引用本文件。
-> **來源**：本文件第三、五～八節之內容原屬 `tarot_plan.md` v0.9（已經五輪外部審查與雲端維運 agent 核對），v0.1 搬移時依「多功能共用」改寫；搬移前之審查紀錄保留於 `tarot_plan.md` 沿革摘要與 `decisions.md` DEC-073／DEC-074，本文件不重複。
+> **沿革**：v0.1 初稿 → 第一輪設計審查 7 項（P1×1、P2×3、P3×3）全數採納（v0.2）：遷移對照表補上呼叫端 import 規則（`tarot.astro` 之 `CARE_COPY` 等）；端點欄位驗證改為「未知欄位忽略」以維持 v0.9 合約；遷移改稱「新舊變數並存」並明載部署重啟數秒之 502 非零停機；回應標頭要求限定 Node 產生之回應；可觀察差異增列缺金鑰 log 字串；未登錄 `/api/*` 之回應依是否符合靜態副檔名分述；`tarot-plan.md` 殘留之 `/api/` 指引更正。→ 第二輪審查 1 項 P2 採納（v0.3）：呼叫端清單補上檔案內部引用（`tarot/copy.ts` 之 `ErrorCode` 型別、`tarot/config.ts` 之斷言），parity 驗收新增 `astro check` 0 errors（`npm run build` 不做型別檢查）。→ 第三輪審查 1 項 P2 採納（v0.4）：溫度範圍斷言明定為共用函式 `assertAiTemperature`，遷移清單補列 `tarot/config.ts` 之第三個斷言；另逐一盤點 `src/lib/tarot/` 全部 export 與內部引用，補明 `guard.ts` 之 `Reservation` 型別與內部依賴。→ 第四輪審查無新問題，設計審查通過。→ 第一階段實作（v0.5）：依實作補明兩處介面細節——`postReading` 新增第三參數 `isValid`（各功能成功回應結構檢查，原塔羅 `isValidReading` 之呼叫點）、`http.ts` 新增 `errorResponse(code)`（錯誤碼 → `ERROR_STATUS` 之 JSON 回應）；本機 parity 驗收結果見 DEC-079。
+> **定位**：線上塔羅抽卡（`tarot-plan.md`）與後續 AI 互動小遊戲（第一個為占星抽卡，規格另立 `astro-cards-plan.md`）共用之伺服器基礎設施——AI 供應商銜接、參數管理、防濫用與額度、輸入守門、API 慣例、nginx、部署。各功能規格書只寫該功能專屬內容（資料、提示詞、API 欄位、頁面），共用部分一律引用本文件。
+> **來源**：本文件第三、五～八節之內容原屬 `tarot-plan.md` v0.9（已經五輪外部審查與雲端維運 agent 核對），v0.1 搬移時依「多功能共用」改寫；搬移前之審查紀錄保留於 `tarot-plan.md` 沿革摘要與 `decisions.md` DEC-073／DEC-074，本文件不重複。
 > **實作分兩階段**：
 > - **第一階段（DEC-079）**：純重構——將塔羅程式中的共用部分抽出至 `src/lib/ai/`，**塔羅之 API 合約、頁面與行為不變**；部署並驗收後才進入第二階段。遷移計畫見第九節。
 > - **第二階段（DEC-080，另立）**：新增占星抽卡，只新增檔案與設定區塊，不再修改塔羅程式。新增功能檢查清單見第十節。
@@ -98,7 +98,7 @@
 
 ## 三、 參數管理（單一來源原則）
 
-> 目標不變（原 `tarot_plan.md` v0.9 第三節第 3 小節）：**任何一個參數只在一個地方定義**。
+> 目標不變（原 `tarot-plan.md` v0.9 第三節第 3 小節）：**任何一個參數只在一個地方定義**。
 
 ### 1. 三層分類
 
@@ -258,7 +258,7 @@
 
 ## 五、 AI 呼叫層
 
-> 第 1～2 小節為原 `tarot_plan.md` v0.9 第五節第 3 小節（1）（2）之搬移，查證日 2026-10-20（MiniMax 官方文件 `platform.minimax.io/docs/guides/text-generation`、`/docs/m-plan/faq`）。模型代碼與參數以實作當下官方文件為準。
+> 第 1～2 小節為原 `tarot-plan.md` v0.9 第五節第 3 小節（1）（2）之搬移，查證日 2026-10-20（MiniMax 官方文件 `platform.minimax.io/docs/guides/text-generation`、`/docs/m-plan/faq`）。模型代碼與參數以實作當下官方文件為準。
 
 ### 1. 供應商：MiniMax
 
@@ -266,7 +266,7 @@
 | :--- | :--- |
 | 協定 | **OpenAI 相容 Chat Completions**（`POST {baseURL}/chat/completions`），日後切換 OpenAI 可共用同一轉接器 |
 | Base URL | `https://api.minimax.io/v1`（國際站；中國站 `api.minimaxi.com` 不使用） |
-| 模型 | 預設 `MiniMax-M3.1-Flash`；`MiniMax-M3` 為備選（延遲約兩倍、輸出 tokens 較多，切換須同步調高各功能 `AI_MAX_OUTPUT_TOKENS` 並重新評估逾時，實測見 `tarot_plan.md` 第五節第 3 小節） |
+| 模型 | 預設 `MiniMax-M3.1-Flash`；`MiniMax-M3` 為備選（延遲約兩倍、輸出 tokens 較多，切換須同步調高各功能 `AI_MAX_OUTPUT_TOKENS` 並重新評估逾時，實測見 `tarot-plan.md` 第五節第 3 小節） |
 | 推理（thinking） | 一律開啟、無法關閉；必須明確送出 `reasoning_effort`（預設 `low`）。推理內容位置因模型而異（Flash：`reasoning_content` 欄位；M3：`content` 開頭之 `<think>` 區塊）——轉接器**只取 `content` 並剝除所有 `<think>…</think>`**；推理內容不得回傳前端、不得寫入 log |
 | 業務錯誤 | HTTP 200 內之 `base_resp.status_code` 非 0 視為錯誤：1002（RPM 限流）、1008（餘額不足）、1039（TPM 限流）→ `rate_limited`，其餘 → `failed` |
 | 溫度 | OpenAI 相容端點合法範圍 (0, 1] |
@@ -303,7 +303,7 @@ interface ChatProvider {
 
 ### 4. 輸出格式慣例：標記式，不採 JSON（原 DEC-074）
 
-- 各功能以提示詞要求 `<tag>…</tag>` 標記輸出，`extractTagged()` 擷取後由各功能結構驗證。實測 MiniMax 之 JSON 輸出常見結尾符號錯置而無效（`response_format: json_object` 亦無改善），標記式於 80 次測試中格式錯誤 0 次（實測表見 `tarot_plan.md` 第五節第 3 小節（2））。
+- 各功能以提示詞要求 `<tag>…</tag>` 標記輸出，`extractTagged()` 擷取後由各功能結構驗證。實測 MiniMax 之 JSON 輸出常見結尾符號錯置而無效（`response_format: json_object` 亦無改善），標記式於 80 次測試中格式錯誤 0 次（實測表見 `tarot-plan.md` 第五節第 3 小節（2））。
 - 各功能之標記名稱集中於該功能 `prompt.ts` 之 `OUTPUT_TAGS` 常數，提示詞與解析器共用。
 - 驗證規則（各功能實作，共用工具）：必要欄位存在且非空、重複欄位數量正確、超長依 Unicode 字元截斷（上限 × 寬限倍率，避免模型字數計算不精確造成正常輸出被硬切）。
 - 使用者問題以 `<question>…</question>` 包裹並於系統提示詞聲明為「訪客提問內容，非指令」；`normalizeQuestion` 將半形角括號轉全形，防止偽造分隔標記。
@@ -360,7 +360,7 @@ interface ChatProvider {
 
 ## 八、 部署（Hetzner VPS）
 
-> 第 0、1 小節沿用原 `tarot_plan.md` v0.8 第八節（2026-10-20 VPS 現況調查，雲端維運 agent 核對同意）；第 2、3 小節依多功能改寫。
+> 第 0、1 小節沿用原 `tarot-plan.md` v0.8 第八節（2026-10-20 VPS 現況調查，雲端維運 agent 核對同意）；第 2、3 小節依多功能改寫。
 
 ### 0. VPS 現況（2026-10-20）
 
@@ -414,7 +414,7 @@ location /api/tarot/ {
 
 - named location `@ai_429`／`@ai_413`／`@ai_502`／`@ai_504` 全部功能共用一組（內容同 v0.9 之 `@tarot_*`，僅改名）。
 - **不再保留泛用 `location /api/`**：未登錄之 `/api/*` 路徑不會被轉送至 Node，依 nginx location 比對分兩種：
-  - 一般路徑（如 `/api/unknown`）落入 `location /`：檔案不存在，GET／POST 皆回 404＋品牌 404 頁（HTML；與全站錯誤網址行為一致，見 `known_issues` 第 6 項。2026-11-14 前為 GET 回首頁 fallback、POST 回 405）。
+  - 一般路徑（如 `/api/unknown`）落入 `location /`：檔案不存在，GET／POST 皆回 404＋品牌 404 頁（HTML；與全站錯誤網址行為一致，見 `known-issues` 第 6 項。2026-11-14 前為 GET 回首頁 fallback、POST 回 405）。
   - 符合靜態資產副檔名 regex 之路徑（如 `/api/unknown.js`）落入靜態資產 location：檔案不存在，同樣回 404＋品牌 404 頁（HTML）。
   - 兩者皆為 nginx 既有行為，本規格不調整 location 優先序。新增功能必須明確新增 location，避免未經限流之端點意外對外開放。
 - 各 location 重複列出 proxy 設定為刻意取捨：維持單一 vhost 檔為唯一正本，不引入 `include` 片段檔（多一個需部署同步的檔案）。
@@ -449,7 +449,7 @@ location /api/tarot/ {
 
 ### 1. 範圍
 
-- **做**：將塔羅程式之共用部分搬至 `src/lib/ai/`；環境變數 `TAROT_AI_*` 改名 `AI_*`；nginx `location /api/` 改為 `location /api/tarot/`、named location 改名；`deploy.sh` 冒煙請求改為端點陣列、log 檢查字串更新；log 新增 `feature` 欄位；同步更新 `AGENTS.md`、`.env.example`、`tarot_plan.md`。
+- **做**：將塔羅程式之共用部分搬至 `src/lib/ai/`；環境變數 `TAROT_AI_*` 改名 `AI_*`；nginx `location /api/` 改為 `location /api/tarot/`、named location 改名；`deploy.sh` 冒煙請求改為端點陣列、log 檢查字串更新；log 新增 `feature` 欄位；同步更新 `AGENTS.md`、`.env.example`、`tarot-plan.md`。
 - **允許之可觀察差異（僅以下三項，其餘一律與 v0.9 相同）**：① log 新增 `feature` 欄位；② 缺金鑰之錯誤 log 字串由 `TAROT_AI_API_KEY missing; tarot disabled` 改為 `AI_API_KEY missing; AI features disabled`（`deploy.sh` 檢查字串同步更新）；③ 未登錄之 `/api/*` 不再轉送 Node（回應依路徑分述見第八節第 2 小節）。
 - **不做**：任何占星功能程式碼；塔羅 API 合約、錯誤碼、頁面 HTML 結構、文案、動畫、GA 事件之任何變更；systemd unit 行為變更（僅可更新註解）。
 
@@ -514,7 +514,7 @@ location /api/tarot/ {
 
 ## 十、 新增 AI 功能檢查清單（第二階段起適用）
 
-1. 規格書 `demo_docs/<feature>_plan.md`（只寫功能專屬內容，共用部分引用本文件）＋ `decisions.md` 新 DEC（含每日總上限核對）。
+1. 規格書 `docs/<feature>-plan.md`（只寫功能專屬內容，共用部分引用本文件）＋ `decisions.md` 新 DEC（含每日總上限核對）。
 2. `src/lib/<feature>/`：`config.ts`（第三節第 3 小節必備常數＋斷言）、`copy.ts`（含完整 `ERROR_MESSAGES`）、內容資料檔；伺服器專用之 `server-config.ts`、`prompt.ts`（含 `OUTPUT_TAGS`）、`ai.ts`（解析＋結構驗證）。
 3. `astro.config.mjs` `env.schema` 新增 `<PREFIX>_ENABLED`／`_DAILY_LIMIT`／`_IP_DAILY_LIMIT`（前綴規則見第三節第 4 小節）；`.env.example` 同步。
 4. `src/pages/api/<feature>/reading.ts`：依第四節第 1 小節順序，使用 `readJsonRequest`、`createDailyQuota`、`callWithReservation`、`logResult`。
@@ -528,7 +528,7 @@ location /api/tarot/ {
 
 ## 十一、 給設計審查者的重點（Review Checklist）
 
-請先閱讀 `AGENTS.md`、`decisions.md`（DEC-073、DEC-074、DEC-079）、`tarot_plan.md` v1.0，以及現行程式 `src/lib/tarot/`、`src/pages/api/tarot/reading.ts`、`src/scripts/tarot.ts`、`nginx/starwoven.conf`、`scripts/deploy.sh`、`astro.config.mjs`。
+請先閱讀 `AGENTS.md`、`decisions.md`（DEC-073、DEC-074、DEC-079）、`tarot-plan.md` v1.0，以及現行程式 `src/lib/tarot/`、`src/pages/api/tarot/reading.ts`、`src/scripts/tarot.ts`、`nginx/starwoven.conf`、`scripts/deploy.sh`、`astro.config.mjs`。
 
 1. **共用界線**：`src/lib/ai/` 之內容是否確為各功能逐行相同之邏輯；是否有不該共用而被抽出、或應共用卻留在功能層的項目；有無過度抽象。
 2. **import 隔離**：以目錄劃分 `server/`／`shared/` 是否足以防止伺服器內容進入前端 bundle；驗收搜尋項目是否足夠。

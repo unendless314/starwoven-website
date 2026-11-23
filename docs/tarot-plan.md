@@ -1,7 +1,7 @@
 # 星靈織語 Starwoven — 線上塔羅抽卡（AI 解讀）規格書 v1.0
 
-> **文件狀態**：v1.0 **設計審查通過；已上線（驗收通過）**（2026-10-27，DEC-079）——AI 共用基礎設施抽出至 `ai_platform_plan.md`，本文件改為只寫塔羅專屬內容；**塔羅之 API 合約、頁面與行為與 v0.9 相同**。v0.9 為已實作並上線之版本（設計五輪審查 LGTM、部署規格經雲端維運 agent 核對）。對應決策 `decisions.md` DEC-073、DEC-074、DEC-079。第一輪設計審查之修正見 `ai_platform_plan.md` v0.2 沿革（本文件僅更正 nginx location 指引與遷移用語）。
-> **沿革摘要**：v0.1 初稿（2026-10-20）→ 第一輪設計審查 2 項 P1 採納：每日額度改為呼叫 AI 前同步保留（防等待期間併發穿透上限）、nginx 限流明確設定 `limit_req_status 429`（v0.2）→ 第二輪審查 1 項 P2 採納：nginx `client_max_body_size` 先行拒絕之 HTML 413 與 JSON 合約對齊，前端以狀態碼 413 判斷（v0.3）→ AI 供應商暫定 MiniMax，新增第五節第 3 小節「AI 供應商與銜接層」、伺服器環境變數清單（v0.4）→ 第三輪審查 1 項 P1、1 項 P2 採納：更正「額度用盡即停止服務」之錯誤假設（訂閱額度用盡後會先扣 Credit packs，開發者知情接受）、`AI_BUSY` 改為同時釋放全站與 IP 額度（v0.5）→ 新增第三節第 3 小節「參數管理」：A 環境變數／B `config.ts`／C nginx 三層單一來源、全部 `TAROT_*` 宣告為 secret 以支援免 build 調整、跨層一致性約束（v0.6）→ 第四輪審查 3 項 P1 採納：`TAROT_AI_API_KEY` 改選填（缺少即視同停用，確保無金鑰亦可 build）、推理強度以 `none` 明確停用、systemd 以 `EnvironmentFile` 載入；伺服器環境變數檔更名 `/etc/starwoven/app.env` 並新增本機／伺服器環境變數檔配置說明（v0.7）→ 文件一致性修正：移除早期版本殘留之「供應商每月花費上限」描述（與訂閱金鑰決定矛盾），成本防線改依實際機制描述；預設模型經實測定為 `MiniMax-M3.1-Flash`、轉接器須剝除 `<think>` 區塊、`AI_MAX_OUTPUT_TOKENS` 依實測訂為 2000；依 VPS 現況調查（雲端維運 agent 回報）改寫第八節部署規格：VPS 即建置機、`scripts/deploy.sh`、`node_modules` 安裝、專用服務帳號、nginx 以 repo 版為底整份替換部署版並沿用主機既有 JSON 錯誤頁慣例、zone 改名 `tarot_api`；更正 `validateSecrets` 實際驗證時機（v0.8）→ 實作後實測發現模型常輸出無效 JSON，AI 輸出格式改為標記式（`<card>`／`<summary>`／`<advice>`），API 回應合約不變（v0.9，DEC-074）→ 為新增占星抽卡等 AI 功能，共用基礎設施（參數管理、AI 供應商與銜接層、防濫用機制、Log 規則、部署）移至 `ai_platform_plan.md`，本文件只保留塔羅專屬內容；環境變數 `TAROT_AI_*` 改名共用之 `AI_*`、nginx 改為逐功能 `location /api/tarot/`、log 新增 `feature` 欄位，API 合約與頁面行為不變（v1.0，DEC-079）。
+> **文件狀態**：v1.0 **設計審查通過；已上線（驗收通過）**（2026-10-27，DEC-079）——AI 共用基礎設施抽出至 `ai-platform-plan.md`，本文件改為只寫塔羅專屬內容；**塔羅之 API 合約、頁面與行為與 v0.9 相同**。v0.9 為已實作並上線之版本（設計五輪審查 LGTM、部署規格經雲端維運 agent 核對）。對應決策 `decisions.md` DEC-073、DEC-074、DEC-079。第一輪設計審查之修正見 `ai-platform-plan.md` v0.2 沿革（本文件僅更正 nginx location 指引與遷移用語）。
+> **沿革摘要**：v0.1 初稿（2026-10-20）→ 第一輪設計審查 2 項 P1 採納：每日額度改為呼叫 AI 前同步保留（防等待期間併發穿透上限）、nginx 限流明確設定 `limit_req_status 429`（v0.2）→ 第二輪審查 1 項 P2 採納：nginx `client_max_body_size` 先行拒絕之 HTML 413 與 JSON 合約對齊，前端以狀態碼 413 判斷（v0.3）→ AI 供應商暫定 MiniMax，新增第五節第 3 小節「AI 供應商與銜接層」、伺服器環境變數清單（v0.4）→ 第三輪審查 1 項 P1、1 項 P2 採納：更正「額度用盡即停止服務」之錯誤假設（訂閱額度用盡後會先扣 Credit packs，開發者知情接受）、`AI_BUSY` 改為同時釋放全站與 IP 額度（v0.5）→ 新增第三節第 3 小節「參數管理」：A 環境變數／B `config.ts`／C nginx 三層單一來源、全部 `TAROT_*` 宣告為 secret 以支援免 build 調整、跨層一致性約束（v0.6）→ 第四輪審查 3 項 P1 採納：`TAROT_AI_API_KEY` 改選填（缺少即視同停用，確保無金鑰亦可 build）、推理強度以 `none` 明確停用、systemd 以 `EnvironmentFile` 載入；伺服器環境變數檔更名 `/etc/starwoven/app.env` 並新增本機／伺服器環境變數檔配置說明（v0.7）→ 文件一致性修正：移除早期版本殘留之「供應商每月花費上限」描述（與訂閱金鑰決定矛盾），成本防線改依實際機制描述；預設模型經實測定為 `MiniMax-M3.1-Flash`、轉接器須剝除 `<think>` 區塊、`AI_MAX_OUTPUT_TOKENS` 依實測訂為 2000；依 VPS 現況調查（雲端維運 agent 回報）改寫第八節部署規格：VPS 即建置機、`scripts/deploy.sh`、`node_modules` 安裝、專用服務帳號、nginx 以 repo 版為底整份替換部署版並沿用主機既有 JSON 錯誤頁慣例、zone 改名 `tarot_api`；更正 `validateSecrets` 實際驗證時機（v0.8）→ 實作後實測發現模型常輸出無效 JSON，AI 輸出格式改為標記式（`<card>`／`<summary>`／`<advice>`），API 回應合約不變（v0.9，DEC-074）→ 為新增占星抽卡等 AI 功能，共用基礎設施（參數管理、AI 供應商與銜接層、防濫用機制、Log 規則、部署）移至 `ai-platform-plan.md`，本文件只保留塔羅專屬內容；環境變數 `TAROT_AI_*` 改名共用之 `AI_*`、nginx 改為逐功能 `location /api/tarot/`、log 新增 `feature` 欄位，API 合約與頁面行為不變（v1.0，DEC-079）。
 > **建立日期**：2026-10-20
 > **定位**：**MVP Demo**——由開發者先做出可實際操作的成品上線，供業主評估 UI、體驗與商業定位；業主決策前**不加入主導航**，所有商業面參數（牌陣、次數、語氣、是否收費）皆視為可調整之暫定值。
 > **核心目標**：訪客於 `/tarot` 選擇牌陣、輸入問題、完成洗牌抽牌儀式後，取得由雲端 AI 依「我方牌義資料＋品牌語氣」生成的解讀，並於結尾導向真人占卜師預約（LINE）。
@@ -15,10 +15,10 @@
 3. **伺服器抽牌**：牌由後端以密碼學安全亂數抽出，前端的「選牌」動作為儀式性互動，不決定實際牌面（防竄改、防把 API 當作任意牌面的解讀器）。
 4. **單一用途端點**：端點只接受「牌陣代碼＋限長問題」，系統提示詞寫死於伺服器，回應為固定 JSON 結構——無法被當作通用聊天 AI 使用，降低濫用誘因。
 5. **不保存使用者內容（隱私）**：問題與解讀**不寫入任何資料庫、檔案或 log**；伺服器只記錄匿名統計（時間、牌陣、成功／失敗、耗時）。
-6. **成本有上限**：三層防線——AI 供應商訂閱方案固定月費（用量窗口與帳號內 Credit packs 用盡即被拒，見 `ai_platform_plan.md` 第五節第 2 小節）＞應用層每日全站次數上限＞nginx 依 IP 限流。不另設供應商後台花費上限（Demo 期間使用訂閱金鑰，開發者決定）。
+6. **成本有上限**：三層防線——AI 供應商訂閱方案固定月費（用量窗口與帳號內 Credit packs 用盡即被拒，見 `ai-platform-plan.md` 第五節第 2 小節）＞應用層每日全站次數上限＞nginx 依 IP 限流。不另設供應商後台花費上限（Demo 期間使用訂閱金鑰，開發者決定）。
 7. **不捏造內容**：牌義關鍵字、品牌語氣提示詞於 MVP 階段為**佔位內容**，於資料檔與頁面中明確標示「待占卜師審定」；牌面圖片以佔位視覺呈現。
 
-> v1.0 起，第 1、2、4、5、6 條已提升為全部 AI 功能共同遵守之原則（`ai_platform_plan.md` 第一節）。
+> v1.0 起，第 1、2、4、5、6 條已提升為全部 AI 功能共同遵守之原則（`ai-platform-plan.md` 第一節）。
 
 ---
 
@@ -70,11 +70,11 @@
 - 安裝 Node 轉接器（實作時以 `npx astro add node` 安裝與 Astro 5 相容之 `@astrojs/node`，必要時明確指定相容之主版本），`mode: 'standalone'`。⚠️ 必須列於 `package.json` 的 **`dependencies`**（不可為 `devDependencies`）——VPS 以 `npm ci --omit=dev` 安裝執行期依賴，放錯位置會被略過、服務無法啟動。
 - `astro.config.mjs` 維持 `output: 'static'`；僅 `src/pages/api/tarot/reading.ts` 宣告 `export const prerender = false`。其餘所有頁面（含 `/tarot`）照舊預先產生。
 - 建置輸出結構改變：`dist/client/`（靜態檔）＋`dist/server/`（Node 服務入口 `entry.mjs`）。
-- 環境變數採 **`astro:env` schema**（`envField`，`context: 'server'`、`access: 'secret'`），於執行期讀取，避免金鑰在建置時被內嵌進 bundle；宣告規則見 `ai_platform_plan.md` 第三節第 4 小節。
+- 環境變數採 **`astro:env` schema**（`envField`，`context: 'server'`、`access: 'secret'`），於執行期讀取，避免金鑰在建置時被內嵌進 bundle；宣告規則見 `ai-platform-plan.md` 第三節第 4 小節。
 
 ### 2. 檔案配置
 
-> v1.0（DEC-079）起，共用部分移至 `src/lib/ai/`（目錄與 import 規則見 `ai_platform_plan.md` 第二節第 2 小節）；本表只列塔羅專屬檔案。
+> v1.0（DEC-079）起，共用部分移至 `src/lib/ai/`（目錄與 import 規則見 `ai-platform-plan.md` 第二節第 2 小節）；本表只列塔羅專屬檔案。
 
 | 路徑 | 用途 | 前端可 import |
 | :--- | :--- | :--- |
@@ -89,11 +89,11 @@
 | `src/lib/tarot/prompt.ts` | 系統提示詞、使用者訊息組裝、`OUTPUT_TAGS` | 否 |
 | `src/lib/tarot/ai.ts` | `generateReading()`：組提示詞 → 共用 `generateText` → 標記解析與結構驗證 | 否 |
 
-> ⚠️ 標「是」之檔案會被前端 import，**不得**放任何伺服器專用內容；標「否」之檔案以檔頭 ⚠️ 註明伺服器專用。v0.9 之 `providers/`、`guard.ts` 已移至 `src/lib/ai/server/`；部署腳本與 systemd unit 見 `ai_platform_plan.md` 第八節。
+> ⚠️ 標「是」之檔案會被前端 import，**不得**放任何伺服器專用內容；標「否」之檔案以檔頭 ⚠️ 註明伺服器專用。v0.9 之 `providers/`、`guard.ts` 已移至 `src/lib/ai/server/`；部署腳本與 systemd unit 見 `ai-platform-plan.md` 第八節。
 
 ### 3. 參數管理（單一來源原則）
 
-> v1.0 起，三層分類、分層判斷規則、環境變數讀取與驗證、跨層一致性約束、環境變數檔配置**移至 `ai_platform_plan.md` 第三節**；逾時、body 上限、時區、允許 Origin 改為所有 AI 功能共用之常數（`src/lib/ai/shared/config.ts`）。本小節只列塔羅專屬參數。
+> v1.0 起，三層分類、分層判斷規則、環境變數讀取與驗證、跨層一致性約束、環境變數檔配置**移至 `ai-platform-plan.md` 第三節**；逾時、body 上限、時區、允許 Origin 改為所有 AI 功能共用之常數（`src/lib/ai/shared/config.ts`）。本小節只列塔羅專屬參數。
 
 #### (1) B 層：`src/lib/tarot/config.ts` 常數清單
 
@@ -101,13 +101,13 @@
 | :--- | :--- | :--- | :--- |
 | `QUESTION_MAX_CHARS` | `120` | 前端（字數提示，依 Unicode 字元計）＋後端（驗證） | 前後端引用同一常數；斷言 body 上限足以容納 |
 | `REVERSALS_ENABLED` | `true` | 後端（抽牌） | 業主決定不用逆位時改為 `false` |
-| `AI_TEMPERATURE` | `0.8` | 後端（`generateText`） | 以共用 `assertAiTemperature` 斷言（`ai_platform_plan.md` 第三節第 2 小節） |
+| `AI_TEMPERATURE` | `0.8` | 後端（`generateText`） | 以共用 `assertAiTemperature` 斷言（`ai-platform-plan.md` 第三節第 2 小節） |
 | `AI_MAX_OUTPUT_TOKENS` | `2000` | 後端（`generateText`） | 依 2026-10-20 實測（三張牌：Flash 約 380、M3 約 950 completion tokens）取足夠餘裕；見第五節第 3 小節 |
 | `READING_LENGTH` | 每張 80～150 字、`summary` 100～200 字、`advice` 40 字內、截斷寬限 1.5 倍 | 後端（提示詞＋結構驗證截斷） | 提示詞文字與驗證截斷引用同一組數值 |
 | `FAN_CARD_COUNT` | `13` | 前端（扇形牌堆張數，儀式性） | |
 | `READING_API_PATH` | `'/api/tarot/reading'` | 前端 | |
 
-- 共用常數（`SERVER_AI_TIMEOUT_MS` 25000、`CLIENT_REQUEST_TIMEOUT_MS` 30000、`REQUEST_BODY_MAX_BYTES` 2048、`TIMEZONE`、`ALLOWED_ORIGINS`、`DEV_ORIGIN`）之數值與 v0.9 相同，定義見 `ai_platform_plan.md` 第三節第 2 小節。
+- 共用常數（`SERVER_AI_TIMEOUT_MS` 25000、`CLIENT_REQUEST_TIMEOUT_MS` 30000、`REQUEST_BODY_MAX_BYTES` 2048、`TIMEZONE`、`ALLOWED_ORIGINS`、`DEV_ORIGIN`）之數值與 v0.9 相同，定義見 `ai-platform-plan.md` 第三節第 2 小節。
 - 牌陣定義（`spreads.ts`）、牌義資料（`cards.ts`）、系統提示詞（`prompt.ts`）屬內容資料，各自單檔集中。
 - 前端可見文案（錯誤訊息、隱私告知、免責聲明）集中於 `src/lib/tarot/copy.ts`；安全關懷文案與求助專線改為全站共用之 `src/lib/ai/shared/care.ts`。
 
@@ -119,7 +119,7 @@
 | `TAROT_DAILY_LIMIT` | `300` | 本功能每日全站上限 |
 | `TAROT_IP_DAILY_LIMIT` | `10` | 本功能每 IP 每日上限 |
 
-- 供應商、端點、模型、金鑰、推理強度改為共用變數 `AI_PROVIDER`／`AI_BASE_URL`／`AI_MODEL`／`AI_API_KEY`／`AI_REASONING_EFFORT`（v0.9 為 `TAROT_AI_*`，型別與預設值不變）；VPS 新舊變數並存之遷移順序見 `ai_platform_plan.md` 第九節第 4 小節。
+- 供應商、端點、模型、金鑰、推理強度改為共用變數 `AI_PROVIDER`／`AI_BASE_URL`／`AI_MODEL`／`AI_API_KEY`／`AI_REASONING_EFFORT`（v0.9 為 `TAROT_AI_*`，型別與預設值不變）；VPS 新舊變數並存之遷移順序見 `ai-platform-plan.md` 第九節第 4 小節。
 - 唯一清單仍為 `astro.config.mjs` 的 `env.schema`；本功能變數只由 `src/lib/tarot/server-config.ts` 讀取。
 
 ---
@@ -142,7 +142,7 @@
 | `spread` | string | 必填；白名單 `single` / `three` |
 | `question` | string | 選填；去除首尾空白後 ≤ 120 字（以 Unicode 字元計）；移除控制字元；空字串視為無問題 |
 
-請求 body 上限 2 KB；超過直接 413。正式環境由 nginx `client_max_body_size 2k` 先行攔截（經 nginx JSON 錯誤頁回傳 `PAYLOAD_TOO_LARGE`，見 `ai_platform_plan.md` 第四節第 3 小節）；端點本身仍保留同一上限檢查並回傳 JSON `PAYLOAD_TOO_LARGE`，作為本機開發（無 nginx）與 nginx 設定遺漏時的防線。
+請求 body 上限 2 KB；超過直接 413。正式環境由 nginx `client_max_body_size 2k` 先行攔截（經 nginx JSON 錯誤頁回傳 `PAYLOAD_TOO_LARGE`，見 `ai-platform-plan.md` 第四節第 3 小節）；端點本身仍保留同一上限檢查並回傳 JSON `PAYLOAD_TOO_LARGE`，作為本機開發（無 nginx）與 nginx 設定遺漏時的防線。
 
 ### 2. 成功回應（200）
 
@@ -177,9 +177,9 @@
 | 502 | `AI_FAILED` | 「星靈訊號不穩，請稍後再試」＋重試鈕 | AI 逾時、供應商錯誤、回傳結構驗證失敗 |
 | 502 | `SERVICE_DOWN` | 同通用錯誤（無重試鈕） | Node 服務未啟動或無回應（由 nginx JSON 錯誤頁產生） |
 | 504 | `GATEWAY_TIMEOUT` | 同 `AI_FAILED`（含重試鈕） | 超過 nginx `proxy_read_timeout`（由 nginx JSON 錯誤頁產生；正常情況後端 25 秒逾時會先觸發 `AI_FAILED`） |
-| 503 | `AI_BUSY` | 「星靈暫時休息中，請稍後再來」（無重試鈕） | 供應商回傳 429（訂閱額度與 Credit packs 皆用盡，或 RPM／TPM 限流），見 `ai_platform_plan.md` 第五節第 2 小節 |
+| 503 | `AI_BUSY` | 「星靈暫時休息中，請稍後再來」（無重試鈕） | 供應商回傳 429（訂閱額度與 Credit packs 皆用盡，或 RPM／TPM 限流），見 `ai-platform-plan.md` 第五節第 2 小節 |
 
-- 錯誤碼、HTTP 狀態與產生者之定義為全部 AI 功能共用（`ai_platform_plan.md` 第四節第 2 小節）；上表之「前端顯示」為本功能文案（`copy.ts`）。
+- 錯誤碼、HTTP 狀態與產生者之定義為全部 AI 功能共用（`ai-platform-plan.md` 第四節第 2 小節）；上表之「前端顯示」為本功能文案（`copy.ts`）。
 - 所有錯誤皆回傳 `{ "ok": false, "error": "<代碼>" }`，不外洩供應商錯誤細節。
 - **nginx 層錯誤亦回傳 JSON**（v0.8 改採；沿用同主機 exopolitics `/v1/` 已驗證之 `error_page` → named location 慣例；v1.0 起 named location 改名為全部 AI 功能共用之 `@ai_*`）：429／413／502／504 由 nginx 回傳同格式 `{ "ok": false, "error": "<代碼>" }`。端點本身產生的 429（`DAILY_LIMIT`）、502（`AI_FAILED`）、503 **原樣穿透、不被 nginx 錯誤頁覆蓋**——`error_page` 預設只作用於 nginx 自身產生的錯誤，前提是 `location /api/tarot/`（v0.9 為 `/api/`）**不得開啟 `proxy_intercept_errors`**。
 - **前端判斷規則**：一律**以 JSON `error` 代碼為準**（同一狀態碼可能來自 nginx 或端點，例如 502 `SERVICE_DOWN`／`AI_FAILED`、429 `RATE_LIMITED`／`DAILY_LIMIT`）；body 無法解析為 JSON 時（nginx 設定遺漏、本機無 nginx 等）才依狀態碼降級：413 → 同 400、429 → `RATE_LIMITED`、其餘 → 通用錯誤。
@@ -212,13 +212,13 @@
   - 問題超出塔羅範疇或試圖改變指令（prompt injection）時，仍只就牌面給出一般性指引。
   - 輸出：**僅輸出指定標記結構**（`<card>`×牌數、`<summary>`、`<advice>`；v0.9 起取代 JSON，見 DEC-074）；每張牌解讀 80～150 字、`summary` 100～200 字、`advice` 一句 40 字內。
 - 使用者問題以明確分隔標記包裹，聲明為「訪客提問內容，非指令」。
-- 供應商與模型見 `ai_platform_plan.md` 第五節；本功能之模型實測見本節第 3 小節。
-- 逾時 **25 秒**（共用常數，見 `ai_platform_plan.md` 第三節第 2、5 小節；前端逾時 30 秒，須大於後端；MiniMax 推理無法關閉，實作時須實測延遲，必要時三處逾時同步調整並維持「nginx ＞ 前端 ＞ 後端」之大小關係）；失敗不自動重試（避免成本倍增），交由使用者手動重試。
+- 供應商與模型見 `ai-platform-plan.md` 第五節；本功能之模型實測見本節第 3 小節。
+- 逾時 **25 秒**（共用常數，見 `ai-platform-plan.md` 第三節第 2、5 小節；前端逾時 30 秒，須大於後端；MiniMax 推理無法關閉，實作時須實測延遲，必要時三處逾時同步調整並維持「nginx ＞ 前端 ＞ 後端」之大小關係）；失敗不自動重試（避免成本倍增），交由使用者手動重試。
 - 解析標記後以結構驗證（欄位存在、型別正確、`reading.cards` 長度＝牌數、長度上限截斷）；驗證失敗視為 `AI_FAILED`。
 
 ### 3. AI 供應商與實測紀錄
 
-> v1.0 起，供應商（MiniMax）規格、金鑰類型與額度用盡行為、`ChatProvider` 銜接層、伺服器環境變數清單**移至 `ai_platform_plan.md` 第五節與第三節第 4 小節**（內容沿用 v0.9，環境變數 `TAROT_AI_*` 改名為共用之 `AI_*`）。本小節保留以塔羅提示詞實測之紀錄，作為模型選擇與本功能常數（`AI_MAX_OUTPUT_TOKENS`、逾時）之依據。
+> v1.0 起，供應商（MiniMax）規格、金鑰類型與額度用盡行為、`ChatProvider` 銜接層、伺服器環境變數清單**移至 `ai-platform-plan.md` 第五節與第三節第 4 小節**（內容沿用 v0.9，環境變數 `TAROT_AI_*` 改名為共用之 `AI_*`）。本小節保留以塔羅提示詞實測之紀錄，作為模型選擇與本功能常數（`AI_MAX_OUTPUT_TOKENS`、逾時）之依據。
 
 #### (1) 實測紀錄（2026-10-20，訂閱金鑰、`reasoning_effort: "low"`、三張牌陣＋提問、`temperature` 0.8）
 
@@ -245,7 +245,7 @@
 
 ### 4. 防濫用與成本控制
 
-機制（呼叫前同步保留、`AI_FAILED` 只釋放 IP、`AI_BUSY` 全部釋放、記憶體計數、Origin 檢查效力）見 `ai_platform_plan.md` 第六節。本功能之數值：
+機制（呼叫前同步保留、`AI_FAILED` 只釋放 IP、`AI_BUSY` 全部釋放、記憶體計數、Origin 檢查效力）見 `ai-platform-plan.md` 第六節。本功能之數值：
 
 | 層級 | 機制 | 預設值（暫定） |
 | :--- | :--- | :--- |
@@ -254,11 +254,11 @@
 | nginx | `limit_req` zone `tarot_api` | 每分鐘 3 次，burst 2 |
 | 應用層 | 功能開關 | `TAROT_ENABLED` `true` |
 
-- 額度與其他 AI 功能**分開計算**（DEC-079）；每日全站上限用途為保護開發者自身之訂閱額度，與其他功能之上限合計後核對（`ai_platform_plan.md` 第六節第 4 小節）。
+- 額度與其他 AI 功能**分開計算**（DEC-079）；每日全站上限用途為保護開發者自身之訂閱額度，與其他功能之上限合計後核對（`ai-platform-plan.md` 第六節第 4 小節）。
 
 ### 5. Log 與隱私
 
-- 共用規則見 `ai_platform_plan.md` 第七節（不記問題、解讀、完整 IP）。本功能 log 之功能代碼欄位為 `spread`：`{"t":…,"feature":"tarot","spread":"three","result":"OK","ms":…,"limitHit":false}`（v1.0 新增 `feature` 欄位，其餘同 v0.9）。
+- 共用規則見 `ai-platform-plan.md` 第七節（不記問題、解讀、完整 IP）。本功能 log 之功能代碼欄位為 `spread`：`{"t":…,"feature":"tarot","spread":"three","result":"OK","ms":…,"limitHit":false}`（v1.0 新增 `feature` 欄位，其餘同 v0.9）。
 - 頁面於問題輸入框下方註明：「你的問題只用於本次解讀，我們不會保存；解讀由第三方 AI 服務生成。」（`copy.ts` 之 `PRIVACY_NOTE`）
 
 ---
@@ -322,13 +322,13 @@
 
 - MVP **不製作 78 張牌面**：統一使用品牌牌背（CSS／SVG 繪製，沿用全站佔位視覺風格），翻牌後牌面為「佔位卡」——顯示中英文牌名、大小阿爾克那／花色符號、正逆位標示。
 - 後續選項（待業主決定，屆時另立 DEC）：① 1909 年 Pamela Colman Smith 原版偉特牌（一般認為已屬公有領域；不得使用後世重繪、上色之受版權保護版本）② ComfyUI 自繪 78 張品牌風格牌面。
-- 任何牌面圖上架仍須依 `AGENTS.md` 素材規範：WebP、命名代碼登錄 `image_prompts.md`、人工把關。
+- 任何牌面圖上架仍須依 `AGENTS.md` 素材規範：WebP、命名代碼登錄 `image-prompts.md`、人工把關。
 
 ---
 
 ## 八、 部署（Hetzner VPS）
 
-> v1.0 起，VPS 現況、一次性設定、nginx、`scripts/deploy.sh`、回滾之規格**整節移至 `ai_platform_plan.md` 第八節**（內容沿用 v0.8 經雲端維運 agent 核對之版本，並依多功能改寫）。v0.9 原文可由 git 歷史查閱。
+> v1.0 起，VPS 現況、一次性設定、nginx、`scripts/deploy.sh`、回滾之規格**整節移至 `ai-platform-plan.md` 第八節**（內容沿用 v0.8 經雲端維運 agent 核對之版本，並依多功能改寫）。v0.9 原文可由 git 歷史查閱。
 
 本功能於共用規格中之專屬設定：
 
@@ -345,7 +345,7 @@
 
 ## 九、 驗收標準
 
-> v1.0 起，基礎設施、部署與 parity 驗收見 `ai_platform_plan.md` 第九節第 3 小節（第一階段）與第十節第 8 項（日後變更）；本節只列塔羅功能本身之驗收。v0.9 之第 2、6～9 項已併入共用驗收。
+> v1.0 起，基礎設施、部署與 parity 驗收見 `ai-platform-plan.md` 第九節第 3 小節（第一階段）與第十節第 8 項（日後變更）；本節只列塔羅功能本身之驗收。v0.9 之第 2、6～9 項已併入共用驗收。
 
 1. `npm run build` 通過；`/tarot` 為預先產生之靜態頁。
 2. 本機 `npm run dev` 下兩種牌陣皆可完成完整流程（洗牌 → 選牌 → 等待 → 依序翻牌 → 逐段淡入解讀 → 導流 CTA → 再抽一次）；深淺模式、手機（iOS Safari、Android Chrome）、桌面各實測一次。
@@ -365,17 +365,17 @@
 4. 牌義關鍵字與系統提示詞語氣審定（建議由偉特塔羅占卜師以恩、達達負責）。
 5. 牌面圖路線（公有領域原版／ComfyUI 自繪）。
 6. 每月 AI 預算上限與每日次數上限。
-7. （日後，具營收時）是否由 MiniMax 訂閱金鑰切換為按量計費金鑰或其他供應商（全部 AI 功能共用，見 `ai_platform_plan.md` 第五節第 2 小節）。
+7. （日後，具營收時）是否由 MiniMax 訂閱金鑰切換為按量計費金鑰或其他供應商（全部 AI 功能共用，見 `ai-platform-plan.md` 第五節第 2 小節）。
 
 ---
 
 ## 十一、 給設計審查者的重點（Review Checklist）
 
-> v0.9 以前之審查重點（架構、金鑰安全、API 合約、防濫用、提示詞安全、隱私、nginx、回滾、AI 供應商、參數管理）已於五輪審查通過；其中共用基礎設施部分自 v1.0 起改由 `ai_platform_plan.md` 第十一節審查。
+> v0.9 以前之審查重點（架構、金鑰安全、API 合約、防濫用、提示詞安全、隱私、nginx、回滾、AI 供應商、參數管理）已於五輪審查通過；其中共用基礎設施部分自 v1.0 起改由 `ai-platform-plan.md` 第十一節審查。
 
-v1.0（DEC-079 第一階段）請先閱讀 `ai_platform_plan.md`，再就下列面向審查本文件：
+v1.0（DEC-079 第一階段）請先閱讀 `ai-platform-plan.md`，再就下列面向審查本文件：
 
-1. **搬移完整性**：v0.9 之第三節第 3 小節、第五節第 3～5 小節、第八節移至 `ai_platform_plan.md` 後，原有決定（含歷次審查採納之修正）是否無遺漏、無語意改變。
+1. **搬移完整性**：v0.9 之第三節第 3 小節、第五節第 3～5 小節、第八節移至 `ai-platform-plan.md` 後，原有決定（含歷次審查採納之修正）是否無遺漏、無語意改變。
 2. **塔羅專屬內容之邊界**：留在本文件與 `src/lib/tarot/` 之項目（牌陣、牌義、提示詞、結構驗證、溫度與輸出長度、前端頁面）是否確屬塔羅專屬。
 3. **API 合約不變**：第四節之請求、成功回應、錯誤碼與前端顯示是否與 v0.9 完全一致。
-4. **驗收**：第九節是否足以確認重構後塔羅行為與 v0.9 相同（與 `ai_platform_plan.md` 第九節第 3 小節併用）。
+4. **驗收**：第九節是否足以確認重構後塔羅行為與 v0.9 相同（與 `ai-platform-plan.md` 第九節第 3 小節併用）。

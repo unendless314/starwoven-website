@@ -3,17 +3,17 @@
 > **文件狀態**：v0.3 **已上線、驗收通過並結案**（2026-10-28；內容仍為佔位，待業主決定事項見第十節；v0.2 設計審查通過於 2026-10-27）。對應決策 `decisions.md` DEC-080（DEC-079 第二階段）。
 > **沿革摘要**：v0.1 初稿（2026-10-27）——依 DEC-079「第二階段已確認需求」與第一階段實際上線之共用 API（`src/lib/ai/`）撰寫。→ 第一輪設計審查 2 項 P2 全數採納（v0.2）：前端 `isValid` 改為完整驗證（`spread`、每張牌之 `deck`／`id` 須屬於對應牌組、`name`／`notice`／`reading` 各欄位為非空字串）；AI 輸出之五種具名標記須**各恰好出現一次**，重複或缺少皆視為 `AI_FAILED`。審查確認現行 `src/lib/ai/` API 足以實作、無須修改共用層。 → v0.3（2026-10-28）：實作完成；模型實測補記於第五節第 3 小節，並依實測修正提示詞（格式示意改「…」、明文禁止英文與簡體、使用者訊息不附英文牌名；第五節第 2、3 小節）。
 > **建立日期**：2026-10-27
-> **定位**：**MVP Demo**——比照線上塔羅抽卡（`tarot_plan.md`），由開發者先做出可操作之成品上線，供業主評估；業主決策前**不加入主導航**（**DEC-082 起已正式公開**：導覽列「線上占星」、移除 `noindex`、頁底 Demo 佔位標示改為加入官方 LINE 之導引文字），牌組組成、牌義、語氣、次數皆為可調整之暫定值。
+> **定位**：**MVP Demo**——比照線上塔羅抽卡（`tarot-plan.md`），由開發者先做出可操作之成品上線，供業主評估；業主決策前**不加入主導航**（**DEC-082 起已正式公開**：導覽列「線上占星」、移除 `noindex`、頁底 Demo 佔位標示改為加入官方 LINE 之導引文字），牌組組成、牌義、語氣、次數皆為可調整之暫定值。
 > **核心目標**：訪客於 `/astro-cards` 輸入問題（選填）後，依序從「行星」「星座」「宮位」三疊牌各抽一張，取得由雲端 AI 依「我方牌義資料＋品牌語氣」組合三張牌生成之解讀，並於結尾導向真人占星師預約（LINE）。
-> **共用基礎設施**：AI 供應商銜接、參數管理規則、防濫用與額度、輸入守門、錯誤碼、nginx、部署，一律依 `ai_platform_plan.md`（v0.5）；本文件只寫占星抽卡專屬內容，並依其第十節檢查清單逐項對應（本文件第十一節）。
+> **共用基礎設施**：AI 供應商銜接、參數管理規則、防濫用與額度、輸入守門、錯誤碼、nginx、部署，一律依 `ai-platform-plan.md`（v0.5）；本文件只寫占星抽卡專屬內容，並依其第十節檢查清單逐項對應（本文件第十一節）。
 
 ---
 
 ## 一、 設計原則
 
-沿用 `ai_platform_plan.md` 第一節全部原則（金鑰不進前端、每功能一支 on-demand 路由、伺服器決定結果、單一用途端點、不保存使用者內容、成本有上限、不捏造內容、共用基礎設施但各自內容與頁面）。本功能另加：
+沿用 `ai-platform-plan.md` 第一節全部原則（金鑰不進前端、每功能一支 on-demand 路由、伺服器決定結果、單一用途端點、不保存使用者內容、成本有上限、不捏造內容、共用基礎設施但各自內容與頁面）。本功能另加：
 
-1. **只新增、不修改塔羅**：本功能只新增檔案與設定區塊（`ai_platform_plan.md` 第二階段定義）；**不修改 `src/lib/ai/`、`src/lib/tarot/`、塔羅頁面與端點**。實作中若發現共用核心不足，停下並另立 DEC 評估，不在本功能內順手改共用層。
+1. **只新增、不修改塔羅**：本功能只新增檔案與設定區塊（`ai-platform-plan.md` 第二階段定義）；**不修改 `src/lib/ai/`、`src/lib/tarot/`、塔羅頁面與端點**。實作中若發現共用核心不足，停下並另立 DEC 評估，不在本功能內順手改共用層。
 2. **占星不談宿命**：行星、星座、宮位皆以「能量、方式、生活領域」描述，不以吉凶論斷；土星、冥王星、南交點、第八宮、第十二宮等傳統上易被渲染為負面者，一律以成長與轉化之角度解讀（第五節第 2 小節）。
 
 ---
@@ -50,7 +50,7 @@
 
 ### 1. 架構
 
-完全沿用 `ai_platform_plan.md` 第二節第 1 小節之流程；本功能之 `<feature>` 代碼為 **`astro-cards`**：
+完全沿用 `ai-platform-plan.md` 第二節第 1 小節之流程；本功能之 `<feature>` 代碼為 **`astro-cards`**：
 
 ```
 訪客瀏覽器
@@ -75,8 +75,8 @@
 | 頁面 | `/astro-cards` | DEC-079 暫定，「合理好記即可」 |
 | 端點 | `POST /api/astro-cards/reading` | |
 | 程式目錄 | `src/lib/astro-cards/` | |
-| 環境變數前綴 | `ASTROCARDS_` | 不得用 `ASTRO_`（Astro 自身使用，`ai_platform_plan.md` 第三節第 4 小節） |
-| nginx zone | `astrocards_api` | 已預留於 `ai_platform_plan.md` 第八節第 2 小節註解 |
+| 環境變數前綴 | `ASTROCARDS_` | 不得用 `ASTRO_`（Astro 自身使用，`ai-platform-plan.md` 第三節第 4 小節） |
+| nginx zone | `astrocards_api` | 已預留於 `ai-platform-plan.md` 第八節第 2 小節註解 |
 | GA 事件前綴 | `astrocards_` | GA4 事件名稱只允許英數與底線，不可用連字號 |
 
 ### 3. 檔案配置（全部為新增檔案）
@@ -95,7 +95,7 @@
 
 - 標「否」之檔案檔頭以 ⚠️ 註明伺服器專用；標「是」之檔案不得 import `astro:env/server`、`src/lib/ai/server/`。
 - 前端可 import 共用之 `src/lib/ai/shared/`（`postReading`、`trackEvent`、`CARE_COPY`、`ErrorCode`）。
-- 塔羅之 `cards.ts`／`spreads.ts`／`copy.ts` **不互相 import**；兩功能之相似程式（抽牌、解析驗證、頁面腳本）依 `ai_platform_plan.md` 第二節第 3 小節「第三個功能出現前不抽象」原則各自實作。
+- 塔羅之 `cards.ts`／`spreads.ts`／`copy.ts` **不互相 import**；兩功能之相似程式（抽牌、解析驗證、頁面腳本）依 `ai-platform-plan.md` 第二節第 3 小節「第三個功能出現前不抽象」原則各自實作。
 
 ### 4. B 層：`src/lib/astro-cards/config.ts` 常數清單
 
@@ -175,7 +175,7 @@
 
 ### 3. 錯誤回應
 
-錯誤碼、HTTP 狀態、產生者與重試鈕規則全部沿用 `ai_platform_plan.md` 第四節第 2 小節；本功能之前端文案（`copy.ts` `ERROR_MESSAGES`，**暫定**）：
+錯誤碼、HTTP 狀態、產生者與重試鈕規則全部沿用 `ai-platform-plan.md` 第四節第 2 小節；本功能之前端文案（`copy.ts` `ERROR_MESSAGES`，**暫定**）：
 
 | `error` 代碼 | 前端顯示 | 重試鈕 |
 | :--- | :--- | :--- |
@@ -249,7 +249,7 @@
 
 ### 4. 防濫用與成本控制
 
-機制全部沿用 `ai_platform_plan.md` 第六節（呼叫前同步保留、`AI_FAILED` 只釋放 IP、`AI_BUSY` 全部釋放、記憶體計數）；端點於模組層建立本功能自己的一份 `createDailyQuota(...)`。
+機制全部沿用 `ai-platform-plan.md` 第六節（呼叫前同步保留、`AI_FAILED` 只釋放 IP、`AI_BUSY` 全部釋放、記憶體計數）；端點於模組層建立本功能自己的一份 `createDailyQuota(...)`。
 
 | 層級 | 機制 | 預設值（暫定） |
 | :--- | :--- | :--- |
@@ -258,7 +258,7 @@
 | nginx | `limit_req` zone `astrocards_api` | 每分鐘 3 次，burst 2（同塔羅） |
 | 應用層 | 功能開關 | `ASTROCARDS_ENABLED` `true` |
 
-- **每日總量核對**（`ai_platform_plan.md` 第三節第 5 小節、第六節第 4 小節）：塔羅 300 ＋ 占星 300 ＝ **每日最壞 600 次 AI 呼叫**（另加服務重啟造成之歸零）。單次呼叫之 token 用量與塔羅三張牌相當（第三節第 4 小節）。**開發者確認（2026-10-27）**：訂閱額度充裕，每日 10 倍於此之呼叫量亦可承受，300 次／日維持。日後調整只需改 `app.env` 重啟，不需 build。
+- **每日總量核對**（`ai-platform-plan.md` 第三節第 5 小節、第六節第 4 小節）：塔羅 300 ＋ 占星 300 ＝ **每日最壞 600 次 AI 呼叫**（另加服務重啟造成之歸零）。單次呼叫之 token 用量與塔羅三張牌相當（第三節第 4 小節）。**開發者確認（2026-10-27）**：訂閱額度充裕，每日 10 倍於此之呼叫量亦可承受，300 次／日維持。日後調整只需改 `app.env` 重啟，不需 build。
 - 兩功能額度互不影響：訪客玩塔羅不扣占星次數，反之亦然（DEC-079）。
 
 ### 5. Log 與隱私
@@ -340,7 +340,7 @@ interface AstroCard {
 }
 ```
 
-- 檔頭與本節皆標示 **「佔位內容，待占星師審定」**；審定人建議為**皮皮**（創辦人，占星教學／解盤；`content_inventory.md` 團隊段），待業主指派。
+- 檔頭與本節皆標示 **「佔位內容，待占星師審定」**；審定人建議為**皮皮**（創辦人，占星教學／解盤；`content-inventory.md` 團隊段），待業主指派。
 - **行星 12 張之組成為暫定**（DEC-079 已確認需求第 2 點）：十大行星＋北交點＋南交點；業主或占星師若改為其他組成（例：凱龍星、上升點），只改資料檔，張數維持 12 以外者須同步調整 `decks.ts` 之斷言。
 - 宮位**不使用**「命宮／財帛宮／疾厄宮」等傳統宮名（部分宮名帶負面聯想，且與紫微斗數宮名易混淆），一律以「第 N 宮」＋生活領域關鍵字呈現；是否加入傳統宮名待占星師決定。
 
@@ -404,13 +404,13 @@ interface AstroCard {
 ### 3. 牌面圖片
 
 - MVP 不製作牌面圖：牌背為 CSS 繪製之品牌牌背（三疊以符號區分），翻牌後牌面為佔位卡——大型占星符號＋中英文牌名＋牌組名稱。
-- 日後若製作牌面（ComfyUI 自繪等），另立 DEC，並依 `AGENTS.md` 素材規範（WebP、命名代碼登錄 `image_prompts.md`、人工把關）；頁面代碼建議 `astrocards`。
+- 日後若製作牌面（ComfyUI 自繪等），另立 DEC，並依 `AGENTS.md` 素材規範（WebP、命名代碼登錄 `image-prompts.md`、人工把關）；頁面代碼建議 `astrocards`。
 
 ---
 
 ## 八、 部署
 
-部署流程、回滾全部依 `ai_platform_plan.md` 第八節。本功能之專屬設定：
+部署流程、回滾全部依 `ai-platform-plan.md` 第八節。本功能之專屬設定：
 
 | 項目 | 值 |
 | :--- | :--- |
@@ -431,7 +431,7 @@ interface AstroCard {
 
 ## 九、 驗收標準
 
-**A. 共用基礎設施（`ai_platform_plan.md` 第十節第 8 項：第九節第 3 小節之第 1～2、5～6 項）**
+**A. 共用基礎設施（`ai-platform-plan.md` 第十節第 8 項：第九節第 3 小節之第 1～2、5～6 項）**
 
 1. `npm run build` 通過（含無 `.env` 之乾淨 clone）；`astro check` 0 errors；`dist/client/` 新增 `/astro-cards` 共 13 頁，**其餘 12 頁 HTML 與本功能實作前一致**（忽略 `/_astro/` 雜湊）。
 2. 前端 bundle 搜尋不到：金鑰、`api.minimax.io`、`chat/completions`、兩功能之系統提示詞片段、自傷關鍵字。
@@ -467,7 +467,7 @@ interface AstroCard {
 
 ---
 
-## 十一、 新增 AI 功能檢查清單對應（`ai_platform_plan.md` 第十節）
+## 十一、 新增 AI 功能檢查清單對應（`ai-platform-plan.md` 第十節）
 
 | # | 檢查項目 | 本功能對應 |
 | :--- | :--- | :--- |
@@ -481,14 +481,14 @@ interface AstroCard {
 | 8 | 驗收 | 第九節 |
 | 9 | `AGENTS.md` 路由表、環境變數、共用表面 | 實作時同步：路由表新增 `/astro-cards` 與端點、環境變數段落新增 `ASTROCARDS_*`、AI 功能段落新增 `src/lib/astro-cards/` |
 
-- 另需同步之文件：`ai_platform_plan.md` 第六節第 4 小節（總量改為「塔羅 300＋占星 ×××」）、第八節第 2 小節（註解行改為正式設定）、第三節第 4 小節（2）（列出 `ASTROCARDS_` 前綴）。
+- 另需同步之文件：`ai-platform-plan.md` 第六節第 4 小節（總量改為「塔羅 300＋占星 ×××」）、第八節第 2 小節（註解行改為正式設定）、第三節第 4 小節（2）（列出 `ASTROCARDS_` 前綴）。
 - 共用表面變更（依 `AGENTS.md` 多代理規則須於回報中明示）：`astro.config.mjs`、`.env.example`、`nginx/starwoven.conf`、`scripts/deploy.sh`、`AGENTS.md`。**不變更** `Layout.astro`、`Navbar.astro`、`global.css`、`public/assets/`。
 
 ---
 
 ## 十二、 給設計審查者的重點（Review Checklist）
 
-請先閱讀 `AGENTS.md`、`decisions.md`（DEC-073、DEC-074、DEC-079）、`ai_platform_plan.md` v0.5、`tarot_plan.md` v1.0，以及現行 `src/lib/ai/`、`src/lib/tarot/`、`src/pages/api/tarot/reading.ts`、`scripts/deploy.sh`、`nginx/starwoven.conf`。
+請先閱讀 `AGENTS.md`、`decisions.md`（DEC-073、DEC-074、DEC-079）、`ai-platform-plan.md` v0.5、`tarot-plan.md` v1.0，以及現行 `src/lib/ai/`、`src/lib/tarot/`、`src/pages/api/tarot/reading.ts`、`scripts/deploy.sh`、`nginx/starwoven.conf`。
 
 1. **只新增、不改共用**：現行 `src/lib/ai/` 之 API（`readJsonRequest`、`createDailyQuota`、`callWithReservation`、`logResult`、`generateText`、`extractTagged`、`postReading`）是否足以實作本功能而無須修改；若有不足是否已在本文件識別。
 2. **API 合約**：只有單一合法值之必填 `spread` 之理由（冒煙請求不碰 AI、日後擴充）是否成立、是否有更好做法；成功回應形狀與 `isValid` 檢查是否完整。

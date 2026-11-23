@@ -1,4 +1,4 @@
-// 星靈扭蛋佔位文案：正式對外開放前須由業主定稿，並登錄 content_inventory.md。
+// 星靈扭蛋佔位文案：正式對外開放前須由業主定稿，並登錄 content-inventory.md。
 export const PAGE_META = {
   title: '星靈扭蛋 — 星靈織語 Starwoven',
   description: '輸入星靈織語提供的抽獎碼，轉動星靈扭蛋，遇見適合你的服務體驗。',

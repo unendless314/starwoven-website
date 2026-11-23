@@ -1,5 +1,5 @@
 // ==========================================
-// AI 互動功能 — 共用程式常數（B 層，demo_docs/ai_platform_plan.md 第三節第 2 小節）
+// AI 互動功能 — 共用程式常數（B 層，docs/ai-platform-plan.md 第三節第 2 小節）
 // 所有 AI 功能必須一致的值集中於此；各功能專屬常數見 src/lib/<feature>/config.ts。
 // ⚠️ 前後端共用、會被打包進前端：只能放可公開的值，
 //    不得 import astro:env/server、src/lib/ai/server/ 或任何伺服器模組。

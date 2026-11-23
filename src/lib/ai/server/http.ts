@@ -1,5 +1,5 @@
 // ==========================================
-// 端點共用 HTTP 工具（demo_docs/ai_platform_plan.md 第四節第 1 小節、第六節第 2 小節、第七節）
+// 端點共用 HTTP 工具（docs/ai-platform-plan.md 第四節第 1 小節、第六節第 2 小節、第七節）
 // - readJsonRequest：Origin → Content-Type → body 上限 → JSON 物件
 // - jsonResponse／errorResponse：統一 Content-Type 與 Cache-Control
 // - logResult：匿名統計 log（不含問題、解讀、IP）

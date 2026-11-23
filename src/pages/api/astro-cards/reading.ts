@@ -1,5 +1,5 @@
 // ==========================================
-// POST /api/astro-cards/reading（DEC-080；共用慣例見 demo_docs/ai_platform_plan.md 第四節第 1 小節）
+// POST /api/astro-cards/reading（DEC-080；共用慣例見 docs/ai-platform-plan.md 第四節第 1 小節）
 // 流程：共用請求檢查 → spread／問題驗證 → 功能開關 → 自傷預檢 → 同步保留額度 → crypto 抽牌 → AI → 結構驗證
 // 隱私：問題、解讀與抽到的牌不寫入任何 log；log 只記時間、功能、spread、結果代碼、耗時、是否命中上限。
 // ==========================================

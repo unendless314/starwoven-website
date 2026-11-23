@@ -12,8 +12,8 @@
 - **分頁代碼**：`home`（首頁）、`about`（關於我們）、`services`（命理服務）、`courses`（活動課程）、`reiki`（靈氣脈輪）、`akashic`（光與阿卡西）、`shop`（星靈選物）、`common`（跨頁共用）。
 - **圖片代碼**：`a` ~ `z`（依版面由上至下、由主要至次要編排）。
 - **存放路徑**：
-  - 挑選採用的原圖／去背圖 → `demo_docs/sd-assets/`（例如：`home_a_tarot_world_v1.png`）
-  - 淘汰或測試圖 → `demo_docs/sd-assets/rejected/`（保留備查）
+  - 挑選採用的原圖／去背圖 → `design-assets/sd-assets/`（例如：`home_a_tarot_world_v1.png`）
+  - 淘汰或測試圖 → `design-assets/sd-assets/rejected/`（保留備查）
   - 最終壓縮上站圖檔 → `public/assets/`
 - **生圖模式**：本專案採**人機協作**，由人類操作 ComfyUI（本機 SDXL/Flux）或 OpenAI 雲端生圖，產出後人工檢視、去背定稿。
 
@@ -298,7 +298,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   - `[課程]-[圖片 D]`：週四 七脈輪與靈氣現場照 (`courses_d_reiki_v1.webp`)
   - `[課程]-[圖片 E]`：週五 托特塔羅循環班現場照 (`courses_e_thoth_v1.webp`)
   - `[課程]-[圖片 F]`：週六 生命靈數循環班現場照 (`courses_f_numerology_v1.webp`)
-- **備註**：已自 `demo_docs/raw-photos/courses/` 實拍原圖完成 16:10 取景裁切與 WebP Q85 壓縮（各圖約 19~86 KB），正式部署於 `public/assets/`。
+- **備註**：已自 `design-assets/raw-photos/courses/` 實拍原圖完成 16:10 取景裁切與 WebP Q85 壓縮（各圖約 19~86 KB），正式部署於 `public/assets/`。
 
 ---
 
@@ -327,7 +327,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
 - **版位用途**：關於我們頁面（`/about`）「我們從抱團取暖開始，現在我們想要傳承」區塊右側主視覺
 - **規格建議**：直式比例 447:517（Canva 原始規格為寬 447 × 高 517 px；原圖 1166 × 1349 px）。
 - **視覺重點**：星靈織語全體夥伴溫馨手繪水彩群像，襯托深邃星空、星座輪盤、塔羅牌、靈性白狐與光之織語，象徵「星靈織語，織起人與人的連結，也讓每一道光持續傳下去」。
-- **對應檔案**：`about_a_brand_story_v1.webp`（由 `demo_docs/raw-photos/team/介紹命理師封面.png` 轉換為 WebP Q85，檔案大小 388.4 KB，保留完整背景）。
+- **對應檔案**：`about_a_brand_story_v1.webp`（由 `design-assets/raw-photos/team/介紹命理師封面.png` 轉換為 WebP Q85，檔案大小 388.4 KB，保留完整背景）。
 
 ---
 
@@ -378,7 +378,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   A full-bleed watercolor illustration filling the entire frame edge to edge, with no borders, no margins and no white space. A calm deep indigo and midnight purple night sky with soft, uneven hand-painted watercolor texture. Soft lavender and moonlight blue watercolor cloud banks rest on the left and right sides at middle height, reaching gently toward the inner third of the image and thinning into faint wisps near the center. Two or three long, thin, flowing golden threads weave in and out of the clouds like loose silk strands, drifting horizontally from both sides toward the middle, their glowing tips fading softly just below the center of the image. The central area stays calm, dark and open, suitable for title text, with only very faint tiny stars. Many small twinkling four-pointed stars and fine star dust are scattered across the upper sky and around the clouds on both sides. The composition is balanced but not mirrored, the left and right sides look naturally different. The sky is flat and open with no swirling shapes. Serene, healing, mystical, elegant mood, high resolution.
   ```
 - **經驗紀錄**：提示詞含「banner」會使模型在畫布內再畫一條橫幅（上下白邊）；要求光暈「匯聚於中央」會畫出漩渦星系；雲層寫「middle height」會讓雲帶橫在中央，文字因此改放上半部。
-- **存放檔名**：`common_b_og_image_v1.jpg`（`public/assets/` 與 `demo_docs/sd-assets/`；生成原圖 `common_b_og_image_v1.png` 留存本機，git-ignored）
+- **存放檔名**：`common_b_og_image_v1.jpg`（`public/assets/` 與 `design-assets/sd-assets/`；生成原圖 `common_b_og_image_v1.png` 留存本機，git-ignored）
 
 ---
 
@@ -404,7 +404,7 @@ low quality, blurry, deformed, extra limbs, messy lines, text, watermark, noise,
   ```
 - **後製紀錄**：原圖 1254×1254 透明 PNG，免去背。燈籠外圍半透明白色光暈在深色底上呈白霧，改以程式移除（自燈籠外緣連通之近白像素）並於燈籠後方疊星金 `#FCE794` 徑向漸層光；裁去四周透明邊（留 24px）為 1132×1147 / WebP Q85。
 - **經驗紀錄**：GPT Image 會在發光物周圍畫白色光暈，去背後只在淺底看不出來；重抽時可在提示詞補「The lantern's warm light stays inside and right around the lantern as a small golden glow, with no white halo or white haze around it.」
-- **存放檔名**：`common_c_lost_star_v1.webp`（`public/assets/` 與 `demo_docs/sd-assets/`）
+- **存放檔名**：`common_c_lost_star_v1.webp`（`public/assets/` 與 `design-assets/sd-assets/`）
 
 ---
 
@@ -539,7 +539,7 @@ pip install rembg onnxruntime pillow
 1. **去背檢查**：若為純白底 RGB 圖，自動透過 U2Net 模型高精度去背轉為透明 RGBA；若已含透明通道則智慧跳過。
 2. **WebP 最佳化**：統一以 `quality=85, method=6` 進行高品質兼小體積壓縮（每張控制在 50~150 KB 內）。
 3. **自動雙重歸檔**：
-   - 封存存檔 $\rightarrow$ `demo_docs/sd-assets/[檔名].webp`
+   - 封存存檔 $\rightarrow$ `design-assets/sd-assets/[檔名].webp`
    - 上架存檔 $\rightarrow$ `public/assets/[檔名].webp`
 4. **自動解析生成履歷**：自動從 ComfyUI PNG 中讀取 Seed 與 Prompt，並印出可直接複製至「六、生成紀錄」的 Markdown 表格行。
 
@@ -547,14 +547,14 @@ pip install rembg onnxruntime pillow
 
 ```bash
 # 單張素材後製處理
-python scripts/process_asset.py --input demo_docs/sd-assets/z-image-turbo_00014_.png --output services_a_tarot_v1.webp --code 服務-A --name "塔羅占卜 (v1)"
+python scripts/process_asset.py --input design-assets/sd-assets/z-image-turbo_00014_.png --output services_a_tarot_v1.webp --code 服務-A --name "塔羅占卜 (v1)"
 
 # 若外部已完成手工去背（跳過去背直接轉 WebP）：
-python scripts/process_asset.py --input demo_docs/sd-assets/custom_image.png --output home_a_tarot_world_v3.webp --skip-rembg
+python scripts/process_asset.py --input design-assets/sd-assets/custom_image.png --output home_a_tarot_world_v3.webp --skip-rembg
 ```
 
 ### 3. Git 版控安全守則
 
-- **禁止提交 Raw PNG**：未經壓縮的原始 PNG（通常 > 1MB）禁止進入 Git 版本庫，`.gitignore` 已設定 `demo_docs/sd-assets/*.png` 自動排除。
+- **禁止提交 Raw PNG**：未經壓縮的原始 PNG（通常 > 1MB）禁止進入 Git 版本庫，`.gitignore` 已設定 `design-assets/sd-assets/*.png` 自動排除。
 - **僅提交 WebP**：Git 僅追蹤 `*.webp` 檔案，確保 Repository 體積輕巧、頁面載入秒開。
 - **前端引用規範**：Astro 頁面統一由 `/assets/[檔名].webp` 引用（對應 `public/assets/` 目錄）。

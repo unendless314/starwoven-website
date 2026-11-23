@@ -2,7 +2,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 顏色唯一定義處（known_issues #16）。
+/* 顏色唯一定義處（known-issues #16）。
    1. 品牌色票：以色名引用，如 `text-accent-blue`、`bg-star-gold/20`。
    2. 語意色：依用途命名，淺色／深色自動切換（深色值在下方 `.dark`），使用處不必再寫 `dark:`。
    頁內 <style> 與行內樣式用 `var(--color-…)`。

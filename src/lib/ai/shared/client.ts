@@ -1,5 +1,5 @@
 // ==========================================
-// AI 互動功能 — 前端 API 呼叫與 GA 工具（demo_docs/ai_platform_plan.md 第四節第 4 小節）
+// AI 互動功能 — 前端 API 呼叫與 GA 工具（docs/ai-platform-plan.md 第四節第 4 小節）
 // - 錯誤一律以 JSON error 代碼為準；body 無法解析或代碼未知時才依狀態碼降級
 // - 前端逾時 → AI_FAILED（含重試鈕）；其他網路錯誤 → 通用錯誤（code: null）
 // ⚠️ 前端模組：不得 import 任何伺服器模組。

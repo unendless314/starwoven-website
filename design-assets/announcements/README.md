@@ -1,5 +1,7 @@
 # 公告與活動海報封存庫 (Announcements Archive)
 
+> **預定退役**：CMS 第二階段將首頁輪播遷入內容 repo 後，業主改在 CMS 直接上傳海報（原檔留在業主的 Canva），本資料夾屆時封存退役。規劃見 `docs/cms-plan.md`。
+
 此目錄用於封存從 Canva 或設計軟體匯出之**原始高解析圖檔**（PNG / JPG / PDF），以「年月份（`YYYY-MM`）」為子目錄進行歸檔。
 
 ---
@@ -7,7 +9,7 @@
 ## 一、目錄結構
 
 ```text
-demo_docs/announcements/
+design-assets/announcements/
 ├── 2026-10/
 │   ├── .gitkeep
 │   └── (放入 2026 年 10 月當期海報原檔，如 202610_waite_tarot.png)
@@ -30,7 +32,7 @@ demo_docs/announcements/
 
 ## 三、上架與 WebP 最佳化流程
 
-1. **原檔存檔**：將 Canva 匯出之原圖存入對應年月份目錄（例如 `demo_docs/announcements/2026-10/`）。
+1. **原檔存檔**：將 Canva 匯出之原圖存入對應年月份目錄（例如 `design-assets/announcements/2026-10/`）。
 2. **轉為 WebP**：
    - 透過專案腳本壓縮轉換為 WebP（品質 Q85，檔案控制在 80~150 KB 內）。
    - 產出檔案放置於 `public/assets/`（例如 `public/assets/hero_announce_202610_waite_v1.webp`）。

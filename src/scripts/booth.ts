@@ -1,5 +1,5 @@
 // ==========================================
-// 星靈出攤（首頁出攤公告）互動邏輯（規格書 demo_docs/booth_plan.md）
+// 星靈出攤（首頁出攤公告）互動邏輯（規格書 docs/booth-plan.md）
 // - 由 index.astro 以頁面層級 <script> 引入（全頁一份）
 // - 「星靈出攤」試算表＋Apps Script 為唯一資料來源（只讀，JSONP）；SSR 不寫死任何活動
 // - 卡片一律 clone 自 <template id="booth-card-template">；依活動數 3／2／1／0 自動排版
@@ -35,7 +35,7 @@ interface BoothEvent {
 }
 
 // JSONP 傳輸（DEC-067）：複製自 wishlist.ts，callback 前綴改為 __boothJsonp_；
-// 刻意不從許願池 import，避免動到已穩定之許願池程式（booth_plan.md 第五節第 5 小節）。
+// 刻意不從許願池 import，避免動到已穩定之許願池程式（booth-plan.md 第五節第 5 小節）。
 // 逾時後保留 noop 回呼讓遲到的回應靜默落地，成功／失敗時才清除。
 let jsonpSeq = 0;
 function jsonp<T>(url: string, timeoutMs: number): Promise<T> {

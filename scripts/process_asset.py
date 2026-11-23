@@ -3,13 +3,13 @@ scripts/process_asset.py — 星靈織語 Starwoven 素材後製與 WebP 轉換�
 
 用途：
   將 ComfyUI 或其他工具產出的生圖素材自動進行去背（去除純白底轉為透明 RGBA）並壓縮轉檔為 WebP，
-  自動同步輸出至 demo_docs/sd-assets/ 與 public/assets/，並印出 image_prompts.md 登記表格行。
+  自動同步輸出至 design-assets/sd-assets/ 與 public/assets/，並印出 image-prompts.md 登記表格行。
 
 環境需求：
   pip install rembg onnxruntime pillow
 
 使用範例：
-  python scripts/process_asset.py --input demo_docs/sd-assets/z-image-turbo_00014_.png --output services_a_tarot_v1.webp --code 服務-A --name "塔羅占卜 (v1)"
+  python scripts/process_asset.py --input design-assets/sd-assets/z-image-turbo_00014_.png --output services_a_tarot_v1.webp --code 服務-A --name "塔羅占卜 (v1)"
 """
 
 import os
@@ -54,7 +54,7 @@ def process_asset(input_path, output_name, code="", name="", skip_rembg=False, q
         output_name += ".webp"
 
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    sd_assets_dir = os.path.join(repo_root, "demo_docs", "sd-assets")
+    sd_assets_dir = os.path.join(repo_root, "design-assets", "sd-assets")
     public_assets_dir = os.path.join(repo_root, "public", "assets")
     
     if not os.path.isabs(input_path):
@@ -101,7 +101,7 @@ def process_asset(input_path, output_name, code="", name="", skip_rembg=False, q
     print(f"    - 上架存檔: {pub_dst}")
     print(f"    - 檔案大小: {sz_kb:.1f} KB")
     
-    # 產生 image_prompts.md 表格記錄
+    # 產生 image-prompts.md 表格記錄
     today_str = date.today().isoformat()
     code_str = f"`{code}`" if code else "`待補`"
     name_str = name if name else output_name
@@ -109,12 +109,12 @@ def process_asset(input_path, output_name, code="", name="", skip_rembg=False, q
     prompt_summary = (prompt_text[:30] + "...") if prompt_text else "手繪全彩插畫"
     
     log_row = f"| {code_str} | {name_str} | {today_str} | ComfyUI | {prompt_summary} | {seed_str} | 採用上架 | {post_process_desc} | `{output_name}` |"
-    print("\n[+] 請將以下行複製貼上至 demo_docs/image_prompts.md 的「六、生成紀錄」表格：")
+    print("\n[+] 請將以下行複製貼上至 docs/image-prompts.md 的「六、生成紀錄」表格：")
     print(log_row)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="星靈織語素材後製與 WebP 轉換工具")
-    parser.add_argument("--input", "-i", required=True, help="原始圖檔路徑 (例如 demo_docs/sd-assets/z-image-turbo_00014_.png)")
+    parser.add_argument("--input", "-i", required=True, help="原始圖檔路徑 (例如 design-assets/sd-assets/z-image-turbo_00014_.png)")
     parser.add_argument("--output", "-o", required=True, help="輸出 WebP 檔名 (例如 services_a_tarot_v1.webp)")
     parser.add_argument("--code", "-c", default="", help="素材編號 (例如 服務-A、首頁-A)")
     parser.add_argument("--name", "-n", default="", help="素材名稱 (例如 塔羅占卜 (v1))")

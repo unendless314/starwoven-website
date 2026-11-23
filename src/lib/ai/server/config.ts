@@ -1,5 +1,5 @@
 // ==========================================
-// AI 共用伺服器設定（唯一讀取共用 AI_* 環境變數之模組，demo_docs/ai_platform_plan.md 第三節第 4 小節）
+// AI 共用伺服器設定（唯一讀取共用 AI_* 環境變數之模組，docs/ai-platform-plan.md 第三節第 4 小節）
 // 各功能之開關與上限由該功能 server-config.ts 讀取；其他模組不得各自讀取 astro:env/server 或 process.env。
 // ⚠️ 伺服器專用：僅可被 API 路由及 src/lib/ai/server/、各功能伺服器專用模組 import。
 // ==========================================

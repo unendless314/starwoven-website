@@ -3,11 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import CTAButton from '../components/CTAButton.astro';
 
 // ==========================================
-// 404 頁（known_issues 第 6 項）：build 輸出 dist/client/404.html，
+// 404 頁（known-issues 第 6 項）：build 輸出 dist/client/404.html，
 // 由 nginx `error_page 404 /404.html` 提供（狀態碼維持 404，網址列保留訪客原網址）。
-// 文案正本：content_inventory.md 第 9 節（開發暫擬，待業主確認；known_issues 第 17 項）。
+// 文案正本：content-inventory.md 第 9 節（開發暫擬，待業主確認；known-issues 第 17 項）。
 // 不另列頁面捷徑：Layout 已含完整導覽列，避免重複維護導覽資料。
-// 主視覺：image_prompts.md「共用-C」（去背透明 WebP，雙主題共用）。
+// 主視覺：image-prompts.md「共用-C」（去背透明 WebP，雙主題共用）。
 // 設為 null 時頁面退回純文字版。
 // ==========================================
 const imgLostStar: string | null = '/assets/common_c_lost_star_v1.webp';

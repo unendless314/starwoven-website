@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==========================================
-# 星靈織語 Starwoven — VPS 部署腳本（DEC-073、DEC-079，規格 demo_docs/ai_platform_plan.md 第八節第 3 小節）
+# 星靈織語 Starwoven — VPS 部署腳本（DEC-073、DEC-079，規格 docs/ai-platform-plan.md 第八節第 3 小節）
 # 於 VPS repo 目錄以 root 執行：先手動 `git pull`，再 `bash scripts/deploy.sh`
 # （腳本本身不拉取，避免執行中途腳本被更新）
 #
@@ -39,7 +39,7 @@ npm run build
 # 2. 結構檢查：防止將錯誤結構同步至網站根目錄
 step "檢查建置產物結構"
 [ -f dist/client/index.html ] || die "dist/client/index.html 不存在，中止部署"
-# nginx error_page 404 依賴此檔（known_issues 第 6 項）
+# nginx error_page 404 依賴此檔（known-issues 第 6 項）
 [ -f dist/client/404.html ] || die "dist/client/404.html 不存在，中止部署"
 [ -f dist/server/entry.mjs ] || die "dist/server/entry.mjs 不存在，中止部署"
 

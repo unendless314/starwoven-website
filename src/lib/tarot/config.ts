@@ -1,5 +1,5 @@
 // ==========================================
-// 線上塔羅抽卡 — 功能程式常數檔（B 層，demo_docs/ai_platform_plan.md 第三節第 3 小節）
+// 線上塔羅抽卡 — 功能程式常數檔（B 層，docs/ai-platform-plan.md 第三節第 3 小節）
 // 所有 AI 功能共用之常數（逾時、body 上限、時區、Origin）見 src/lib/ai/shared/config.ts。
 // ⚠️ 前後端共用、會被打包進前端：只能放可公開的值，
 //    不得 import astro:env/server、src/lib/ai/server/ 或任何伺服器模組。

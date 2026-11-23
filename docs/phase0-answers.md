@@ -30,7 +30,7 @@
   - 本機顯卡：AMD Radeon AI PRO R9700，32 GB VRAM（AMD 卡跑 SD 需 DirectML/ROCm 環境，可作備援）
   - **主要生圖路徑：OpenAI 雲端服務**，理由：批量生成速度快
 - 開發含義：
-  - `image_prompts.md` 的 SD 提示詞模板（tag 風格）需改寫為**自然語言描述**以適配 OpenAI 生圖 API，或兩者並存
+  - `image-prompts.md` 的 SD 提示詞模板（tag 風格）需改寫為**自然語言描述**以適配 OpenAI 生圖 API，或兩者並存
   - 商用授權：以 OpenAI 生圖服務條款為準，採用前需在 `decisions.md` 記錄條款結論
   - SD 本機環境僅作備援，不列入 Demo 關鍵路徑
 

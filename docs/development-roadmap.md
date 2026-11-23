@@ -2,7 +2,7 @@
 
 > 狀態：v0.3（2026-10-06）— **Phase 0–4 已完成、Demo 已交付**；Phase 5 部署配置檔已備妥（`nginx/starwoven.conf`），實際 VPS 部署與 Phase 6 簡報尚未執行（依業主安排）。
 > 後續迭代不再走 Phase 制，統一記錄於 `decisions.md`（DEC-001 起）。
-> 配套文件：[spec.md](spec.md)、[phase0_answers.md](phase0_answers.md)、[image_prompts.md](image_prompts.md)
+> 配套文件：[spec.md](spec.md)、[phase0-answers.md](phase0-answers.md)、[image-prompts.md](image-prompts.md)
 > ~~專案期限：2026-09-23~~（已達成）。採多 agent 平行開發策略，瓶頸在 review 與溝通效率。
 > 設計給接手的 AI 或開發者依序執行，每個 Phase 完成後建議跑一次檢查點再往下。
 
@@ -10,7 +10,7 @@
 
 ## Phase 0：前置確認
 
-> ✅ **已完成（2026-09-21）**，回答紀錄見 [phase0_answers.md](phase0_answers.md)。以下項目已確認：
+> ✅ **已完成（2026-09-21）**，回答紀錄見 [phase0-answers.md](phase0-answers.md)。以下項目已確認：
 >
 > - [x] 預約諮詢 CTA → LINE `@347fucvj`（另開新分頁）
 > - [x] 關於我們：10 人（創辦人 2 + 成員 8），文案照片待人工提供，先佔位版型
@@ -19,7 +19,7 @@
 > - [x] VPS：Hetzner NBG1 / Ubuntu arm64 / nginx vhost 加入；IP `<YOUR_VPS_IP>`；網域確定為 `starwoven.xyz`
 >
 > 僅存待辦：
-> - [x] 從原站逐頁抄錄文案，整理成 `content_inventory.md`（之後所有頁面以此為內容來源）
+> - [x] 從原站逐頁抄錄文案，整理成 `content-inventory.md`（之後所有頁面以此為內容來源）
 
 ## Phase 1：專案骨架（0.5 天）
 
@@ -35,16 +35,16 @@
 
 ## Phase 2：素材準備（1～2 天，人機協作，可與 Phase 1 平行）
 
-> ⚠️ 本階段為**人工為主、AI 為輔**：生圖、挑圖、修圖由人類執行，AI 助手只協助起草原案與提示詞。團隊已確認接受 AI 重製視覺與原站的差異（見 phase0_answers.md 問題 3）。
-> 實際執行差異（2026-10-06 註記）：生圖以**本機 ComfyUI（Z-Image-Turbo）**為主、輔以**業主實拍照片**；**個別素材曾使用 OpenAI Playground**（如 `服務-G` 毛孩溝通插圖，見 `image_prompts.md`「六、生成紀錄」），OpenAI 服務條款之商用授權結論仍需確認。
+> ⚠️ 本階段為**人工為主、AI 為輔**：生圖、挑圖、修圖由人類執行，AI 助手只協助起草原案與提示詞。團隊已確認接受 AI 重製視覺與原站的差異（見 phase0-answers.md 問題 3）。
+> 實際執行差異（2026-10-06 註記）：生圖以**本機 ComfyUI（Z-Image-Turbo）**為主、輔以**業主實拍照片**；**個別素材曾使用 OpenAI Playground**（如 `服務-G` 毛孩溝通插圖，見 `image-prompts.md`「六、生成紀錄」），OpenAI 服務條款之商用授權結論仍需確認。
 
-- [x] 人類操作生圖，參考 `image_prompts.md` 生成並挑選：
+- [x] 人類操作生圖，參考 `image-prompts.md` 生成並挑選：
   - [x] 月亮＋星星 Logo — 以 inline SVG（月亮＋四芒星）定稿於 `Navbar.astro`，無位圖素材
   - [x] 首頁星空背景 — 未採用位圖，由 CSS 漸層與光斑粒子渲染（`index.astro` 保留 `imgHeroBg` 介面）
   - [x] 內頁水彩雲朵底圖 — 同上，以 CSS 漸層與光斑呈現
   - [ ] 手繪游標等插圖 — 版面未使用，未生成
-- [x] 採用圖放 `demo_docs/sd-assets/`，淘汰圖放 `demo_docs/sd-assets/rejected/`
-- [x] 逐筆填寫 `image_prompts.md` 的「生成紀錄」（提示詞、日期、結果、後製方式）
+- [x] 採用圖放 `design-assets/sd-assets/`，淘汰圖放 `design-assets/sd-assets/rejected/`
+- [x] 逐筆填寫 `image-prompts.md` 的「生成紀錄」（提示詞、日期、結果、後製方式）
 - [ ] 生圖授權結論 — 生圖以本機 ComfyUI 為主，但曾使用 OpenAI Playground（`服務-G` 毛孩溝通）；OpenAI 服務條款之商用結論仍需確認並記錄於 `decisions.md`
 - [x] 所有圖檔壓縮為 WebP Q85（首頁總圖檔遠低於 1 MB），正式版放網站 `public/assets/`
 
@@ -57,7 +57,7 @@
 - [x] 頁尾（footer）：聯絡我們、地址導航按鈕、社群圖示列、版權（後續多次改版見 DEC-007/009/025/044/045/047）
 - [x] 響應式檢查（手機 / 平板 / 桌面）
 
-**檢查點**：首頁與原站設計規劃（依據 `content_inventory.md` 與規格）並排比對，風格一致。✅ 已達成（首頁另陸續擴充四大服務卡片、固定循環課程、課程許願池與學員評價輪播，見 DEC-006/030/034）。
+**檢查點**：首頁與原站設計規劃（依據 `content-inventory.md` 與規格）並排比對，風格一致。✅ 已達成（首頁另陸續擴充四大服務卡片、固定循環課程、課程許願池與學員評價輪播，見 DEC-006/030/034）。
 
 ## Phase 4：內頁切版（1.5～2 天）
 
@@ -78,7 +78,7 @@
 
 ## Phase 5：建置與部署（0.5～1 天）
 
-> 環境已確認（見 phase0_answers.md 問題 5）：Hetzner Ubuntu arm64、nginx 已在運作。
+> 環境已確認（見 phase0-answers.md 問題 5）：Hetzner Ubuntu arm64、nginx 已在運作。
 > 2026-10-06 註記：vhost 配置檔已落地版控（`nginx/starwoven.conf`，含 `/reiki` `/akashic` 301、靜態快取、gzip、安全標頭，DEC-023）；**實際上傳 VPS、DNS 與憑證作業尚未執行**，待業主安排。
 
 - [x] `npm run build` 產生 `dist/`，本機驗證正式輸出無誤
@@ -117,7 +117,7 @@
 ## 給接手 AI 的執行守則
 
 1. 嚴格依照 Phase 順序，完成一個 Phase 並通過檢查點再進下一個
-2. 文案一律以 `content_inventory.md` 為準，不要憑空編造
+2. 文案一律以 `content-inventory.md` 為準，不要憑空編造
 3. 素材缺漏時用佔位圖（灰色底 + 檔名標示），不要停止開發
 4. 每個 Phase 結束更新本文件的 checkbox 狀態
 5. 遇到 Spec 未定義的決策，記錄在 `decisions.md`，不要自行默默決定
@@ -127,4 +127,4 @@
 ## 交付文件
 
 - [spec](spec.md)
-- [development_roadmap](development_roadmap.md)
+- [development-roadmap](development-roadmap.md)

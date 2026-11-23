@@ -4,7 +4,7 @@
 > **建立日期**：2026-11-08
 > **沿革摘要**：業主經常於外部市集擺攤，活動接洽成功之通知具時效性，經由開發者改程式碼、重新部署的流程太慢；希望業主自行於 Google 試算表更新，首頁即時呈現。經開發者與 AI 討論後整理為 v0.1。v0.2 依 v0.1 之設計審查（3 項 P2）及其覆核（2 項建議）修訂：後端驗證第 1 列標題（`SHEET_SCHEMA_MISMATCH`）、GA4 只送連結網域、補列 Apps Script 單點故障之接受標準與依失敗原因分流之處置流程。各項採納與取捨見**第十一節**。
 > **核心目標**：首頁 Hero 原「品牌三大核心特色」三張卡片（DEC-060，AI 生成之 Demo 文案）**移除**，改為「星靈出攤」區塊——內容由 Google 試算表驅動，**業主改試算表、訪客重整網頁即更新，不需重新部署**。
-> **技術路線**：沿用課程許願池（`course_wishlist_plan_v3.md`）已驗證之架構——Google Apps Script＋試算表為 SSOT，前端以 JSONP 讀取（DEC-067）；**只讀不寫**，許願池之投票、鎖、防重複、寫入核對等機制一律不需要。
+> **技術路線**：沿用課程許願池（`course-wishlist-plan.md`）已驗證之架構——Google Apps Script＋試算表為 SSOT，前端以 JSONP 讀取（DEC-067）；**只讀不寫**，許願池之投票、鎖、防重複、寫入核對等機制一律不需要。
 
 ---
 
@@ -82,7 +82,7 @@
 ## 四、 Apps Script（整段貼上）
 
 > 部署方式：試算表 →「擴充功能 → Apps Script」→ 貼上以下程式碼 →「部署 → 新增部署作業 → 類型：網頁應用程式」，**執行身分：我**、**存取權：任何人** → 取得 Web App 網址（填入 `PUBLIC_BOOTH_API_URL`）。
-> ⚠️ **日後更新程式碼**請用「部署 → 管理部署作業 → ✏️ 編輯 → 版本：新增版本 → 部署」，**Web App 網址不變**。切勿「刪除後重新部署」——網址會更換，須同步更新本機與 VPS 之 `.env` 並重新 build（許願池曾發生兩次，見 `course_wishlist_plan_v3.md` 第五節）。
+> ⚠️ **日後更新程式碼**請用「部署 → 管理部署作業 → ✏️ 編輯 → 版本：新增版本 → 部署」，**Web App 網址不變**。切勿「刪除後重新部署」——網址會更換，須同步更新本機與 VPS 之 `.env` 並重新 build（許願池曾發生兩次，見 `course-wishlist-plan.md` 第五節）。
 
 ```javascript
 /**
@@ -327,7 +327,7 @@ function doGet(e) {
 
 ### 2. 同步文件（實作時）
 
-- `content_inventory.md` 第 1.1 節：移除「三大品牌核心特色」，改登錄「星靈出攤」區塊（小標題、提示卡定稿文案；活動內容以試算表為 SSOT，不登錄）。
+- `content-inventory.md` 第 1.1 節：移除「三大品牌核心特色」，改登錄「星靈出攤」區塊（小標題、提示卡定稿文案；活動內容以試算表為 SSOT，不登錄）。
 - `AGENTS.md`：首頁 IA（「Hero」後註明星靈出攤）、Environment variables 新增 `PUBLIC_BOOTH_API_URL`。
 - `.env.example`：新增 `PUBLIC_BOOTH_API_URL=`。
 - 共用表面：**不修改** Layout、Navbar、`global.css`、`GoogleAnalytics.astro`、nginx、VPS Node 服務。

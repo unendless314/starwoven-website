@@ -1,5 +1,5 @@
 // ==========================================
-// AI 呼叫入口：generateText()（demo_docs/ai_platform_plan.md 第五節第 3 小節）
+// AI 呼叫入口：generateText()（docs/ai-platform-plan.md 第五節第 3 小節）
 // 依 AI_PROVIDER 選擇並快取轉接器、以 SERVER_AI_TIMEOUT_MS 控制逾時，回傳剝除推理後之純文字；
 // 失敗一律拋出 ProviderError。提示詞、解析與結構驗證由各功能 ai.ts 負責。
 // ⚠️ 伺服器專用。

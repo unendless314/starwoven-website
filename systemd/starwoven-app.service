@@ -2,7 +2,7 @@
 # 安裝：cp systemd/starwoven-app.service /etc/systemd/system/ && systemctl daemon-reload && systemctl enable starwoven-app
 # 修改 /etc/starwoven/app.env 後：systemctl restart starwoven-app
 # 修改本檔後：systemctl daemon-reload && systemctl restart starwoven-app
-# 規格：demo_docs/ai_platform_plan.md 第八節第 1 小節
+# 規格：docs/ai-platform-plan.md 第八節第 1 小節
 
 [Unit]
 Description=Starwoven Astro Node service (tarot reading API)

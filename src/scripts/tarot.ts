@@ -3,7 +3,7 @@
 // 狀態機：setup → pick（洗牌＋扇形選牌）→ 送出請求（等待動畫）→ result（依序翻牌＋逐段淡入）
 //         └→ care（自傷預檢命中）／error（錯誤碼對照 copy.ts）
 // - 牌由後端以 crypto 亂數抽出；前端選牌僅為儀式，翻牌在 API 回傳後才開始
-// - API 呼叫、錯誤碼判斷與降級規則見 src/lib/ai/shared/client.ts（ai_platform_plan.md 第四節第 4 小節）
+// - API 呼叫、錯誤碼判斷與降級規則見 src/lib/ai/shared/client.ts（ai-platform-plan.md 第四節第 4 小節）
 // - GA4 事件不含問題內容
 // ==========================================
 import { postReading, trackEvent } from '../lib/ai/shared/client';
