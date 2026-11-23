@@ -176,8 +176,18 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
   your final reply.
 - Open content/config issues live in `known_issues/README.md`.
 
+## Naming（2026-11-23 定案）
+
+- **用 `_`**：程式碼內的變數名稱、環境變數、Python 檔名。
+- **其他一律用 `-`**：檔名、資料夾、網址、repo，**包含素材圖片**。
+- 既有的 `_` 檔名（文件、素材圖片等）正依重構計畫分批改正；改正前不要零星改名，
+  以免引用路徑斷掉。新增檔案一律用 `-`。
+
 ## Deployment (Hetzner NBG1, Ubuntu arm64, nginx)
 
+- **分工：開發機改程式，VPS 只 pull 與 build／部署。** 所有修改在開發機完成並 push；
+  VPS 上的 AI 不得自行修改 repo 內容或 commit。部署相關腳本以本 repo 為正本，
+  不放在 VPS 的工具資料夾。跨 repo 一律用相對路徑（如 `../starwoven-content`）。
 - Server IP: `<YOUR_VPS_IP>` · domain `starwoven.xyz`（A records for `@`/`www`）。
 - Deploy root `/var/www/starwoven`（內容為 `dist/client/`，nginx 直接提供）；
   `/api/` 由 nginx 反向代理至 `127.0.0.1:4321` 的 systemd 服務 `starwoven-app`
