@@ -199,7 +199,7 @@
 - 前端環境變數：`PUBLIC_GACHA_API_URL`（Apps Script web app URL，比照 `PUBLIC_WISHLIST_API_URL`）。未設定時使用明確標示之本機 Demo：只接受頁面列出之展示碼，結果以 `DEMO-` 開頭、無兌換效力，不發送網路請求。
 - **程式位置（v0.12）**：`src/pages/gacha.astro`（頁面與動畫）、`src/scripts/gacha.ts`
   （狀態機、JSONP、結果記憶）、`src/lib/gacha/`（常數與佔位文案）、
-  `scripts/gacha_apps_script.gs`（Apps Script 正本，設置方式見第十一節）。
+  `scripts/gacha-apps-script.gs`（Apps Script 正本，設置方式見第十一節）。
 - **共用表面影響**：
   - **`src/layouts/Layout.astro`**——新增僅於 `/gacha` 輸出之 inline script；全站共用表面變更，實作時須明確告知。
   - `.env.example`（新增變數）、`AGENTS.md`（路由表、環境變數）。
@@ -543,7 +543,7 @@
 
 ### 3. 安裝 Apps Script 與觸發器
 
-1. 在試算表開啟「擴充功能 → Apps Script」，將 `scripts/gacha_apps_script.gs` 全文貼入 `Code.gs`。
+1. 在試算表開啟「擴充功能 → Apps Script」，將 `scripts/gacha-apps-script.gs` 全文貼入 `Code.gs`。
 2. 專案設定之時區設為「台北（GMT+08:00）」。
 3. 在「觸發器」新增**一個可安裝觸發器**：執行函式 `onFormSubmit`、事件來源「試算表」、
    事件類型「提交表單時」。三張表單共用此觸發器，不要重複建立。

@@ -71,7 +71,7 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
 - 新增 AI 功能依 `ai-platform-plan.md` 第十節檢查清單；兩功能相似程式各自實作、不互相 import。
 - 星靈扭蛋集中於 `src/pages/gacha.astro`、`src/scripts/gacha.ts` 與 `src/lib/gacha/`；
   以獨立 Google Apps Script＋試算表抽籤（JSONP），不使用 AI／Node API。後端正本為
-  `scripts/gacha_apps_script.gs`，Google 後台設置與 API 合約見 `docs/gacha-plan.md`；
+  `scripts/gacha-apps-script.gs`，Google 後台設置與 API 合約見 `docs/gacha-plan.md`；
   `PUBLIC_GACHA_API_URL` 未設定時為明確標示、無兌換效力的本機 Demo。
 
 - Nav (Navbar.astro): 關於我們 / 命理服務 / 活動與課程 / 課程許願池 / 星靈專欄 / 線上占星 + 「預約諮詢」CTA
