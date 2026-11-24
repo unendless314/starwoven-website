@@ -163,7 +163,12 @@
 1. **只接受 `.md`，不接受 `.mdx`**：MDX 可在建置時執行程式。Content Collections 只讀 `*.md`，Sveltia 設 `extension: md`。
 2. **內文不得含原始 HTML**：`.md` 的原始 HTML（`<script>`、`<iframe>`、`onerror=` 等）會原樣輸出，在訪客瀏覽器執行。
    - 以 Markdown 解析結果檢查（**不用字串比對**，寫法變化太多）；出現原始 HTML 節點 → **建置失敗**（不默默刪除），網站維持上一版。
-   - 連結與圖片網址只允許 `https://`、`mailto:`、站內路徑（擋 `javascript:` 等）。
+     **不設白名單**，`<strong>` 也不放行：編輯者不會手打 HTML，出現即視為帳號被盜。
+   - **Markdown 引擎改用 `unified()`（`@astrojs/markdown-remark`）＋`remark-cjk-friendly`**（2026-11-24 定案）：
+     Astro 7 預設引擎 satteri 無法辨識緊貼全形標點的粗體／斜體（`**「…」**` 會原樣露出星號），也無法以外掛修正；
+     換引擎＋外掛後已實測正常，英文不受影響。編輯者按粗體按鈕即可，不需知道此限制。
+     效能代價只在建置時；換引擎後須確認標題錨點、程式碼上色、內文圖片最佳化仍正常，並實測 Sveltia 粗體輸出的寫法。
+   - 連結與圖片網址只允許 `https://`、`mailto:`、`tel:`、站內路徑（擋 `javascript:`、`http://` 等；2026-11-24 定案加入 `tel:`）。
    - 須先解決 Sveltia 插圖輸出 HTML 的問題（第十三節第 2 點），否則編輯者正常操作就會建置失敗。
    - YouTube 改用專門欄位（第五節第 2 小節）。
    - CSP（瀏覽器端第二道防線）暫不做。
@@ -331,6 +336,8 @@ VPS 現為 `/root/.openclaw/workspace/starwoven-workspace/`，部署改造時搬
   - 「Canonical sources of truth」：CMS 管理的內容，正本改為內容 repo 的檔案，`content-inventory.md` 不再登錄。
   - 「Asset management」：增列 CMS 上傳圖片規範（第八節）。
   - 「No fabrication」：CMS 內容由編輯者負責，開發者不草擬。
+  - 「Styling conventions」：刪除「粗體緊鄰全形引號時改用 `<strong>`」（第六節第 2 點換引擎後不再需要）；
+    既有部落格的 `<strong>` 隨文章搬入內容 repo 時改回 `**`。
   - 「Deployment」：增列內容部署流程；VPS 搬至 `/srv` 後更新 repo 路徑（工作區頂層 `AGENTS.md` 同步）。
 - **`content-inventory.md`**：第 1.1 節（輪播）、第 3.3 節（交流會）、第 3.4 節（工作坊）及部落格相關記載，遷移後改為「見 CMS」。
 - **`known-issues/README.md`**：第 22 項（奧剛塔短影音與文案待業主確認）於工作坊遷移後改由編輯者在 CMS 處理。
@@ -377,7 +384,7 @@ VPS 現為 `/root/.openclaw/workspace/starwoven-workspace/`，部署改造時搬
 
 1. **選填欄位留空會讓建置失敗**：Sveltia 對空白欄位寫入 `''`。schema 須把 `''` 視同未填（spike 已示範），所有選填日期／數字欄位比照；並查 Sveltia 是否有「空值不寫出」設定。
 2. **內文插圖會破圖，且建置抓不到**（**最優先**）：插圖存到全站 `/media/` 而非文章的 `images/`，且編輯器輸出 HTML（`<figure><a><img>`），Astro 不處理 → 線上 404。
-   須指定內文欄位的圖片資料夾、限制編輯器只產生 Markdown 圖片（不含連結／圖說）；可另在建置時檢查「內文引用的圖片是否存在」。與第六節「內文不得含原始 HTML」一起處理。
+   須指定內文欄位的圖片資料夾、限制編輯器只產生 Markdown 圖片（不含連結／圖說）；並在建置時檢查「內文引用的圖片是否存在」，不存在即建置失敗（2026-11-24 定案）。與第六節「內文不得含原始 HTML」一起處理。
 3. **動畫 GIF 不轉檔**：不允許 GIF，以 `accept` 在後台擋，並設單檔大小上限（第八節）；寫進教學。
 4. **上傳檔名保留原名**（如 `IMG_20260705_185236_1.webp`，含 `_`）：開啟 Sveltia 的 `slugify_filename: true`
    （設於 `media_libraries`，轉小寫、空格與無效字元換成 `-`）。官方文件未說明底線是否被替換，推測會保留；實作時實測，若仍在，再決定是否將 CMS 上傳圖片列為命名規則例外。
