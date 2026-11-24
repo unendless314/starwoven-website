@@ -1,6 +1,10 @@
 import { defineConfig, envField } from 'astro/config';
 import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
+import { unified } from '@astrojs/markdown-remark';
+import remarkCjkFriendly from 'remark-cjk-friendly';
+import { fileURLToPath } from 'node:url';
+import { remarkContentSafety } from './src/lib/content/remark-content-safety.mjs';
 
 // AI 互動功能（線上塔羅抽卡 DEC-073、線上占星抽卡 DEC-080；共用基礎設施 DEC-079，規格 docs/ai-platform-plan.md）：
 // 全站維持 output: 'static'；僅 src/pages/api/<feature>/reading.ts 宣告 prerender = false，
@@ -42,6 +46,17 @@ export default defineConfig({
       ASTROCARDS_IP_DAILY_LIMIT: envField.number({ ...serverSecret, int: true, min: 0, default: 10 }),
     },
     validateSecrets: true,
+  },
+  // Markdown 引擎改用 unified（CMS 規格書第六節第 2 點，2026-11-24 定案）：
+  // 預設引擎 satteri 無法辨識緊貼全形標點的粗體（`**「…」**`），remark-cjk-friendly 修正之；
+  // remarkContentSafety 讓含原始 HTML、危險連結或不存在圖片的內文建置失敗。
+  markdown: {
+    processor: unified({
+      remarkPlugins: [
+        remarkCjkFriendly,
+        [remarkContentSafety, { publicDir: fileURLToPath(new URL('./public/', import.meta.url)) }],
+      ],
+    }),
   },
   vite: {
     plugins: [tailwindcss()],

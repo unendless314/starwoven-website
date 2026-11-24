@@ -16,7 +16,9 @@ pre-build planning repo and is obsolete.
   `POST /api/astro-cards/reading` (`prerender = false`). Build output is `dist/client/`（static）＋`dist/server/`（Node）.
 - Commands: `npm run dev`（前後端一起，API 讀 `.env` 的 `AI_*`／`TAROT_*`／`ASTROCARDS_*`）· `npm run build`
   (→ `dist/client/` + `dist/server/`) · `npm run preview` · `npm run check`（`astro check`
-  型別檢查；`npm run build` 不做型別檢查，改動 TS 後須另跑，應為 0 errors）。
+  型別檢查；`npm run build` 不做型別檢查，改動 TS 後須另跑，應為 0 errors）·
+  `npm run test:content`（內容安全規則端到端測試，逐案實際 build；改動 Markdown 設定、
+  `content.config.ts` 或檢查程式後須跑，應全部通過；會覆寫 `dist/`）。
   `typescript` 固定 `^6`：`@astrojs/check` 0.9.x 不支援 TypeScript 7，待其支援再升。
 
 ## Canonical sources of truth (read these first, in order)
@@ -128,7 +130,10 @@ POST /api/astro-cards/reading  api/astro-cards/reading.ts  on-demand 路由（No
 - Page content lives in **frontmatter data arrays** (courses, reviews, wishlist,
   team) — edit data, not markup.
 - 部落格文章**不寫死課程的星期、時段、講師、價格**，一律連至
-  `/courses#recurring`；粗體緊鄰全形引號（「」）時 `**` 不生效，改用 `<strong>`。
+  `/courses#recurring`。
+- **Markdown 內文不得含原始 HTML**（`<strong>` 也不行；粗體用 `**`，緊鄰「」亦可）、連結只允許
+  `https:`／`mailto:`／`tel:`／站內路徑、站內圖片須存在，否則建置失敗。檢查程式
+  `src/lib/content/remark-content-safety.mjs`，引擎為 `unified()`＋`remark-cjk-friendly`（`cms-plan.md` 第六節第 2 點）。
 - Every page sets its own `<title>` and meta description. OG image：各頁未個別傳入
   `ogImage`，共用 Layout 預設值 `/assets/common-b-og-image-v1.jpg`（1200×630；
   刻意用 JPG，DEC-091；Layout 會轉成完整網址輸出）。
